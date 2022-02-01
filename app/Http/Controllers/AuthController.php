@@ -69,12 +69,13 @@ class AuthController extends Controller
   
     public function register(Request $request)
     {
-        
+       
     }
   
     public function logout()
     {
-        
+        Auth::logout(); // menghapus session yang aktif
+        return redirect()->route('login');
     }
   
   

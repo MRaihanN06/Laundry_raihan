@@ -28,8 +28,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
-Route::resource('/outlet', OutletController::class);
-Route::resource('/member', MemberController::class);
-Route::resource('/paket', PaketController::class);
-Route::get('index', [HomeController::class, 'index'])->name('home');
+Route::resource('/outlet', OutletController::class)->middleware('auth');
+Route::resource('/member', MemberController::class)->middleware('auth');
+Route::resource('/paket', PaketController::class)->middleware('auth');
+Route::get('index', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 

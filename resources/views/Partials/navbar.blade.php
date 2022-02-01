@@ -74,7 +74,7 @@
             <img src="{{ asset('assets') }}/images/faces/face28.jpg" alt="profile"/>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="" onclick="return confirm('Anda Yakin Ingin Menghapus?')">
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="return confirm('Anda Yakin Ingin Logout?')">
               <i class="ti-power-off text-primary"></i>
               Logout
             </a>
