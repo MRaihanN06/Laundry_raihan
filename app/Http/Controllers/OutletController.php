@@ -26,7 +26,7 @@ class OutletController extends Controller
      */
     public function create()
     {
-        
+        return view('outlet/index');
     }
 
     /**
@@ -37,7 +37,15 @@ class OutletController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'nama'  => 'required',
+            'alamat'  => 'required',
+            'tlp'  => 'required'
+        ]);
+
+        outlet::create($validatedData);
+
+        return redirect('/outlet')->with('success', 'New post has been added!');
     }
 
     /**
