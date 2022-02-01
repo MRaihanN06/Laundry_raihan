@@ -26,7 +26,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        
+        return view('member/index');
     }
 
     /**
@@ -37,7 +37,16 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'nama'  => 'required',
+            'alamat'  => 'required',
+            'jenis_kelamin'  => 'required',
+            'tlp'  => 'required'
+        ]);
+
+        member::create($validatedData);
+
+        return redirect('/member')->with('success', 'New post has been added!');
     }
 
     /**
