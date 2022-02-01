@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PaketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::resource('/outlet', OutletController::class);
 Route::resource('/member', MemberController::class);
+Route::resource('/paket', PaketController::class);

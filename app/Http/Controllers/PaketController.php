@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\outlet;
 use App\Models\paket;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,9 @@ class PaketController extends Controller
      */
     public function index()
     {
-        
+        $data['outlet'] = outlet::get();
+        $data['paket'] = paket::get();
+        return view('paket/index', $data);
     }
 
     /**
