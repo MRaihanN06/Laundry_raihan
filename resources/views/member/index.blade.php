@@ -102,11 +102,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                         
+                          @foreach ($member as $member)
                             <tr>
-                              
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $member->nama }}</td>
+                              <td>{{ $member->alamat }}</td>
+                              <td>{{ $member->jenis_kelamin }}</td>
+                              <td>{{ $member->tlp }}</td>
+                              <td>
+                                
+                              </td>
                             </tr>
-                          
+                          @endforeach
                         </tbody>
                     </table>
                     </div>
