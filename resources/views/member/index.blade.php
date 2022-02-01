@@ -193,6 +193,12 @@
       </div>
       <!-- content-wrapper ends -->
 
-      
+      @push('script')
+      <script>
+        $(function(){
+          $('#tb-member').DataTable();
+        });
+      </script>
+      @endpush
 
 @endsection
