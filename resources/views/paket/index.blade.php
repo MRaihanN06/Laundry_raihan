@@ -103,11 +103,25 @@
                           </tr>
                         </thead>
                         <tbody>
-                          
+                          @foreach ($paket as $paket)
                             <tr>
-                            
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $paket->id_outlet }}</td>
+                              <td>
+                                @if ( $paket->jenis == 'bed_cover')
+                                    Bed Cover      
+                                    @else
+                                      {{ $paket->jenis }} 
+                                  
+                                @endif
+                               </td>
+                              <td>{{ $paket->nama_paket }}</td>
+                              <td>Rp. {{ number_format($paket->harga) }}</td>
+                              <td>
+                                
+                              </td>
                             </tr>
-                        
+                          @endforeach
                         </tbody>
                     </table>
                     </div>
