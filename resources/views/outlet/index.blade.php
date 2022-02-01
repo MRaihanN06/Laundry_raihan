@@ -154,7 +154,11 @@
                                         </div>
                                         </div>
                               </div>
-                                
+                                <form action="{{ url('outlet/'.$outlet->id) }}" method="post" class="d-inline">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger text-light border-0" onclick="return confirm('Anda Yakin Ingin Menghapus?')"><i class="ti-close"></i></button>
+                                </form> 
                               </td>
                             </tr>
                           @endforeach
