@@ -207,4 +207,12 @@
       </div>
       <!-- content-wrapper ends -->
 
+      @push('script')
+      <script>
+        $(function(){
+          $('#tb-paket').DataTable();
+        });
+      </script>
+      @endpush
+
 @endsection
