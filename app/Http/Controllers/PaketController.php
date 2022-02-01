@@ -27,7 +27,7 @@ class PaketController extends Controller
      */
     public function create()
     {
-       
+        return view('paket/index');
     }
 
     /**
@@ -38,7 +38,17 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $validatedData = $request->validate([
+            'id_outlet' => 'required',
+            'jenis' => 'required',
+            'nama_paket' => 'required',
+            'harga' => 'required'
+        ]);
+
+
+        paket::create($validatedData);
+
+        return redirect('/paket')->with('success', 'New post has been added!');
     }
 
     /**
