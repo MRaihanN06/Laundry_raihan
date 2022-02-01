@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -13,7 +14,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        return view('member/index', [
+            'member' => member::get() 
+        ]);
     }
 
     /**
@@ -23,7 +26,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,16 +37,16 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
         //
     }
@@ -51,34 +54,34 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Member $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Member $member)
     {
-        //
+       
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
