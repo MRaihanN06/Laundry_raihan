@@ -177,6 +177,12 @@
       </div>
       <!-- content-wrapper ends -->
 
-      
+      @push('script')
+      <script>
+        $(function(){
+          $('#tb-outlet').DataTable();
+        });
+      </script>
+      @endpush
 
 @endsection
