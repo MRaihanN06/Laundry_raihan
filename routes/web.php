@@ -17,17 +17,9 @@ use App\Http\Controllers\PaketController;
 */
 
 Route::get('/', function () {
-    return view('/login');
+    return view('index');
 });
-
-Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
-Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
-Route::post('register', [AuthController::class, 'register']);
 
 Route::resource('/outlet', OutletController::class);
 Route::resource('/member', MemberController::class);
 Route::resource('/paket', PaketController::class);
-Route::get('index', [HomeController::class, 'index'])->name('home');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
