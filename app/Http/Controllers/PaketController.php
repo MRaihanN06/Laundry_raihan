@@ -106,6 +106,8 @@ class PaketController extends Controller
      */
     public function destroy($id)
     {
-        
+        $validatedData = paket::find($id);
+        $validatedData->delete();
+        return redirect('/paket')->with('success', 'Post has been deleted!');
     }
 }
