@@ -94,11 +94,17 @@
                           </tr>
                         </thead>
                         <tbody>
-                         
+                          @foreach ($outlet as $outlet)
                             <tr>
-                              
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $outlet->nama }}</td>
+                              <td>{{ $outlet->alamat }}</td>
+                              <td>{{ $outlet->tlp }}</td>
+                              <td>
+                                
+                              </td>
                             </tr>
-                          
+                          @endforeach
                         </tbody>
                     </table>
                     </div>
