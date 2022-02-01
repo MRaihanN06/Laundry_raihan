@@ -67,7 +67,9 @@ class OutletController extends Controller
      */
     public function edit(Outlet $outlet)
     {
-        
+        return view('outlet/edit', [
+            'outlet' => $outlet
+        ]);
     }
 
     /**
@@ -79,7 +81,16 @@ class OutletController extends Controller
      */
     public function update(Request $request, Outlet $outlet)
     {
-        
+        $validatedData = $request->validate([
+            'nama'  => 'required',
+            'alamat'  => 'required',
+            'tlp'  => 'required'
+        ]);
+
+        outlet::where('id', $outlet->id)
+            ->update($validatedData);
+
+        return redirect('/outlet')->with('success', 'Post has been added!');
     }
 
     /**
