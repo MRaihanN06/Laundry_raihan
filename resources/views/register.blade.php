@@ -24,16 +24,21 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-  <div class="container-scroller">
-    <div class="col-md-4 offset-md-4 mt-5">
-      <div class="card">
-          <div class="card-header">
-              <h3 class="text-center">Form Register</h3>
-          </div>
-          <form action="{{ route('register') }}" method="post">
-          @csrf
-          <div class="card-body">
-              @if(session('errors'))
+
+    <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="{{ asset('assets') }}/images/logo.svg" alt="logo">
+              </div>
+              <h4>New here?</h4>
+              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+              <form class="pt-3" action="{{ route('register') }}" method="post">
+                @csrf
+                @if(session('errors'))
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
                       Something it's wrong:
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -45,31 +50,41 @@
                       @endforeach
                       </ul>
                   </div>
-              @endif
-              <div class="form-group">
-                  <label for=""><strong>Nama Lengkap</strong></label>
-                  <input type="text" name="name" class="form-control" placeholder="Nama Lengkap">
-              </div>
-              <div class="form-group">
-                  <label for=""><strong>Email</strong></label>
-                  <input type="text" name="email" class="form-control" placeholder="Email">
-              </div>
-              <div class="form-group">
-                  <label for=""><strong>Password</strong></label>
-                  <input type="password" name="password" class="form-control" placeholder="Password">
-              </div>
-              <div class="form-group">
-                  <label for=""><strong>Konfirmasi Password</strong></label>
-                  <input type="password" name="password_confirmation" class="form-control" placeholder="Password">
-              </div>
+                @endif
+                <div class="form-group">
+                  <input type="text" name="name"class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Nama Lengkap">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password_confirmation" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Ketik Ulang Password">
+                  </div>
+                <div class="mb-4">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input">
+                      I agree to all Terms & Conditions
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</button>
+                </div>
+                <div class="text-center mt-4 font-weight-light">
+                  Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="card-footer">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
-              <p class="text-center">Sudah punya akun? <a href="{{ route('login') }}">Login</a> sekarang!</p>
-          </div>
-          </form>
+        </div>
       </div>
-   </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
   </div>
        
 
