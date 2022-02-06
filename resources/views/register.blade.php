@@ -86,10 +86,7 @@
                   </div>
                 </div>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
               </form>
             </div>

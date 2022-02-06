@@ -20,4 +20,9 @@ class outlet extends Model
     {
         return $this->belongsTo(paket::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }
