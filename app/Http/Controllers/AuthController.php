@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
   
 use Illuminate\Http\Request;
-  
+
+use App\Models\outlet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -64,7 +65,8 @@ class AuthController extends Controller
   
     public function showFormRegister()
     {
-        return view('register');
+        $data['outlet'] = outlet::get();
+        return view('register', $data);
     }
   
     public function register(Request $request)
@@ -72,7 +74,10 @@ class AuthController extends Controller
         $rules = [
             'name'                  => 'required|min:3|max:35',
             'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed'
+            'password'              => 'required|confirmed',
+            'id_outlet'             => 'required',
+            'role'                  => 'required',
+
         ];
   
         $messages = [
@@ -83,7 +88,9 @@ class AuthController extends Controller
             'email.email'           => 'Email tidak valid',
             'email.unique'          => 'Email sudah terdaftar',
             'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+            'id_outlet.required'    => 'Id oulet wajib diisi',
+            'role.required'         => 'Role wajib diisi'
         ];
   
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -97,6 +104,8 @@ class AuthController extends Controller
         $user->email = strtolower($request->email);
         $user->password = Hash::make($request->password);
         $user->email_verified_at = \Carbon\Carbon::now();
+        $user->id_outlet = $request->id_outlet;
+        $user->role = $request->role;
         $simpan = $user->save();
   
         if($simpan){

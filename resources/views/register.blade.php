@@ -62,7 +62,21 @@
                 </div>
                 <div class="form-group">
                     <input type="password" name="password_confirmation" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Ketik Ulang Password">
-                  </div>
+                </div>
+                <div class="form-group">
+                  <select name="id_outlet" id="outlet" class="form-control js-example-basic-single w-100">
+                    @foreach ($outlet as $o)
+                    <option value="{{ $o->id }}">{{ $o->nama }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select class="form-control" name="role" id="role">
+                    <option value="admin">Admin</option>
+                    <option value="kasir">Kasir</option>
+                    <option value="owner">Owner</option>
+                  </select>
+                </div>
                 <div class="mb-4">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
