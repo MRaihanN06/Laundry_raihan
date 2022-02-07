@@ -28,7 +28,13 @@
     
     @include('partials/navbar')
 
-      @include('partials/sidebar')
+      @if(auth()->user()->role == 'admin')
+        @include('partials/sidebar-admin')
+      @elseif(auth()->user()->role == 'kasir')
+        @include('partials/sidebar-kasir')
+      @elseif(auth()->user()->role == 'owner')
+        @include('partials/sidebar-owner')
+      @endif
 
       @yield('content')
         

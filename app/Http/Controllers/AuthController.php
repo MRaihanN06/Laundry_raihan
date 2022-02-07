@@ -52,6 +52,13 @@ class AuthController extends Controller
   
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
+            if(auth::user()->role == 'admin'){
+                return redirect()->route('a.home'); 
+            }elseif(auth::user()->role == 'kasir'){
+                return redirect()->route('k.home'); 
+            }elseif(auth::user()->role == 'owner'){
+                return redirect()->route('o.home'); 
+            }
             return redirect()->route('home');
   
         } else { // false
@@ -117,9 +124,11 @@ class AuthController extends Controller
         }
     }
   
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout(); // menghapus session yang aktif
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
   

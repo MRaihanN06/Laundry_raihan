@@ -35,3 +35,27 @@ Route::resource('/paket', PaketController::class)->middleware('auth');
 Route::resource('/user', UserController::class)->middleware('auth');
 Route::get('index', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
+
+Route::group(['prefix'=>'a','middleware'=>['isAdmin','auth']],function(){
+    Route::get('index', [HomeController::class, 'index'])->name('a.home');
+    Route::resource('/member', MemberController::class)->middleware('auth');
+    Route::resource('/paket', PaketController::class)->middleware('auth');
+    Route::resource('/outlet', OutletController::class)->middleware('auth');
+    Route::resource('/user', UserController::class)->middleware('auth');
+    
+    
+});
+
+Route::group(['prefix'=>'k','middleware'=>['isKasir','auth']],function(){
+    Route::get('index', [HomeController::class, 'index'])->name('k.home');
+    Route::resource('/member', MemberController::class)->middleware('auth');
+    Route::resource('/paket', PaketController::class)->middleware('auth');
+    
+    
+});
+
+Route::group(['prefix'=>'o','middleware'=>['isOwner','auth']],function(){
+    Route::get('index', [HomeController::class, 'index'])->name('o.home');
+    
+    
+});
