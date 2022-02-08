@@ -42,7 +42,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-dark">
-                            <form action="/paket" method="POST" class="mb-5" enctype="multipart/form-data">
+                            <form action="/{{ request()->segment(1) }}/paket" method="POST" class="mb-5" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                 <label for="nama" class="form-label">Nama Outlet</label>
@@ -132,7 +132,7 @@
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-dark">
-                                      <form action="{{ url('paket/'.$paket->id) }}" method="POST" class="mb-5" enctype="multipart/form-data">
+                                      <form action="/{{ request()->segment(1) }}/paket/{{ $paket->id }}" method="POST" class="mb-5" enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
                                         <div class="mb-3">
@@ -184,7 +184,7 @@
                                   </div>
                                 </div>
                               </div>
-                                <form action="{{ url('paket/'.$paket->id) }}" method="post" class="d-inline">
+                                <form action="/{{ request()->segment(1) }}/paket/{{ $paket->id }}" method="post" class="d-inline">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger text-light border-0" onclick="return confirm('Anda Yakin Ingin Menghapus?')"><i class="ti-close"></i></button>

@@ -45,7 +45,7 @@ class OutletController extends Controller
 
         outlet::create($validatedData);
 
-        return redirect('/outlet')->with('success', 'New post has been added!');
+        return redirect('#')->with('success', 'New post has been added!');
     }
 
     /**
@@ -90,7 +90,7 @@ class OutletController extends Controller
         outlet::where('id', $outlet->id)
             ->update($validatedData);
 
-        return redirect('/outlet')->with('success', 'Post has been added!');
+        return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been added!');
     }
 
     /**
@@ -103,6 +103,6 @@ class OutletController extends Controller
     {
         $validatedData = outlet::find($id);
         $validatedData->delete();
-        return redirect('/outlet')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been deleted!');
     }
 }

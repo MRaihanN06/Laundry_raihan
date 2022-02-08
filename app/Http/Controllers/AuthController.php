@@ -54,9 +54,9 @@ class AuthController extends Controller
             //Login Success
             if(auth::user()->role == 'admin'){
                 return redirect()->route('a.home'); 
-            }elseif(auth::user()->role == 'kasir'){
+            }else if(auth::user()->role == 'kasir'){
                 return redirect()->route('k.home'); 
-            }elseif(auth::user()->role == 'owner'){
+            }else if(auth::user()->role == 'owner'){
                 return redirect()->route('o.home'); 
             }
             return redirect()->route('home');

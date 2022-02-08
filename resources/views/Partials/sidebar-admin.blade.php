@@ -189,21 +189,21 @@
         </a>
         <div class="collapse" id="tables">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/member">Member</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/outlet">Outlet</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/paket">Paket</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/user">User</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/member">Member</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/outlet">Outlet</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/paket">Paket</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/user">User</a></li>
           </ul>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/a/transaksi">
           <i class="ti-money menu-icon"></i>
           <span class="menu-title">Transaksi</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/a/laporan">
           <i class="ti-money menu-icon"></i>
           <span class="menu-title">Laporan</span>
         </a>

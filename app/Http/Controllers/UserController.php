@@ -43,13 +43,13 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
             'id_outlet' => 'required',
-            'role'=> 'required',
+            'role'=> 'required'
         ]);
 
 
         user::create($validatedData);
 
-        return redirect('/user')->with('success', 'New post has been added!');
+        return redirect('#')->with('success', 'New post has been added!');
     }
 
     /**
@@ -88,7 +88,6 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'id_outlet' => 'required',
             'role'=> 'required'
         ]);
@@ -97,7 +96,7 @@ class UserController extends Controller
         user::where('id', $user->id)
             ->update($validatedData);
 
-        return redirect('/user')->with('success', 'Post has been edited!');
+        return redirect(request()->segment(1).'/user')->with('success', 'Post has been edited!');
     }
 
     /**
@@ -110,6 +109,6 @@ class UserController extends Controller
     {
         $validatedData = user::find($id);
         $validatedData->delete();
-        return redirect('/user')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1).'/user')->with('success', 'Post has been deleted!');
     }
 }

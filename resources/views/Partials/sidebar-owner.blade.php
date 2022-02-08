@@ -182,13 +182,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="ti-money menu-icon"></i>
-          <span class="menu-title">Transaksi</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/o/laporan">
           <i class="ti-money menu-icon"></i>
           <span class="menu-title">Laporan</span>
         </a>

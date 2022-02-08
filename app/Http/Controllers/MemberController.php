@@ -15,7 +15,7 @@ class MemberController extends Controller
     public function index()
     {
         return view('member/index', [
-            'member' => member::get() 
+            'member' => member::all() 
         ]);
     }
 
@@ -26,7 +26,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('member/index');
+        //
     }
 
     /**
@@ -46,7 +46,7 @@ class MemberController extends Controller
 
         member::create($validatedData);
 
-        return redirect('/member')->with('success', 'New post has been added!');
+        return redirect('#')->with('success', 'New post has been added!');
     }
 
     /**
@@ -92,7 +92,7 @@ class MemberController extends Controller
         member::where('id', $member->id)
             ->update($validatedData);
 
-        return redirect('/member')->with('success', 'Post has been added!');
+        return redirect(request()->segment(1).'/member')->with('success', 'Post has been added!');
     }
 
     /**
@@ -105,6 +105,6 @@ class MemberController extends Controller
     {
         $validatedData = member::find($id);
         $validatedData->delete();
-        return redirect('/member')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1).'/member')->with('success', 'Post has been deleted!');
     }
 }
