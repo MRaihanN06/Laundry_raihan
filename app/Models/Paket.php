@@ -19,7 +19,7 @@ class paket extends Model
 
     public function outlet()
     {
-        return $this->belongsTo(outlet::class);
+        return $this->belongsTo(outlet::class, 'id_outlet');
     }
 
 }

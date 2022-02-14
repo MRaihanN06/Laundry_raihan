@@ -106,7 +106,7 @@
                           @foreach ($paket as $paket)
                             <tr>
                               <td>{{ $loop->iteration }}</td>
-                              <td>{{ $paket->id_outlet }}</td>
+                              <td>{{ $paket->outlet->nama ?? '' }}</td>
                               <td>
                                 @if ( $paket->jenis == 'bed_cover')
                                     Bed Cover      
