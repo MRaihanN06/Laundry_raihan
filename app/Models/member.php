@@ -17,4 +17,10 @@ class member extends Model
         'jenis_kelamin',
         'tlp'
     ];
+
+    public function transaksi()
+    {
+        return $this->belongsTo(transaksi::class);
+    }
+
 }

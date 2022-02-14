@@ -25,4 +25,9 @@ class outlet extends Model
     {
         return $this->belongsTo(user::class);
     }
+
+    public function transaksi()
+    {
+        return $this->belongsTo(transaksi::class);
+    }
 }

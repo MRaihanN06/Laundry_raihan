@@ -22,4 +22,9 @@ class paket extends Model
         return $this->belongsTo(outlet::class, 'id_outlet');
     }
 
+    public function transaksi()
+    {
+        return $this->belongsTo(transaksi::class);
+    }
+
 }
