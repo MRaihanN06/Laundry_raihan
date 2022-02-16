@@ -90,7 +90,7 @@ class OutletController extends Controller
         outlet::where('id', $outlet->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been added!');
+        return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been edited!');
     }
 
     /**

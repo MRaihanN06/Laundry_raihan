@@ -13,6 +13,7 @@ class Transaksi extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $table = 'tb_transaksi';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $fillable = [
         'id_outlet',
         'kode_invoice',

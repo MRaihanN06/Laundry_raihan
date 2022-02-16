@@ -92,7 +92,7 @@ class MemberController extends Controller
         member::where('id', $member->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/member')->with('success', 'Post has been added!');
+        return redirect(request()->segment(1).'/member')->with('success', 'Post has been edited!');
     }
 
     /**
