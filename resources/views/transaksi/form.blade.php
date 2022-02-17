@@ -4,18 +4,18 @@
         <!-- Data awal pelanggan -->
         <div class="card">
           <div class="card-body">
-            <form>
+
               <div class="row" class="col-12">
                 <div class="form-group row col-6">
                 <label for="statictEmail" class="col-sm-4 col-form-label">Tanggal Transaksi</label>
                   <div class="col-sm-6">
-                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}">
+                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="tgl">
                   </div>
                 </div>
                 <div class="form-group row col-6">
                   <label for="InputPassword" class="col-4 col-form-label">Estimasi Selesai</label>
                     <div class="col-6 ml-auto">
-                      <input type="date" class="form-control ml-auto" value="{{ date('Y-m-d', strtotime(date('Y-m-d') . '+3 day')) }}">
+                      <input type="date" class="form-control ml-auto" value="{{ date('Y-m-d', strtotime(date('Y-m-d') . '+3 day')) }}" name="batas_waktu">
                     </div>
                 </div>
               </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
               </div>
-            </form>
+            
           </div>
         </div>
         <!-- End of Data awal pelanggan -->
@@ -56,7 +56,7 @@
                                 <th>Harga</th>
                                 <th>Qty</th>
                                 <th>Total</th>
-                                <th>Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,6 +64,35 @@
                                 <td colspan="5" style="text-align:center;font-style:italic">Belum ada data</td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                          <tr valign="bottom">
+                            <td width="" colspan="3" align="right">Jumlah Bayar</td>
+                            <td><span id="subtotal">0</span></td>
+                            <td rowspan="4">
+                              <label for="">Pembayaran</label>
+                              <input type="text" class="form-control" name="bayar" id="" style="width: 170px" value="0">
+                              <div>
+                                <button class="btn btn-primary" style="margin-top: 10px; width:170px" type="submit">Bayar</button>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" align="right">Diskon</td>
+                            <td><input type="number" value="0" min="0" id="diskon" name="diskon" style="width: 100px"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" align="right">Pajak <input type="number" value="0" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width: 40px"></td>
+                            <td><span id="pajak-harga">0</span></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" align="right">Biaya Tambahan</td>
+                            <td><input type="number" value="0" min="0" name="biaya_tambahan" style="width: 100px"></td>
+                          </tr>
+                          <tr style="background:black;color:white;font-weight:bold;font-size:1em">
+                            <td colspan="3" align="right">Total Bayar Akhir</td>
+                            <td><span id="total">0</span></td>
+                          </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -100,7 +129,7 @@
                         @foreach ($member as $b)
                         <tr>
                             <td>{{ $i = (!isset($i)?1:++$i) }}
-                                <input type="hidden" class="idMember" name="idMember" value="{{ $b->id }}"></td>
+                                <input type="hidden" class="idMember" name="id_member"></td>
                             <td>{{ $b->nama }}</td>
                             <td>{{ $b->jenis_kelamin }}</td>
                             <td>{{ $b->tlp }}</td>
@@ -140,7 +169,7 @@
                         @foreach ($paket as $b)
                         <tr>
                             <td>{{ $j = (!isset($j)?1:++$j) }}
-                                <input type="hidden" class="idPaket" name="idPaket" value="{{ $b->id }}"></td>
+                                <input type="hidden" class="idPaket" value="{{ $b->id }}"></td>
                             <td>{{ $b->nama_paket }}</td>
                             <td>{{ $b->harga }}</td>
                             <td> <button type="button" class="pilihPaketBtn btn btn-primary" data-dismiss="modal">Pilih</button></td>

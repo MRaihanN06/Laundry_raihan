@@ -47,14 +47,14 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::resource('/paket', PaketController::class);
     Route::resource('/outlet', OutletController::class);
     Route::resource('/user', UserController::class);
-    Route::get('/transaksi', [TransaksiController::class, 'index']);
+    Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });
 
 Route::group(['prefix' => 'k','middleware' => ['isKasir','auth']], function() {
     Route::get('index', [HomeController::class, 'index'])->name('k.home');
     Route::resource('/member', MemberController::class);
-    Route::get('/transaksi', [TransaksiController::class, 'index']);
+    Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });
 

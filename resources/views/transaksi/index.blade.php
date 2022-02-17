@@ -34,10 +34,13 @@
                         </li>
                       </ul>
                       <div class="card" style+border-top:0px>
+                      <form method="post" action="transaksi">
+                        @csrf
                         @include('transaksi.form')
                         @include('transaksi.data')
 
-                        <input type="hidden" class="id_member" id="id_member">
+                        <input type="hidden" name="id_member" id="id_member">
+                      </form>
                       </div>
                     </div>
                   </div>
@@ -70,6 +73,7 @@
 // end menu
 
 // Initialize
+let subtotal = total = 0;
   $(function(){
     $('#tblMember').DataTable();
   });
@@ -111,7 +115,7 @@ function pilihPaket(x){
     data += '<tr>'
     data += `<td> ${namaPaket} </td>`
     data += `<td> ${harga} </td>`;
-    data += `<input type="hidden" name="id_paket" value="${idPaket}">`
+    data += `<input type="hidden" name="id_paket[]" value="${idPaket}">`
     data += `<td><input type="number" value="1" min="1" class="qty" name="qty[]" size="2" style="width:40px"></td>`;
     data += `<td><label name="sub_total[]" class="subTotal">${harga}</label></td>`;
     data += `<td><button type="button" class="btnRemovePaket btn btn-danger">Hapus</button></td>`;
@@ -123,10 +127,40 @@ function pilihPaket(x){
 
     subtotal += Number(harga)
     total = subtotal - Number($('#diskon').val()) + Number($('#pajak-harga').val())
-    $('subtotal').text(subtotal)
+    $('#subtotal').text(subtotal)
     $('#total').text(total)
   }
 
+//function hitung total
+function hitungTotalAkhir(a){
+  let qty = Number($(a).closest('tr').find('.qty').val());
+  let harga = Number($(a).closest('tr').find('td:eq(1)').text());
+  let subTotalAwal = Number($(a).closest('tr').find('.subTotal').text());
+  let count = qty * harga;
+  subtotal = subtotal - subTotalAwal + count
+  total = subtotal - Number($('#diskon').val()) + Number($('#pajak-harga').val())
+  $(a).closest('tr').find('.subTotal').text(count)
+  $('#subtotal').text(subtotal)
+  $('#total').text(total)
+}
+//
+
+// onchange qty
+$('#tblTransaksi').on('change','.qty',function(){
+  hitungTotalAkhir(this)
+})
+
+// remove paket
+$('#tblTransaksi').on('click','.btnRemovePaket',function(){
+  let subTotalAwal = parseFloat($(this).closest('tr').find('.subTotal').text());
+  subtotal -= subTotalAwal
+  total -= subTotalAwal;
+
+  $currentRow = $(this).closest('tr').remove();
+  $('#subtotal').text(subtotal)
+  $('#total').text(total)
+})
+//
 
 </script>
 @endpush
