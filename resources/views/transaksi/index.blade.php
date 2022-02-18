@@ -34,7 +34,15 @@
                         </li>
                       </ul>
                       <div class="card" style+border-top:0px>
-                      <form method="post" action="transaksi">
+                        @if (session()->has('success'))
+                        <div class="alert alert-success text-center" role="alert">
+                          {{ session('success') }}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </div> 
+                        </button> 
+                        @endif
+                      <form method="post" action="/{{ request()->segment(1) }}/transaksi">
                         @csrf
                         @include('transaksi.form')
                         @include('transaksi.data')
@@ -45,6 +53,24 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="card" style+border-top:0px>
+                  @if ($errors->any())
+                    <div class="card-body">
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    </div>
+                    @endif
+                  </div>
+
               </div>
 
           </div>
