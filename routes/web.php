@@ -47,6 +47,8 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::resource('/paket', PaketController::class);
     Route::resource('/outlet', OutletController::class);
     Route::resource('/user', UserController::class);
+    Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
+    Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });

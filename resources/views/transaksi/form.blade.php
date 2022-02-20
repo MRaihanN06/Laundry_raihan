@@ -81,12 +81,12 @@
                             <td><input type="number" value="0" min="0" id="diskon" name="diskon" style="width: 100px"></td>
                           </tr>
                           <tr>
-                            <td colspan="3" align="right">Pajak <input type="number" value="0" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width: 40px"></td>
+                            <td colspan="3" align="right">Pajak <input type="number" value="0" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width: 40px">%</td>
                             <td><span id="pajak-harga">0</span></td>
                           </tr>
                           <tr>
                             <td colspan="3" align="right">Biaya Tambahan</td>
-                            <td><input type="number" value="0" min="0" name="biaya_tambahan" style="width: 100px"></td>
+                            <td><input type="number" value="0" min="0" id="biaya_tambahan" name="biaya_tambahan" style="width: 100px"></td>
                           </tr>
                           <tr style="background:black;color:white;font-weight:bold;font-size:1em">
                             <td colspan="3" align="right">Total Bayar Akhir</td>
@@ -129,7 +129,7 @@
                         @foreach ($member as $b)
                         <tr>
                             <td>{{ $i = (!isset($i)?1:++$i) }}
-                                <input type="hidden" class="idMember" name="id_member"></td>
+                                <input type="hidden" class="idMember" name="id_member" value="{{ $b->id }}"></td>
                             <td>{{ $b->nama }}</td>
                             <td>{{ $b->jenis_kelamin }}</td>
                             <td>{{ $b->tlp }}</td>

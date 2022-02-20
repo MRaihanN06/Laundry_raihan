@@ -7,9 +7,12 @@
       <div class="content-wrapper">
         <div class="row">
           @if (session()->has('success'))
-              <div class="alert alert-success text-center" role="alert">
-                  {{ session('success') }}
-              </div>  
+            <div class="alert alert-success text-center" role="alert" id="succes-alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </div>
+                </button>
           @endif
           <div class="col-md-12 grid-margin">
             <div class="row">
@@ -30,83 +33,9 @@
                     <div class="table-responsive">
                     
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahUser">
-                      Buat Data User Baru
+                    <button type="button" class="btn btn-light">
+                      <a href="/a/register">Buat Data User Baru</a>
                     </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="ModalTambahUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalTambahUserLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header text-dark">
-                            <h5 class="modal-title" id="ModalTambahUser">Tambah Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-dark">
-                            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                              <div class="brand-logo">
-                                <img src="{{ asset('assets') }}/images/logo.svg" alt="logo">
-                              </div>
-                              <h4>New here?</h4>
-                              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-                              <form class="pt-3" action="/{{ request()->segment(1) }}/user" method="post">
-                                @csrf
-                                @if(session('errors'))
-                                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                      Something it's wrong:
-                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                          <span aria-hidden="true">×</span>
-                                      </button>
-                                      <ul>
-                                      @foreach ($errors->all() as $error)
-                                      <li>{{ $error }}</li>
-                                      @endforeach
-                                      </ul>
-                                  </div>
-                                @endif
-                                <div class="form-group">
-                                  <input type="text" name="name"class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Nama Lengkap">
-                                </div>
-                                <div class="form-group">
-                                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Ketik Ulang Password">
-                                </div>
-                                <div class="form-group">
-                                  <select name="id_outlet" id="outlet" class="form-control js-example-basic-single w-100">
-                                    @foreach ($outlet as $o)
-                                    <option value="{{ $o->id }}">{{ $o->nama }}</option>
-                                    @endforeach
-                                  </select>
-                                </div>
-                                <div class="form-group">
-                                  <select class="form-control" name="role" id="role">
-                                    <option value="admin">Admin</option>
-                                    <option value="kasir">Kasir</option>
-                                    <option value="owner">Owner</option>
-                                  </select>
-                                </div>
-                                <div class="mb-4">
-                                  <div class="form-check">
-                                    <label class="form-check-label text-muted">
-                                      <input type="checkbox" class="form-check-input">
-                                      I agree to all Terms & Conditions
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="mt-3">
-                                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                 
                     <br>
                     <br>

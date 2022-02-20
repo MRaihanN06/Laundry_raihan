@@ -6,6 +6,14 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="row">
+          @if (session()->has('success'))
+            <div class="alert alert-success text-center" role="alert" id="succes-alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </div>
+                </button>
+          @endif
           <div class="col-md-12 grid-margin">
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">

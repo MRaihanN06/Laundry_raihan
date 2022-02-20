@@ -7,10 +7,27 @@
       <div class="content-wrapper">
         <div class="row">
           @if (session()->has('success'))
-            <div class="alert alert-success text-center" role="alert">
+            <div class="alert alert-success text-center" role="alert" id="succes-alert">
                 {{ session('success') }}
-            </div>  
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </div>
+                </button>
           @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              @endif
+              
           <div class="col-md-12 grid-margin">
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -34,14 +51,6 @@
                         </li>
                       </ul>
                       <div class="card" style+border-top:0px>
-                        @if (session()->has('success'))
-                        <div class="alert alert-success text-center" role="alert">
-                          {{ session('success') }}
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </div> 
-                        </button> 
-                        @endif
                       <form method="post" action="/{{ request()->segment(1) }}/transaksi">
                         @csrf
                         @include('transaksi.form')
@@ -53,23 +62,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="card" style+border-top:0px>
-                  @if ($errors->any())
-                    <div class="card-body">
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                    </div>
-                    @endif
-                  </div>
 
               </div>
 
@@ -102,6 +94,10 @@
 let subtotal = total = 0;
   $(function(){
     $('#tblMember').DataTable();
+  });
+
+  $(function(){
+    $('#tblPaket').DataTable();
   });
 // End of Initialize
 
@@ -164,8 +160,10 @@ function hitungTotalAkhir(a){
   let subTotalAwal = Number($(a).closest('tr').find('.subTotal').text());
   let count = qty * harga;
   subtotal = subtotal - subTotalAwal + count
-  total = subtotal - Number($('#diskon').val()) + Number($('#pajak-harga').val())
+  let pajak = Number($('#pajak-persen').val())/100*subtotal
+  total = subtotal - Number($('#diskon').val()) + Number($('#biaya_tambahan').val()) + pajak;
   $(a).closest('tr').find('.subTotal').text(count)
+  $('#pajak-harga').text(pajak)
   $('#subtotal').text(subtotal)
   $('#total').text(total)
 }
