@@ -70,7 +70,11 @@
                             <td><span id="subtotal">0</span></td>
                             <td rowspan="4">
                               <label for="">Pembayaran</label>
-                              <input type="text" class="form-control" name="bayar" id="" style="width: 170px" value="0">
+                              <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                    <select class="form-control" name="bayar" id="">
+                                        <option value="1">Dibayar</option>
+                                        <option value="0">Bayar Nanti</option>
+                                    </select>
                               <div>
                                 <button class="btn btn-primary" style="margin-top: 10px; width:170px" type="submit">Bayar</button>
                               </div>

@@ -20,6 +20,7 @@ class TransaksiController extends Controller
     public function index()
     {
         $data['member'] = Member::get();
+        $data['DetailTransaksi'] = DetailTransaksi::get();
         $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
         $data['transaksi'] = Transaksi::where('id_outlet', auth()->user()->id_outlet)->get();
         
@@ -68,7 +69,7 @@ class TransaksiController extends Controller
         $request['kode_invoice'] = $this->generateKodeInvoice();
         $request['tgl_bayar'] = ($request->bayar == 0?NULL:date('Y-m-d H:i:s'));
         $request['status'] = 'baru';
-        $request['dibayar'] = ($request->bayar == 0?'belum_dibayar':'dibayar');
+        $request['pembayaran'] = ($request->bayar == 0?'belum_dibayar':'dibayar');
         $request['id_user'] = auth()->user()->id;
 
         //input transaksi

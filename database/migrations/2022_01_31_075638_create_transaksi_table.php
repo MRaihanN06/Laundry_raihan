@@ -19,8 +19,9 @@ class CreateTransaksiTable extends Migration
             $table->unsignedBigInteger('id_outlet')->index();
             $table->string('kode_invoice');
             $table->unsignedBigInteger('id_member');
-            $table->date('tgl');
+            $table->date('tgl')->nullable();
             $table->date('batas_waktu');
+            $table->datetime('tgl_bayar');
             $table->integer('biaya_tambahan');
             $table->double('diskon');
             $table->integer('pajak');
@@ -38,6 +39,7 @@ class CreateTransaksiTable extends Migration
             $table->foreign('id_member')->references('id')->on('tb_member')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
+
     }
 
     /**

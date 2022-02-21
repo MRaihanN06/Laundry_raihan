@@ -88,6 +88,18 @@
     $('#nav-data').removeClass('active');
     $('#nav-form').addClass('active');
   })
+
+  $('#DetailData').on('show.bs.collapse', function(){
+    $('#DetailPelanggan').collapse('hide');
+    $('#nav-DetailPelanggan').removeClass('active');
+    $('#nav-DetailData').addClass('active');
+  })
+
+  $('#DetailPelanggan').on('show.bs.collapse', function(){
+    $('#DetailData').collapse('hide');
+    $('#nav-DetailData').removeClass('active');
+    $('#nav-DetailPelanggan').addClass('active');
+  })
 // end menu
 
 // Initialize
@@ -98,6 +110,10 @@ let subtotal = total = 0;
 
   $(function(){
     $('#tblPaket').DataTable();
+  });
+
+  $(function(){
+    $('#tb-transaksi').DataTable();
   });
 // End of Initialize
 

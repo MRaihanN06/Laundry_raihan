@@ -14,21 +14,6 @@ class Transaksi extends Model
     public $incrementing = true;
     protected $table = 'tb_transaksi';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = [
-        'id_outlet',
-        'kode_invoice',
-        'id_member',
-        'tgl',
-        'batas_waktu',
-        'biaya_tambahan',
-        'diskon',
-        'pajak',
-        'status',
-        'pembayaran',
-        'id_user',
-        'total'
-    ];
-
 
 
     public function outlet()
