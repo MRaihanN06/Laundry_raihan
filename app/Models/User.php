@@ -48,4 +48,9 @@ class User extends Authenticatable
     { 
         return $this->belongsTo(Outlet::class);
     }
+    
+    public function transaksi()
+    {
+        return $this->belongsTo(transaksi::class);
+    }
 }

@@ -90,7 +90,7 @@
                           </tr>
                           <tr style="background:black;color:white;font-weight:bold;font-size:1em">
                             <td colspan="3" align="right">Total Bayar Akhir</td>
-                            <td><span id="total">0</span></td>
+                            <td><input id="total" name="total" class="form-control-plaintext text-white" readonly></td>
                           </tr>
                         </tfoot>
                     </table>

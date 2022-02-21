@@ -148,9 +148,9 @@ function pilihPaket(x){
     $('#tblTransaksi tbody').append(data);
 
     subtotal += Number(harga)
-    total = subtotal - Number($('#diskon').val()) + Number($('#pajak-harga').val())
+    total = subtotal - Number($('#diskon').val()) + Number($('#biaya_tambahan').val()) + Number($('#pajak-harga').val())
     $('#subtotal').text(subtotal)
-    $('#total').text(total)
+    $('#total').val(total)
   }
 
 //function hitung total
@@ -165,7 +165,7 @@ function hitungTotalAkhir(a){
   $(a).closest('tr').find('.subTotal').text(count)
   $('#pajak-harga').text(pajak)
   $('#subtotal').text(subtotal)
-  $('#total').text(total)
+  $('#total').val(total)
 }
 //
 
@@ -182,7 +182,7 @@ $('#tblTransaksi').on('click','.btnRemovePaket',function(){
 
   $currentRow = $(this).closest('tr').remove();
   $('#subtotal').text(subtotal)
-  $('#total').text(total)
+  $('#total').val(total)
 })
 //
 

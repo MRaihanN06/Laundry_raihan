@@ -31,6 +31,7 @@ class CreateTransaksiTable extends Migration
                 'dibayar', 'belum_dibayar'
             ]);
             $table->unsignedBigInteger('id_user');
+            $table->double('total');
             $table->timestamps();
 
             $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');

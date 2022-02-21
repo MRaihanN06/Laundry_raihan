@@ -21,6 +21,7 @@ class TransaksiController extends Controller
     {
         $data['member'] = Member::get();
         $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
+        $data['transaksi'] = Transaksi::where('id_outlet', auth()->user()->id_outlet)->get();
         
         return view('transaksi.index')->with($data);
     }
@@ -54,7 +55,7 @@ class TransaksiController extends Controller
     {
         // dd($request->all());
 
-        $validatedData = $request->validate([
+        $request->validate([
             'id_member' => 'required',
             'tgl' => 'required',
             'batas_waktu' => 'required',
@@ -62,8 +63,6 @@ class TransaksiController extends Controller
             'qty' => 'required',
             'bayar' => 'required',
         ]);
-        
-        DetailTransaksi::create($validatedData);
 
         $request['id_outlet'] = auth()->user()->id_outlet;
         $request['kode_invoice'] = $this->generateKodeInvoice();

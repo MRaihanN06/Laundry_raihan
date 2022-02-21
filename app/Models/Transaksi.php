@@ -26,6 +26,7 @@ class Transaksi extends Model
         'status',
         'pembayaran',
         'id_user',
+        'total'
     ];
 
 
@@ -42,6 +43,11 @@ class Transaksi extends Model
 
     public function member()
     {
-        return $this->belongsTo(member::class);
+        return $this->belongsTo(member::class, 'id_member');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'id_user');
     }
 }

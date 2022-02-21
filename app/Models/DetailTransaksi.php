@@ -18,6 +18,7 @@ class DetailTransaksi extends Model
         'id_transaksi',
         'id_paket',
         'qty',
+        'total',
         'keterangan'
     ];
 
