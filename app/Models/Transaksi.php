@@ -35,4 +35,17 @@ class Transaksi extends Model
     {
         return $this->belongsTo(user::class, 'id_user');
     }
+
+    public function DetailTransaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'id_transaksi');
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->DetailTransaksi->reduce(function ($subTotal, $detail){
+            return $subTotal + ($detail->paket->harga * $detail->qty);
+        });
+    }
+
 }

@@ -193,6 +193,7 @@
             <li class="nav-item"> <a class="nav-link" href="/a/outlet">Outlet</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/paket">Paket</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/user">User</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/barang">Barang</a></li>
           </ul>
         </div>
       </li>

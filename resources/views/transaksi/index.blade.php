@@ -54,10 +54,12 @@
                       <form method="post" action="/{{ request()->segment(1) }}/transaksi">
                         @csrf
                         @include('transaksi.form')
-                        @include('transaksi.data')
 
                         <input type="hidden" name="id_member" id="id_member">
                       </form>
+
+                        @include('transaksi.data')
+                        
                       </div>
                     </div>
                   </div>
@@ -199,6 +201,7 @@ $('#tblTransaksi').on('click','.btnRemovePaket',function(){
   $currentRow = $(this).closest('tr').remove();
   $('#subtotal').text(subtotal)
   $('#total').val(total)
+  hitungTotalAkhir(this)
 })
 //
 

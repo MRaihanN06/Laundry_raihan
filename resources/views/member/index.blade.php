@@ -42,7 +42,7 @@
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header text-dark">
-                            <h5 class="modal-title" id="ModalBuatMemberLabel">Masukan Data Baru</h5>
+                            <h3 class="modal-title" id="ModalBuatMemberLabel">Masukan Data Baru</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-dark">
@@ -123,7 +123,7 @@
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header text-dark">
-                                      <h5 class="modal-title" id="ModalPerbaharuiDataLabel">Perbaharui Data</h5>
+                                      <h3 class="modal-title" id="ModalPerbaharuiDataLabel">Perbaharui Data</h3>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-dark">

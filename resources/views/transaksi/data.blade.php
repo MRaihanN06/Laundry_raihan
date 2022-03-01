@@ -28,17 +28,27 @@
                   <td>{{ $t->batas_waktu }}</td>
                   <td>{{ $t->total }}</td>
                   <td>{{ $t->status }}</td>
-                  <td>{{ $t->pembayaran }}</td>
                   <td>
+                    @switch($t->pembayaran)
+                    @case('dibayar')
+                        Dibayar
+                        @break
+                    @case('belum_dibayar')
+                        Belum Bayar
+                        @break
+                    @endswitch
+                  </td>
+                  <td class="d-flex flex-coloum">
+
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalLihatData{{ $t->id }}">
+                  <button type="button" class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#ModalLihatData{{ $t->id }}">
                     <i class="ti-info-alt"></i>
-                  </button>
+                  </button> &nbsp;
                   <div class="modal fade" id="ModalLihatData{{ $t->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalLihatDataLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header text-dark">
-                          <h5 class="modal-title" id="ModalLihatDataLabel">Lihat Data Disini</h5>
+                          <h3 class="modal-title" id="ModalLihatDataLabel">Lihat Data Disini</h3>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-dark">
@@ -83,7 +93,16 @@
                               </tr>
                               <tr>
                                 <td>Pembayaran</td>
-                                <td>{{ $t->pembayaran }}</td>
+                                <td>
+                                  @switch($t->pembayaran)
+                                  @case('dibayar')
+                                      Dibayar
+                                      @break
+                                  @case('belum_dibayar')
+                                      Belum Bayar
+                                      @break
+                                  @endswitch
+                                </td>
                               </tr>
                               <tr>
                                 <td>Kasir</td>
@@ -102,16 +121,38 @@
                               </tr>
                             </thead>
                             <tbody>
-                              @foreach ($DetailTransaksi as $dt)
+                              @foreach ($t->DetailTransaksi as $dt)
                               <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $dt->paket->nama_paket ?? '' }}</td>
                                 <td>{{ $dt->paket->harga ?? '' }}</td>
                                 <td>{{ $dt->qty }}</td>
-                                <td></td>
+                                <td>{{ ($dt->paket->harga ?? '') * ($dt->qty) }}</td>
                               </tr>
                               @endforeach
                             </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="4" ></td>
+                                <td>{{ $t->getTotalPrice() }}</td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" align="right">Diskon</td>
+                                <td>{{ $t->diskon }}</td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" align="right">Pajak {{ $t->pajak }} %</td>
+                                <td>{{ $t->getTotalPrice()*$t->pajak/100 }}</td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" align="right">Biaya Tambahan</td>
+                                <td>{{ $t->biaya_tambahan }}</td>
+                              </tr>
+                              <tr style="background:black;color:white;font-weight:bold;font-size:1em">
+                                <td colspan="4" align="right">Total Bayar Akhir</td>
+                                <td>{{ $t->total }}</td>
+                              </tr>
+                            </tfoot>
                           </table>
                           </div>
                           <div class="collapse" id="DetailPelanggan">
@@ -137,10 +178,53 @@
                             </table>
                           </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                                  <button type="button" class="btn btn-block btn-warning btn-lg font-weight-medium" data-bs-dismiss="modal">Tutup</button>
                                 </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $t->id }}">
+                    <i class="ti-pencil-alt"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="ModalPerbaharuiData{{ $t->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalPerbaharuiDataLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header text-dark">
+                          <h3 class="modal-title" id="ModalPerbaharuiDataLabel">Perbaharui Data</h3>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-dark">
+                          <form action="/{{ request()->segment(1) }}/transaksi/{{ $t->id }}" method="POST" class="mb-5" enctype="multipart/form-data">
+                            @method('PUT')
+                            @csrf
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-control" name="status" id="status">
+                                  <option value="baru" @if($t->status == 'baru') selected @endif>Baru</option>
+                                  <option value="proses" @if($t->status == 'proses') selected @endif>Proses</option>
+                                  <option value="selesai" @if($t->status == 'selesai') selected @endif>Selesai</option>
+                                  <option value="diambil" @if($t->status == 'diambil') selected @endif>Diambil</option>
+                                </select>
                             </div>
-                            </div>
+                            <div class="mb-3">
+                              <label for="pembayaran" class="form-label">Pembayaran</label>
+                              <select class="form-control" name="pembayaran" id="pembayaran">
+                                <option value="dibayar" @if($t->pembayaran == 'dibayar') selected @endif>Dibayar</option>
+                                <option value="belum_dibayar" @if($t->pembayaran == 'belum_dibayar') selected @endif>Belum Dibayar</option>
+                              </select>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                          <button type="submit" class="btn btn-warning">Posting</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   </td>
                 </tr>

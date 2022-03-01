@@ -41,7 +41,7 @@
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header text-dark">
-                            <h5 class="modal-title" id="ModalBuatPaketLabel">Masukan Data Baru</h5>
+                            <h3 class="modal-title" id="ModalBuatPaketLabel">Masukan Data Baru</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-dark">
@@ -111,12 +111,24 @@
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $paket->outlet->nama ?? '' }}</td>
                               <td>
-                                @if ( $paket->jenis == 'bed_cover')
-                                    Bed Cover      
-                                    @else
-                                      {{ $paket->jenis }} 
-                                  
-                                @endif
+                                @switch($paket->jenis)
+                                      @case('kiloan')
+                                          Kiloan
+                                          @break
+                                      @case('selimut')
+                                          Selimut
+                                          @break
+                                      @case('bed_cover')
+                                          Bed Cover
+                                          @break
+                                      @case('kaos')
+                                          Kaos
+                                          @break
+                                      @case('lain')
+                                          Lainnya
+                                          @break
+                                      @default
+                                @endswitch
                                </td>
                               <td>{{ $paket->nama_paket }}</td>
                               <td>Rp. {{ number_format($paket->harga) }}</td>
@@ -131,7 +143,7 @@
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header text-dark">
-                                      <h5 class="modal-title" id="ModalPerbaharuiDataLabel">Perbaharui Data</h5>
+                                      <h3 class="modal-title" id="ModalPerbaharuiDataLabel">Perbaharui Data</h3>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-dark">

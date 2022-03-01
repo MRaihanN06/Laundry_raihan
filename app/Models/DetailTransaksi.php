@@ -37,4 +37,9 @@ class DetailTransaksi extends Model
     {
         return $this->belongsTo(member::class);
     }
+
+    public function Transaksi()
+    {
+        return $this->belongsTo(Transaksi::class,);
+    }
 }

@@ -19,9 +19,9 @@ class CreateTransaksiTable extends Migration
             $table->unsignedBigInteger('id_outlet')->index();
             $table->string('kode_invoice');
             $table->unsignedBigInteger('id_member');
-            $table->date('tgl')->nullable();
+            $table->date('tgl');
             $table->date('batas_waktu');
-            $table->datetime('tgl_bayar');
+            $table->datetime('tgl_bayar')->nullable();
             $table->integer('biaya_tambahan');
             $table->double('diskon');
             $table->integer('pajak');

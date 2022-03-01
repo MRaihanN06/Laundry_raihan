@@ -62,14 +62,14 @@ class TransaksiController extends Controller
             'batas_waktu' => 'required',
             'id_paket' => 'required',
             'qty' => 'required',
-            'bayar' => 'required',
+            'pembayaran' => 'required',
         ]);
 
         $request['id_outlet'] = auth()->user()->id_outlet;
         $request['kode_invoice'] = $this->generateKodeInvoice();
-        $request['tgl_bayar'] = ($request->bayar == 0?NULL:date('Y-m-d H:i:s'));
+        $request['tgl_bayar'] = ($request->pembayaran == 0?NULL:date('Y-m-d H:i:s'));
         $request['status'] = 'baru';
-        $request['pembayaran'] = ($request->bayar == 0?'belum_dibayar':'dibayar');
+        $request['pembayaran'] = ($request->pembayaran == 0?'belum_dibayar':'dibayar');
         $request['id_user'] = auth()->user()->id;
 
         //input transaksi
@@ -79,7 +79,7 @@ class TransaksiController extends Controller
                 'transaksi' => 'Input transaksi gagal',
             ]);
         }
-
+        
         //input detail pembelian
         foreach($request->id_paket as $i => $v){
             $input_detail = DetailTransaksi::create([
@@ -88,6 +88,7 @@ class TransaksiController extends Controller
                 'qty' => $request->qty[$i],
                 'keterangan' => ''
             ]);
+            
         }
         
         return redirect('#')->with('success', 'New post has been added!');
@@ -112,7 +113,9 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi)
     {
-        //
+        return view('transaksi/edit', [
+            'transaksi' => $transaksi
+        ]);
     }
 
     /**
@@ -124,7 +127,20 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, Transaksi $transaksi)
     {
-        //
+        // dd($request);
+        $validatedData = $request->validate([
+            'status' => 'required',
+            'pembayaran' => 'required'
+        ]);
+
+        $validatedData['pembayaran'] = ($request->pembayaran == 'belum_dibayar'?'belum_dibayar':'dibayar');
+        $validatedData['tgl_bayar'] = ($request->pembayaran == 'dibayar') ? date('Y-m-d') : null    ;
+
+
+        transaksi::where('id', $transaksi->id)
+            ->update($validatedData);
+
+        return redirect(request()->segment(1).'/transaksi')->with('success', 'Post has been edited!');
     }
 
     /**

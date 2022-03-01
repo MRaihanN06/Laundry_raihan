@@ -70,8 +70,7 @@
                             <td><span id="subtotal">0</span></td>
                             <td rowspan="4">
                               <label for="">Pembayaran</label>
-                              <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                    <select class="form-control" name="bayar" id="">
+                                    <select class="form-control" name="pembayaran" id="pembayaran">
                                         <option value="1">Dibayar</option>
                                         <option value="0">Bayar Nanti</option>
                                     </select>
