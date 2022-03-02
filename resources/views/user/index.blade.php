@@ -33,9 +33,9 @@
                     <div class="table-responsive">
                     
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-light">
-                      <a href="/a/register">Buat Data User Baru</a>
-                    </button>
+                    <a href="/a/register" type="button" class="btn btn-primary">
+                      Buat Data User Baru
+                    </a>
                 
                     <br>
                     <br>

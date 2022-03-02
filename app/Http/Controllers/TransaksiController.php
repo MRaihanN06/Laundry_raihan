@@ -134,7 +134,7 @@ class TransaksiController extends Controller
         ]);
 
         $validatedData['pembayaran'] = ($request->pembayaran == 'belum_dibayar'?'belum_dibayar':'dibayar');
-        $validatedData['tgl_bayar'] = ($request->pembayaran == 'dibayar') ? date('Y-m-d') : null    ;
+        $validatedData['tgl_bayar'] = ($request->pembayaran == 'dibayar') ? date('Y-m-d H:i:s') : null    ;
 
 
         transaksi::where('id', $transaksi->id)

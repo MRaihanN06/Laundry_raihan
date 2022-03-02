@@ -38,10 +38,10 @@
                         @break
                     @endswitch
                   </td>
-                  <td class="d-flex flex-coloum">
+                  <td>
 
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#ModalLihatData{{ $t->id }}">
+                  <button type="button" class="btn btn-primary text-light mb-1" data-bs-toggle="modal" data-bs-target="#ModalLihatData{{ $t->id }}">
                     <i class="ti-info-alt"></i>
                   </button> &nbsp;
                   <div class="modal fade" id="ModalLihatData{{ $t->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalLihatDataLabel" aria-hidden="true">
@@ -184,10 +184,11 @@
                       </div>
                     </div>
                   </div>
+
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $t->id }}">
+                  <button type="button" class="btn btn-warning text-light mb-1" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $t->id }}">
                     <i class="ti-pencil-alt"></i>
-                  </button>
+                  </button> &nbsp;
 
                   <!-- Modal -->
                   <div class="modal fade" id="ModalPerbaharuiData{{ $t->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalPerbaharuiDataLabel" aria-hidden="true">
@@ -226,6 +227,116 @@
                       </div>
                     </div>
                   </div>
+
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-success text-light mb-1" data-bs-toggle="modal" data-bs-target="#ModalLihatInvoice{{ $t->id }}">
+                    <i class="icon-grid-2 menu-icon"></i>
+                  </button> &nbsp;
+                  <div class="modal fade bd-example-modal-lg" id="ModalLihatInvoice{{ $t->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalLihatInvoiceLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header text-dark">
+                          <h3 class="modal-title" id="ModalLihatInvoiceLabel">Lihat Faktur Disini</h3>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-dark">
+                          <table class="expandable-table w-100 table-sm">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <h3><img src="{{ asset('assets') }}/images/favicon.png" class="mr-2">Laundry MRaihanN</h3>
+                                  Alamat : {{ $t->outlet->alamat ?? '' }} <br>
+                                  Telepon : {{ $t->outlet->tlp ?? '' }} <br>
+                                  Operator : {{ $t->user->name ?? '' }} <br>
+                                  Outlet : {{ $t->outlet->nama ?? '' }}
+                                </td>
+                                <td>
+                                  <b>Faktur No. {{ $t->kode_invoice }} </b> <br>
+                                  {{ $t->tgl_bayar }} <br>
+                                  Kepada Yth : <br>
+                                  {{ $t->member->nama ?? '' }} <br>
+                                  {{ $t->member->alamat ?? '' }} <br>
+                                  {{ $t->member->tlp ?? '' }} <br>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <br>
+                          <table class="expandable-table w-100 table-sm">
+                            <thead>
+                              <tr>
+                              <th>No</th>
+                              <th>Nama Paket</th>
+                              <th>Harga</th>
+                              <th>Qty</th>
+                              <th>Subtotal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @foreach ($t->DetailTransaksi as $dt)
+                              <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $dt->paket->nama_paket ?? '' }}</td>
+                                <td>{{ $dt->paket->harga ?? '' }}</td>
+                                <td>{{ $dt->qty }}</td>
+                                <td>{{ ($dt->paket->harga ?? '') * ($dt->qty) }}</td>
+                              </tr>
+                              @endforeach
+                            </tbody>
+                          </table> <br> <br>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                              <b>Perhatian</b>
+                              <ol>
+                                <li> Pengambilan brang dibayar tunai. </li>
+                                <li> Jika terjadi kehilangan/kerusakan kami hanya mengganti tidak lebih dari 2x ongkos cuci. </li>
+                                <li> Hak claim yang kami terima tidak lebih dari 24 jam dari pengambilan. </li>
+                              </ol>
+                              <b>Kami Tidak Bertanggung Jawab</b>
+                              <ol>
+                                <li> Susut/luntur karena sifat bahannya. </li>
+                                <li> Cucian yang tidak diambil tempo 1 bulan hilang/rusak. </li>
+                                <li> Bila terhadi kebakaran. </li>
+                              </ol>
+                            </div>
+                            <div class="col-md-6">
+                              <table>
+                                <tbody>
+                                  <tr><h6>Dibayar Pada {{ $t->tgl_bayar }}</h6></tr>
+                                  <tr>
+                                    <td>Subtotal</td>
+                                    <td>{{ $t->getTotalPrice() }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Diskon</td>
+                                    <td>{{ $t->diskon }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Pajak {{ $t->pajak }} %</td>
+                                    <td>{{ $t->getTotalPrice()*$t->pajak/100 }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Biaya Tambahan</td>
+                                    <td>{{ $t->biaya_tambahan }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Total Bayar Akhir</td>
+                                    <td>{{ $t->total }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                      
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                          <button type="button" class="btn btn-warning">Cetak</button>
+                        </div>
+                    </div>
+                   </div>
+                  </div>
+
                   </td>
                 </tr>
               @endforeach

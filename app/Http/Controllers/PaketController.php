@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\outlet;
 use App\Models\paket;
+use App\Imports\PaketImport;
+use App\Exports\PaketExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class PaketController extends Controller
 {
@@ -109,5 +113,28 @@ class PaketController extends Controller
         $validatedData = paket::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/paket')->with('success', 'Post has been deleted!');
+    }
+
+    public function exportData() 
+    {
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new PaketExport, $date. '_paket.xlsx');
+    }
+
+    public function importData(Request $request) 
+    {
+        $request->validate([
+            'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
+        ]);
+        
+        if ($request){
+            Excel::import(new PaketImport, $request->file('file'));  
+        } else {
+            return back()->withErrors([
+                'file' => "File Bukan Excel"
+            ]);
+        }
+        
+        return redirect(request()->segment(1).'/paket')->with('success', 'All good!');
     }
 }

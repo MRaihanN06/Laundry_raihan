@@ -87,9 +87,9 @@
                 </div>
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
-                  <button type="button" class="btn btn-block btn-warning btn-lg font-weight-medium">
-                    <a href="/a/user">Batal</a>
-                  </button>
+                  <a href="/a/user" type="button" class="btn btn-block btn-warning btn-lg font-weight-medium">
+                    Batal
+                  </a>
                 </div>
               </form>
             </div>

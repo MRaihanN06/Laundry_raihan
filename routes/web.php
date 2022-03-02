@@ -53,6 +53,8 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
+    Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
+    Route::post('import/paket', [PaketController::class, 'importData'])->name('import-paket');
 });
 
 Route::group(['prefix' => 'k','middleware' => ['isKasir','auth']], function() {
