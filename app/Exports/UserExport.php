@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Barang;
+use App\Models\user;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -10,25 +10,25 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Sheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class BarangExport implements FromCollection, WithHeadings,  WithEvents
+class UserExport implements FromCollection, WithHeadings,  WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Barang::all();
+        return user::all();
     }
 
     public function headings(): array
     {
         return [
             'Id',
-            'Nama Barang',
-            'Merk Barang',
-            'Qty',
-            'Kondisi',
-            'Tanggal Pengadaan',
+            'Name',
+            'Email',
+            'Emai Verified At',
+            'Id Outlet',
+            'Role',
             'Tanggal Dibuat',
             'Tanggal Diupdate'
         ];
@@ -49,7 +49,7 @@ class BarangExport implements FromCollection, WithHeadings,  WithEvents
                 
                 $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:H1');
-                $event->sheet->setCellValue('A1', 'DATA BARANG');
+                $event->sheet->setCellValue('A1', 'DATA USER');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
             }
         ];

@@ -7,7 +7,7 @@
       <div class="content-wrapper">
         <div class="row">
           @if (session()->has('success'))
-            <div class="alert alert-success text-center" role="alert" id="succes-alert">
+            <div class="alert alert-success text-center" role="alert" id="success-alert">
                 {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -204,6 +204,15 @@ $('#tblTransaksi').on('click','.btnRemovePaket',function(){
   hitungTotalAkhir(this)
 })
 //
+
+// menghapus alert
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
+
+        $("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
 
 </script>
 @endpush

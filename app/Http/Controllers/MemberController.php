@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Exports\MemberExport;
+use App\Imports\MemberImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
@@ -106,5 +110,28 @@ class MemberController extends Controller
         $validatedData = member::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/member')->with('success', 'Post has been deleted!');
+    }
+
+    public function exportData() 
+    {
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new MemberExport, $date. '_member.xlsx');
+    }
+
+    public function importData(Request $request) 
+    {
+        $request->validate([
+            'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
+        ]);
+        
+        if ($request){
+            Excel::import(new MemberImport, $request->file('file'));  
+        } else {
+            return back()->withErrors([
+                'file' => "File Bukan Excel"
+            ]);
+        }
+        
+        return back()->with('success', 'All good!');
     }
 }

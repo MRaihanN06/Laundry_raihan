@@ -135,6 +135,6 @@ class PaketController extends Controller
             ]);
         }
         
-        return redirect(request()->segment(1).'/paket')->with('success', 'All good!');
+        return back()->with('success', 'All good!');
     }
 }

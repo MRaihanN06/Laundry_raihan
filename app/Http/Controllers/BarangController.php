@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Exports\BarangExport;
+use App\Imports\BarangImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class BarangController extends Controller
 {
@@ -110,5 +114,28 @@ class BarangController extends Controller
         $validatedData = barang::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/barang')->with('success', 'Post has been deleted!');
+    }
+
+    public function exportData() 
+    {
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new BarangExport, $date. '_barang.xlsx');
+    }
+
+    public function importData(Request $request) 
+    {
+        $request->validate([
+            'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
+        ]);
+        
+        if ($request){
+            Excel::import(new BarangImport, $request->file('file'));  
+        } else {
+            return back()->withErrors([
+                'file' => "File Bukan Excel"
+            ]);
+        }
+        
+        return back()->with('success', 'All good!');
     }
 }

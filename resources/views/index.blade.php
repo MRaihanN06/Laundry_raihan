@@ -14,11 +14,22 @@
             </div>
                 </button>
           @endif
+          @if ($errors->any())
+            <div class="alert alert-danger text-center" role="alert" id="error-alert">
+                @foreach ($errors->all() as $error)
+                  {{ $error }}
+                @endforeach
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </div>
+                </button>
+          @endif
+
           <div class="col-md-12 grid-margin">
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                 <h3 class="font-weight-bold">Welcome {{ auth()->user()->name }}</h3>
-                <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                <h6 class="font-weight-normal mb-0">{{ auth()->user()->name }} sebagai {{ auth()->user()->role }} <span class="text-primary">Disini!</span></h6>
               </div>
               <div class="col-12 col-xl-4">
                <div class="justify-content-end d-flex">
@@ -658,5 +669,18 @@
           </div>
       </div>
       <!-- content-wrapper ends -->
+      
+      @push('script')
+      <script>
+        // menghapus alert
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
+
+        $("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
+      </script>
+      @endpush
 
 @endsection

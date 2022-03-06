@@ -31,7 +31,17 @@ Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register')->middleware('auth');
 Route::post('register', [AuthController::class, 'register'])->middleware('auth');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
+Route::post('import/paket', [PaketController::class, 'importData'])->name('import-paket');
+Route::get('export/barang', [BarangController::class, 'exportData'])->name('export-barang');
+Route::post('import/barang', [BarangController::class, 'importData'])->name('import-barang');
+Route::get('export/outlet', [OutletController::class, 'exportData'])->name('export-outlet');
+Route::post('import/outlet', [OutletController::class, 'importData'])->name('import-outlet');
+Route::get('export/member', [MemberController::class, 'exportData'])->name('export-member');
+Route::post('import/member', [MemberController::class, 'importData'])->name('import-member');
+Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
+Route::post('import/user', [UserController::class, 'importData'])->name('import-user');
 
 // Route::resource('/outlet', OutletController::class)->middleware('auth');
 // Route::resource('/member', MemberController::class)->middleware('auth');
@@ -53,14 +63,11 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
-    Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
-    Route::post('import/paket', [PaketController::class, 'importData'])->name('import-paket');
 });
 
 Route::group(['prefix' => 'k','middleware' => ['isKasir','auth']], function() {
     Route::get('index', [HomeController::class, 'index'])->name('k.home');
     Route::resource('/member', MemberController::class);
-    Route::resource('/barang', BarangController::class);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });

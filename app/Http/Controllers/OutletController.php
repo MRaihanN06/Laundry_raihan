@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outlet;
+use App\Exports\OutletExport;
+use App\Imports\OutletImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class OutletController extends Controller
 {
@@ -104,5 +108,28 @@ class OutletController extends Controller
         $validatedData = outlet::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been deleted!');
+    }
+
+    public function exportData() 
+    {
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new OutletExport, $date. '_outlet.xlsx');
+    }
+
+    public function importData(Request $request) 
+    {
+        $request->validate([
+            'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
+        ]);
+        
+        if ($request){
+            Excel::import(new OutletImport, $request->file('file'));  
+        } else {
+            return back()->withErrors([
+                'file' => "File Bukan Excel"
+            ]);
+        }
+        
+        return back()->with('success', 'All good!');
     }
 }

@@ -7,8 +7,18 @@
       <div class="content-wrapper">
         <div class="row">
           @if (session()->has('success'))
-            <div class="alert alert-success text-center" role="alert" id="succes-alert">
+            <div class="alert alert-success text-center" role="alert" id="success-alert">
                 {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </div>
+                </button>
+          @endif
+          @if ($errors->any())
+            <div class="alert alert-danger text-center" role="alert" id="error-alert">
+                @foreach ($errors->all() as $error)
+                  {{ $error }}
+                @endforeach
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
             </div>
@@ -35,6 +45,36 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalBuatBarang">
                         Buat Data Barang Baru
                     </button>
+
+                    <a href="{{ route('export-barang') }}" class="btn btn-success">
+                      Export Barang
+                    </a>
+
+                    <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalImportBarang">
+                      Import Barang
+                    </button>
+  
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalImportBarang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalImportBarangLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header text-dark">
+                            <h3 class="modal-title" id="ModalImportbarangLabel">Import Data</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body text-dark">
+                            <form action="{{ route('import-barang') }}" method="POST" enctype="multipart/form-data">
+                              @csrf
+                              <input type="file" name="file" required>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-warning">Posting</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 
                     <!-- Modal -->
                     <div class="modal fade" id="ModalBuatBarang" tabindex="-1" aria-labelledby="ModalBuatBarangLabel" aria-hidden="true">
@@ -234,6 +274,15 @@
       <script>
         $(function(){
           $('#tb-barang').DataTable();
+        });
+
+        // menghapus alert
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
+
+        $("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
         });
       </script>
       @endpush
