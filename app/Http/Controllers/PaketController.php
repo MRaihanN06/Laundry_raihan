@@ -9,6 +9,7 @@ use App\Exports\PaketExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class PaketController extends Controller
 {
@@ -137,4 +138,14 @@ class PaketController extends Controller
         
         return back()->with('success', 'All good!');
     }
+
+    public function exportPDF(Paket $Paket) {
+  
+        $pdf = PDF::loadView('Paket.pdf', [
+            'tb_paket' => Paket::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }

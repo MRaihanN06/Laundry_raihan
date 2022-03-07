@@ -54,6 +54,10 @@
                     <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalImportPaket">
                       Import Paket
                     </button>
+
+                    <a href="{{ route('importpdf-paket') }}" target="_blank" class="btn btn-secondary">
+                      Export PDF
+                    </a>
   
                     <!-- Modal -->
                     <div class="modal fade" id="ModalImportPaket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalImportPaketLabel" aria-hidden="true">

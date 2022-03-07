@@ -8,6 +8,7 @@ use App\Imports\MemberImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class MemberController extends Controller
 {
@@ -134,4 +135,13 @@ class MemberController extends Controller
         
         return back()->with('success', 'All good!');
     }
+    public function exportPDF(Member $Member) {
+  
+        $pdf = PDF::loadView('Member.pdf', [
+            'tb_member' => Member::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }

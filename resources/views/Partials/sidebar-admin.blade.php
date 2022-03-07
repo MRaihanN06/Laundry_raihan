@@ -209,5 +209,11 @@
           <span class="menu-title">Laporan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="data_karyawan">
+          <i class="ti-id-badge menu-icon"></i>
+          <span class="menu-title">Simulasi Data Karyawan</span>
+        </a>
+      </li>
     </ul>
   </nav>

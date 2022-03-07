@@ -10,6 +10,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SimulasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,14 +35,19 @@ Route::post('register', [AuthController::class, 'register'])->middleware('auth')
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
 Route::post('import/paket', [PaketController::class, 'importData'])->name('import-paket');
+Route::get('paket/pdf', [PaketController::class, 'exportPDF'])->name('importpdf-paket');
 Route::get('export/barang', [BarangController::class, 'exportData'])->name('export-barang');
 Route::post('import/barang', [BarangController::class, 'importData'])->name('import-barang');
+Route::get('barang/pdf', [BarangController::class, 'exportPDF'])->name('importpdf-barang');
 Route::get('export/outlet', [OutletController::class, 'exportData'])->name('export-outlet');
 Route::post('import/outlet', [OutletController::class, 'importData'])->name('import-outlet');
+Route::get('outlet/pdf', [OutletController::class, 'exportPDF'])->name('importpdf-outlet');
 Route::get('export/member', [MemberController::class, 'exportData'])->name('export-member');
 Route::post('import/member', [MemberController::class, 'importData'])->name('import-member');
+Route::get('member/pdf', [MemberController::class, 'exportPDF'])->name('importpdf-member');
 Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
 Route::post('import/user', [UserController::class, 'importData'])->name('import-user');
+Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('importpdf-user');
 
 // Route::resource('/outlet', OutletController::class)->middleware('auth');
 // Route::resource('/member', MemberController::class)->middleware('auth');
@@ -63,6 +69,7 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
+    Route::get('data_karyawan', [SimulasiController::class, 'index']);
 });
 
 Route::group(['prefix' => 'k','middleware' => ['isKasir','auth']], function() {

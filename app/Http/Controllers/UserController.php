@@ -9,6 +9,7 @@ use App\Imports\UserImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class UserController extends Controller
 {
@@ -138,4 +139,14 @@ class UserController extends Controller
         
         return back()->with('success', 'All good!');
     }
+
+    public function exportPDF(User $User) {
+  
+        $pdf = PDF::loadView('User.pdf', [
+            'users' => User::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }

@@ -54,6 +54,10 @@
                     <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalImportUser">
                       Import User
                     </button>
+
+                    <a href="{{ route('importpdf-user') }}" target="_blank" class="btn btn-secondary">
+                      Export PDF
+                    </a>
   
                     <!-- Modal -->
                     <div class="modal fade" id="ModalImportUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalImportuserLabel" aria-hidden="true">

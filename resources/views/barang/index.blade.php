@@ -27,7 +27,7 @@
           <div class="col-md-12 grid-margin">
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                <h3 class="font-weight-bold">Master Data Barang</h3>
+              <h3 class="font-weight-bold">Master Data Barang</h3>
                 <h6 class="font-weight-normal mb-0">Membuat, Melihat, Perbaharui dan Hapus Data Barang <span class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
               </div>
             </div>
@@ -53,6 +53,10 @@
                     <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalImportBarang">
                       Import Barang
                     </button>
+
+                    <a href="{{ route('importpdf-barang') }}" target="_blank" class="btn btn-secondary">
+                      Export PDF
+                    </a>
   
                     <!-- Modal -->
                     <div class="modal fade" id="ModalImportBarang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalImportBarangLabel" aria-hidden="true">

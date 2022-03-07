@@ -8,6 +8,7 @@ use App\Imports\BarangImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class BarangController extends Controller
 {
@@ -138,4 +139,14 @@ class BarangController extends Controller
         
         return back()->with('success', 'All good!');
     }
+
+    public function exportPDF(Barang $Barang) {
+  
+        $pdf = PDF::loadView('Barang.pdf', [
+            'tb_barang' => Barang::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }

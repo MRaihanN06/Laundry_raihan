@@ -8,6 +8,7 @@ use App\Imports\OutletImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class OutletController extends Controller
 {
@@ -132,4 +133,14 @@ class OutletController extends Controller
         
         return back()->with('success', 'All good!');
     }
+
+    public function exportPDF(Outlet $Outlet) {
+  
+        $pdf = PDF::loadView('Outlet.pdf', [
+            'tb_outlet' => Outlet::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }
