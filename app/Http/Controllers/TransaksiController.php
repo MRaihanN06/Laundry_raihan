@@ -7,6 +7,8 @@ use App\Models\Outlet;
 use App\Models\Member;
 use App\Models\Paket;
 use App\Models\DetailTransaksi;
+use App\Http\Controllers\Controller;
+use PDF;
 
 use Illuminate\Http\Request;
 
@@ -23,8 +25,18 @@ class TransaksiController extends Controller
         $data['DetailTransaksi'] = DetailTransaksi::get();
         $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
         $data['transaksi'] = Transaksi::where('id_outlet', auth()->user()->id_outlet)->get();
-        
+
         return view('transaksi.index')->with($data);
+    }
+
+    public function Faktur()
+    {
+        $data['member'] = Member::get();
+        $data['DetailTransaksi'] = DetailTransaksi::get();
+        $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
+        $data['transaksi'] = Transaksi::where('id_outlet', auth()->user()->id_outlet)->get();
+
+        return view('transaksi.faktur')->with($data);
     }
 
     /**
@@ -44,10 +56,11 @@ class TransaksiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private function generateKodeInvoice(){
-        $last =Transaksi::orderBy('id','desc')->first();
-        $last = ($last == null?1:$last->id + 1);
-        $kode = sprintf('TKI'.date('ymd').'%06d', $last);
+    private function generateKodeInvoice()
+    {
+        $last = Transaksi::orderBy('id', 'desc')->first();
+        $last = ($last == null ? 1 : $last->id + 1);
+        $kode = sprintf('TKI' . date('ymd') . '%06d', $last);
 
         return $kode;
     }
@@ -67,30 +80,29 @@ class TransaksiController extends Controller
 
         $request['id_outlet'] = auth()->user()->id_outlet;
         $request['kode_invoice'] = $this->generateKodeInvoice();
-        $request['tgl_bayar'] = ($request->pembayaran == 0?NULL:date('Y-m-d H:i:s'));
+        $request['tgl_bayar'] = ($request->pembayaran == 0 ? NULL : date('Y-m-d H:i:s'));
         $request['status'] = 'baru';
-        $request['pembayaran'] = ($request->pembayaran == 0?'belum_dibayar':'dibayar');
+        $request['pembayaran'] = ($request->pembayaran == 0 ? 'belum_dibayar' : 'dibayar');
         $request['id_user'] = auth()->user()->id;
 
         //input transaksi
         $input_transaksi = Transaksi::create($request->all());
-        if($input_transaksi == null){
+        if ($input_transaksi == null) {
             return back()->withErrors([
                 'transaksi' => 'Input transaksi gagal',
             ]);
         }
-        
+
         //input detail pembelian
-        foreach($request->id_paket as $i => $v){
+        foreach ($request->id_paket as $i => $v) {
             $input_detail = DetailTransaksi::create([
                 'id_transaksi' => $input_transaksi->id,
                 'id_paket' => $request->id_paket[$i],
                 'qty' => $request->qty[$i],
                 'keterangan' => ''
             ]);
-            
         }
-        
+
         return redirect('#')->with('success', 'New post has been added!');
     }
 
@@ -133,14 +145,14 @@ class TransaksiController extends Controller
             'pembayaran' => 'required'
         ]);
 
-        $validatedData['pembayaran'] = ($request->pembayaran == 'belum_dibayar'?'belum_dibayar':'dibayar');
-        $validatedData['tgl_bayar'] = ($request->pembayaran == 'dibayar') ? date('Y-m-d H:i:s') : null    ;
+        $validatedData['pembayaran'] = ($request->pembayaran == 'belum_dibayar' ? 'belum_dibayar' : 'dibayar');
+        $validatedData['tgl_bayar'] = ($request->pembayaran == 'dibayar') ? date('Y-m-d H:i:s') : null;
 
 
         transaksi::where('id', $transaksi->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/transaksi')->with('success', 'Post has been edited!');
+        return redirect(request()->segment(1) . '/transaksi')->with('success', 'Post has been edited!');
     }
 
     /**
@@ -152,5 +164,16 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //
+    }
+
+    public function fakturPDF($id)
+    {
+
+        $transaksi = Transaksi::findOrFail($id);
+        $pdf = PDF::loadView('transaksi.faktur', [
+            'transaksi' => $transaksi
+        ]);
+
+        return $pdf->stream();
     }
 }

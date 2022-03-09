@@ -48,6 +48,7 @@ Route::get('member/pdf', [MemberController::class, 'exportPDF'])->name('importpd
 Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
 Route::post('import/user', [UserController::class, 'importData'])->name('import-user');
 Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('importpdf-user');
+Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])->name('faktur');
 
 // Route::resource('/outlet', OutletController::class)->middleware('auth');
 // Route::resource('/member', MemberController::class)->middleware('auth');
@@ -58,7 +59,7 @@ Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('importpdf-us
 // Route::get('index', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
-Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
+Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function () {
     Route::get('index', [HomeController::class, 'index'])->name('a.home');
     Route::resource('/member', MemberController::class);
     Route::resource('/paket', PaketController::class);
@@ -72,14 +73,14 @@ Route::group(['prefix' => 'a','middleware' => ['isAdmin','auth']], function() {
     Route::get('data_karyawan', [SimulasiController::class, 'index']);
 });
 
-Route::group(['prefix' => 'k','middleware' => ['isKasir','auth']], function() {
+Route::group(['prefix' => 'k', 'middleware' => ['isKasir', 'auth']], function () {
     Route::get('index', [HomeController::class, 'index'])->name('k.home');
     Route::resource('/member', MemberController::class);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });
 
-Route::group(['prefix' => 'o','middleware' => ['isOwner','auth']], function() {
+Route::group(['prefix' => 'o', 'middleware' => ['isOwner', 'auth']], function () {
     Route::get('index', [HomeController::class, 'index'])->name('o.home');
     Route::get('/laporan', [DetailTransaksiController::class, 'index']);
 });
