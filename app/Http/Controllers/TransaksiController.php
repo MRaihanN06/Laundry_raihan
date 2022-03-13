@@ -7,8 +7,11 @@ use App\Models\Outlet;
 use App\Models\Member;
 use App\Models\Paket;
 use App\Models\DetailTransaksi;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use PDF;
+use App\Exports\LaporanExport;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -166,6 +169,22 @@ class TransaksiController extends Controller
         //
     }
 
+    public function exportData() 
+    {
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new LaporanExport, $date. '_Laporan.xlsx');
+    }
+
+    public function laporanPDF(Transaksi $transaksi) {
+  
+        $pdf = PDF::loadView('laporan.pdf', [
+            'tb_transaksi' => Transaksi::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
+
     public function fakturPDF($id)
     {
 
@@ -175,5 +194,18 @@ class TransaksiController extends Controller
         ]);
 
         return $pdf->stream();
+    }
+
+    public function laporan(){
+        $data['transaksi'] = Transaksi::all(); 
+        if (request()->start_date || request()->end_date) {
+            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+            $data = Transaksi::whereBetween('created_at',[$start_date,$end_date])->get();
+        } else {
+            $data =Transaksi::latest()->get();
+        }
+        
+        return view('/laporan/index', compact('data'));
     }
 }

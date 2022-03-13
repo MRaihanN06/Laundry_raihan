@@ -20,7 +20,7 @@ class MemberController extends Controller
     public function index()
     {
         return view('member/index', [
-            'member' => member::all() 
+            'member' => member::all()
         ]);
     }
 
@@ -97,7 +97,7 @@ class MemberController extends Controller
         member::where('id', $member->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/member')->with('success', 'Post has been edited!');
+        return redirect(request()->segment(1) . '/member')->with('success', 'Post has been edited!');
     }
 
     /**
@@ -110,38 +110,39 @@ class MemberController extends Controller
     {
         $validatedData = member::find($id);
         $validatedData->delete();
-        return redirect(request()->segment(1).'/member')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1) . '/member')->with('success', 'Post has been deleted!');
     }
 
-    public function exportData() 
+    public function exportData()
     {
         $date =  date('Y-m-d H:i:s');
-        return Excel::download(new MemberExport, $date. '_member.xlsx');
+        return Excel::download(new MemberExport, $date . '_member.xlsx');
     }
 
-    public function importData(Request $request) 
+    public function importData(Request $request)
     {
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
-        
-        if ($request){
-            Excel::import(new MemberImport, $request->file('file'));  
+
+        if ($request) {
+            Excel::import(new MemberImport, $request->file('file'));
         } else {
             return back()->withErrors([
                 'file' => "File Bukan Excel"
             ]);
         }
-        
+
         return back()->with('success', 'All good!');
     }
-    public function exportPDF(Member $Member) {
-  
+
+    public function exportPDF(Member $Member)
+    {
+
         $pdf = PDF::loadView('Member.pdf', [
             'tb_member' => Member::all()
         ]);
-        
+
         return $pdf->stream();
-        
-      }
+    }
 }

@@ -106,10 +106,15 @@
                                 <div class="card-body">
                                     <p class="card-title">Data</p>
                                     <div class="row">
-                                        <div class="form-group row">
-                                            <div class="col-sm-2">
-                                                <button class="btn btn-success" type="button" id="sorting">Sorting</button>
-                                            </div>
+                                        <div class="form-group row-3">
+                                                <select name="sorting" id="sorting" class="form-control col-sm-2">
+                                                    <option value="id">Id Buku</option>
+                                                    <option value="judul">Judul</option>
+                                                    <option value="pengarang">Pengarang</option>
+                                                    <option value="tahun">Tahun</option>
+                                                    <option value="harga">Harga</option>
+                                                    <option value="qty">Qty</option>
+                                                </select>
                                             <div>
                                                 <br><input type="search" class="form-control col-sm-2" name="teksCari"
                                                     id="teksCari">
@@ -182,10 +187,11 @@
                         $('#tblBuku tbody').html(showData(dataBuku)) 
                     })
                     
-                    $('#sorting').on('click', function() {
-                            dataBuku = insertionSort(dataBuku, 'id')
-                        console.log(dataBuku)
+                    $('#sorting').on('change', function() {
 
+                        let nama = document.getElementById("sorting").value;
+                            dataBuku = insertionSort(dataBuku, nama)
+                        // console.log(dataBuku)
                             $('#tblBuku tbody').html(showData(dataBuku))
                     })
 

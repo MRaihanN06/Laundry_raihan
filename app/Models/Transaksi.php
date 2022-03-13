@@ -47,5 +47,5 @@ class Transaksi extends Model
             return $subTotal + ($detail->paket->harga * $detail->qty);
         });
     }
-
+    
 }

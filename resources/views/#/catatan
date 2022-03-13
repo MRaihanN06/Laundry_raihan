@@ -1,0 +1,119 @@
+membuat crud
+    buat database
+    buat modal
+    buat index
+    buat contoller
+    edit web route
+    edit controller
+    edit index
+
+buat import export excel
+    edit controller
+    edit route
+    buat fileImport
+    buat fileExport
+    tambahkan button a href route
+
+buat pdf
+    edit contoller
+    editroute
+    tambahkan button a href route
+    buat file pdf view
+
+simulasi
+     buat saja index
+     buat controller
+     edit web route
+
+buat data 
+    buat factory
+    edit seeder database
+    migrate seeder
+
+php artisan list
+
+php artisan make:controller ProjectController --resource 
+php artisan make:model Project -mc -> Project contoller dan model
+php artisan make:model Project -a -> project model dan controller resource
+atau
+php artisan make:controller ProjectController --resource --model=Project
+php artisan make:migration create_projects_table -> database
+php artisan migrate -> migrate
+php artisan migrate --force -> menambah
+php artisan migrate --fresh -> mengulang
+php artisan migrate:rollback -> migrate sebelumnya
+php artisan migrate:rollback --step=3 ->mundur sesuai keinginan
+php artisan migrate:reset -> migrate pertama
+
+serve (Menjalankan server lokal)
+down (Membuat maintenance mode)
+up (Mematikan maintenance mode)
+list (Menampilkan daftar perintah laravel)
+help (Menampilkan bantuan untuk perintah)
+-v (Menampilkan versi Laravel yang digunakan)
+env (Menampilkan environment framework)
+migrate (Melakukan migrasi database)
+tinker (Untuk interaksi data pada aplikasi dengan cepat)
+inspire (Menampilkan quote secara acak)
+optimize (Optimalisasi performa framework)
+preset (Menukar front-end scaffolding pada aplikasi)
+app:name (Mengatur namespace aplikasi)
+auth:clear-resets (Reset password & token kedaluarsa)
+cache:clear (Melakukan flush cache)
+cache:forget (Menghilangkan item dari cache)
+cache:table (Migrasi cache tabel database)
+config:cache (Membuat file cache)
+config:clear (Menghapus konfigurasi file cache)
+db:seed (Mengisi database dengan records)
+event:cache (Menemukan event & listener aplikasi)
+event:clear (Menghapus semua even & listener)
+event:generate (Generasi event & listener yang hilang)
+event:list (Menampilkan list event dan listener aplikasi)
+key:generate (Mengatur application key)
+make:auth (Membuat fungsi login & register + logout)
+make:channel (Membuat kelas channel baru)
+make:command (Membuat perintah artisan baru)
+make:controller (Membuat kelas controller baru)
+make:event (Membuat kelas event baru)
+make:exception (Membuat kelas custom exception)
+make:factory (Membuat kelas model factory baru)
+make:job (Membuat kelas job baru)
+make:listener (Membuat kelas event listener baru)
+make:mail (Membuat kelas email baru)
+make:middleware (Membuat kelas middleware baru)
+make:migration (Membuat file migrasi baru)
+make:model (Membuat kelas model baru)
+make:notification (Membuat kelas notification baru)
+make:obsever (Membuat kelas obsever baru)
+make:policy (Membuat kelas policy baru)
+make:provider (Membuat kelas service provider baru)
+make:request (Membuat kelas form request baru)
+make:resource (Membuat resource baru)
+make:rule (Membuat validation rule baru)
+make:seeder (Membuat kelas seeder baru)
+make:test (Membuat kelas test baru)
+migrate:fresh (Drop semua tabel lalu migrasi ulang)
+migrate:install (Membuat repositori migrasi)
+migrate:refresh (Reset dan jalankan semua migrasi)
+migrate:rollback (Rollback migrasi database terakhir)
+migrate:status (Menampilkan status tiap migrasi)
+notifications:table (Membuat migrasi untuk tabel notif)
+optimize:clear (Menghapus file bootstrap yg di-cache)
+queue:failed (List jobs antrian yang gagal)
+queue:failed-table (Buat migrasi untuk jobs yg gagal)
+queue:flush (Flush jobs antrian yang gagal)
+queue:forget (Hapus jobs antrian yang gagal)
+queue:listen (Mendengarkan antrian yang diberikan)
+queue:restart (Restart queue worker daemons)
+queue:retry (Mencoba kembali job antrian yg gagal)
+queue:table (Buat migrasi tabel database job antrian)
+queue:work (Memproses job pada antrian sbg daemon)
+route:cache (Buat file cache route)
+route:clear (Hapus file cache route)
+route:list (List semua route yang terdaftar)
+schedule:run (Menjalankan perintah yang terjadwal)
+session:table (Buat migrasi untuk session tabel DB)
+storage:link (Buat simbolik link)
+vendor:publish (Publikasi asset dari vendor packages)
+view:cache (Compile semua aplikasi blade template)
+view:clear (Bersihkan semua file view yg ter-compile)

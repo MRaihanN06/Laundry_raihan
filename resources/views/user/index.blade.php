@@ -100,7 +100,7 @@
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
-                              <td>{{ $user->id_outlet }}</td>
+                              <td>{{ $user->outlet->nama ?? '' }}</td>
                               <td>{{ $user->role }}</td>
                               <td>
                                 <!-- Button trigger modal -->

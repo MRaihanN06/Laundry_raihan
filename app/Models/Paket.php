@@ -27,9 +27,4 @@ class paket extends Model
         return $this->belongsTo(transaksi::class);
     }
 
-    public function DetailTransaksi()
-    {
-        return $this->belongsTo(DetailTransaksi::class);
-    }
-
 }

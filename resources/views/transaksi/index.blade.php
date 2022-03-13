@@ -32,7 +32,7 @@
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                 <h3 class="font-weight-bold">Master Data Transaksi</h3>
-                <h6 class="font-weight-normal mb-0">Membuat, Melihat, Perbaharui dan Hapus Data Transaksi <span class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
+                <h6 class="font-weight-normal mb-0">Membuat, Melihat dan Perbaharui Data Transaksi <span class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
               </div>
             </div>
             <br>

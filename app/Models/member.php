@@ -22,5 +22,5 @@ class member extends Model
     {
         return $this->belongsTo(transaksi::class);
     }
-
+    
 }

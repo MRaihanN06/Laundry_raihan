@@ -44,13 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Outlet() 
-    { 
-        return $this->belongsTo(Outlet::class);
+    public function outlet()
+    {
+        return $this->belongsTo(outlet::class, 'id_outlet');
     }
     
     public function transaksi()
     {
         return $this->belongsTo(transaksi::class);
     }
+
 }

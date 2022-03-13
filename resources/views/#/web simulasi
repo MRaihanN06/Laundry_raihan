@@ -1,0 +1,60 @@
+@extends('layouts/main')
+
+@section('content')
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-md-12 grid-margin">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                            <h3 class="font-weight-bold">Simulasi</h3>
+                            <h6 class="font-weight-normal mb-0">Simulasi Buku <span class="text-primary">Hati-hati dengan
+                                    keputusan anda!</span></h6>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Form</p>
+                                    <div class="row">
+
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Data</p>
+                                    <div class="row">
+                                        
+                                        <br>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endsection
+
+    @push('script')
+        <script>
+            
+        </script>
+    @endpush

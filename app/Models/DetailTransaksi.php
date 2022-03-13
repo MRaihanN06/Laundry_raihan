@@ -42,4 +42,9 @@ class DetailTransaksi extends Model
     {
         return $this->belongsTo(Transaksi::class,);
     }
+    
+    public function laporan()
+    {
+        return $this->belongsTo(laporan::class);
+    }
 }

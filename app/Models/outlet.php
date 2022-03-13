@@ -30,4 +30,5 @@ class outlet extends Model
     {
         return $this->belongsTo(transaksi::class);
     }
+    
 }

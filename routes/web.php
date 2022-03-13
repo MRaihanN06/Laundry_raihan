@@ -5,12 +5,12 @@ use App\Http\Controllers\OutletController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SimulasiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,12 +49,14 @@ Route::get('export/user', [UserController::class, 'exportData'])->name('export-u
 Route::post('import/user', [UserController::class, 'importData'])->name('import-user');
 Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('importpdf-user');
 Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])->name('faktur');
+Route::get('/laporan/pdf', [TransaksiController::class, 'laporanPDF'])->name('laporanPDF');
+Route::get('export/laporan', [TransaksiController::class, 'exportData'])->name('export-laporan');
 
 // Route::resource('/outlet', OutletController::class)->middleware('auth');
 // Route::resource('/member', MemberController::class)->middleware('auth');
 // Route::resource('/paket', PaketController::class)->middleware('auth');
 // Route::resource('/user', UserController::class)->middleware('auth');
-// Route::resource('/laporan', DetailTransaksiController::class)->middleware('auth');
+// Route::resource('/laporan', LaporanController::class)->middleware('auth');
 // Route::resource('/transaksi', TransaksiController::class)->middleware('auth');
 // Route::get('index', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
@@ -69,7 +71,7 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
-    Route::get('/laporan', [DetailTransaksiController::class, 'index']);
+    Route::get('/laporan', [TransaksiController::class, 'laporan']);
     Route::get('data_karyawan', [SimulasiController::class, 'index']);
 });
 
@@ -77,10 +79,10 @@ Route::group(['prefix' => 'k', 'middleware' => ['isKasir', 'auth']], function ()
     Route::get('index', [HomeController::class, 'index'])->name('k.home');
     Route::resource('/member', MemberController::class);
     Route::resource('/transaksi', TransaksiController::class);
-    Route::get('/laporan', [DetailTransaksiController::class, 'index']);
+    Route::get('/laporan', [TransaksiController::class, 'index']);
 });
 
 Route::group(['prefix' => 'o', 'middleware' => ['isOwner', 'auth']], function () {
     Route::get('index', [HomeController::class, 'index'])->name('o.home');
-    Route::get('/laporan', [DetailTransaksiController::class, 'index']);
+    Route::get('/laporan', [TransaksiController::class, 'index']);
 });

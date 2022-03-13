@@ -45,7 +45,7 @@
                             <button type="button" class="btn btn-primary text-light mb-1" data-bs-toggle="modal"
                                 data-bs-target="#ModalLihatData{{ $t->id }}">
                                 <i class="ti-info-alt"></i>
-                            </button> &nbsp;
+                            </button>
                             <div class="modal fade" id="ModalLihatData{{ $t->id }}" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalLihatDataLabel"
                                 aria-hidden="true">
@@ -206,7 +206,7 @@
                             <button type="button" class="btn btn-warning text-light mb-1" data-bs-toggle="modal"
                                 data-bs-target="#ModalPerbaharuiData{{ $t->id }}">
                                 <i class="ti-pencil-alt"></i>
-                            </button> &nbsp;
+                            </button>
 
                             <!-- Modal -->
                             <div class="modal fade" id="ModalPerbaharuiData{{ $t->id }}"
@@ -269,7 +269,7 @@
                             <button type="button" class="btn btn-success text-light mb-1" data-bs-toggle="modal"
                                 data-bs-target="#ModalLihatInvoice{{ $t->id }}">
                                 <i class="icon-grid-2 menu-icon"></i>
-                            </button> &nbsp;
+                            </button>
                             <div class="modal fade bd-example-modal-lg" id="ModalLihatInvoice{{ $t->id }}"
                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                 aria-labelledby="ModalLihatInvoiceLabel" aria-hidden="true">
