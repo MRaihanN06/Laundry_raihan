@@ -16,6 +16,16 @@ class BarangImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new Barang($row);
+        return new Barang([
+            'nama_barang'        => $row['nama_barang'],
+            'merk_barang'        => $row['merk_barang'], 
+            'qty'                => $row['qty'],
+            'kondisi'            => $row['kondisi'],
+            'tanggal_pengadaan'  => $row['tanggal_pengadaan']
+        ]);
+    }
+
+    public function headingrow(): int {
+        return 3;
     }
 }

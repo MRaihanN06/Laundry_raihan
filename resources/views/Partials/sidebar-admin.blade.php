@@ -210,10 +210,23 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="data_karyawan">
-          <i class="ti-id-badge menu-icon"></i>
-          <span class="menu-title">Simulasi Data Karyawan</span>
+        <a class="nav-link" href="/a/penjemputan">
+          <span class="menu-title">Penjemputan</span>
         </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#tables2" aria-expanded="false" aria-controls="tables">
+          <i class="ti-id-badge menu-icon"></i>
+          <span class="menu-title">Simulasi</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="tables2">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="data_karyawan">Data Karyawan</a></li>
+            <li class="nav-item"> <a class="nav-link" href="data_siswa">Data Siswa</a></li>
+            <li class="nav-item"> <a class="nav-link" href="GajiKaryawan">Gaji Karyawan</a></li>
+          </ul>
+        </div>
       </li>
     </ul>
   </nav>

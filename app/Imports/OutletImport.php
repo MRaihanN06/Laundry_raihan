@@ -16,6 +16,14 @@ class OutletImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new outlet($row);
+        return new Outlet([
+            'nama'      => $row['nama'],
+            'alamat'    => $row['alamat'],
+            'tlp'       => $row['tlp'] 
+        ]);
+    }
+
+    public function headingrow(): int {
+        return 3;
     }
 }

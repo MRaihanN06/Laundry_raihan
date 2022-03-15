@@ -51,35 +51,9 @@
                       Export User
                     </a>
 
-                    <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalImportUser">
-                      Import User
-                    </button>
-
-                    <a href="{{ route('importpdf-user') }}" target="_blank" class="btn btn-secondary">
+                    <a href="{{ route('exportpdf-user') }}" target="_blank" class="btn btn-secondary">
                       Export PDF
                     </a>
-  
-                    <!-- Modal -->
-                    <div class="modal fade" id="ModalImportUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalImportuserLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header text-dark">
-                            <h3 class="modal-title" id="ModalImportuserLabel">Import Data</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-dark">
-                            <form action="{{ route('import-user') }}" method="POST" enctype="multipart/form-data">
-                              @csrf
-                              <input type="file" name="file" required>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-warning">Posting</button>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                 
                     <br>
                     <br>

@@ -22,5 +22,10 @@ class member extends Model
     {
         return $this->belongsTo(transaksi::class);
     }
+
+    public function penjemputan()
+    {
+        return $this->belongsTo(penjemputan::class);
+    }
     
 }

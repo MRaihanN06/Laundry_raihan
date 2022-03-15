@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\outlet;
 use App\Models\user;
 use App\Exports\UserExport;
-use App\Imports\UserImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -121,23 +120,6 @@ class UserController extends Controller
     {
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new UserExport, $date. '_user.xlsx');
-    }
-
-    public function importData(Request $request) 
-    {
-        $request->validate([
-            'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
-        ]);
-        
-        if ($request){
-            Excel::import(new UserImport, $request->file('file'));  
-        } else {
-            return back()->withErrors([
-                'file' => "File Bukan Excel"
-            ]);
-        }
-        
-        return back()->with('success', 'All good!');
     }
 
     public function exportPDF(User $User) {

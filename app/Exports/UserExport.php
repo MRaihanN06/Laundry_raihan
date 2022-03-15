@@ -6,11 +6,15 @@ use App\Models\user;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Sheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class UserExport implements FromCollection, WithHeadings,  WithEvents
+class UserExport implements FromCollection, WithHeadings,  WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -20,13 +24,27 @@ class UserExport implements FromCollection, WithHeadings,  WithEvents
         return user::all();
     }
 
+    public function map($user): array
+    {
+        return [
+            $user->id,
+            $user->name,
+            $user->email,
+            $user->email_verified_at,
+            $user->outlet->nama,
+            $user->role,
+            $user->created_at,
+            $user->updated_at,
+        ];
+    }
+
     public function headings(): array
     {
         return [
             'Id',
             'Name',
             'Email',
-            'Emai Verified At',
+            'Email Verified At',
             'Id Outlet',
             'Role',
             'Tanggal Dibuat',
@@ -51,6 +69,15 @@ class UserExport implements FromCollection, WithHeadings,  WithEvents
                 $event->sheet->mergeCells('A1:H1');
                 $event->sheet->setCellValue('A1', 'DATA USER');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
+                $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getStyle('A3:E' . $event->sheet->getHighestRow())->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '252525'],
+                        ],
+                    ],
+                ]);
             }
         ];
     }

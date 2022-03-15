@@ -9,7 +9,7 @@ use App\Exports\PaketExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PaketController extends Controller
 {

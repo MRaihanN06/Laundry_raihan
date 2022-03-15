@@ -117,3 +117,5 @@ storage:link (Buat simbolik link)
 vendor:publish (Publikasi asset dari vendor packages)
 view:cache (Compile semua aplikasi blade template)
 view:clear (Bersihkan semua file view yg ter-compile)
+
+use Barryvdh\DomPDF\Facade\Pdf;

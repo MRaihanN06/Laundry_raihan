@@ -158,7 +158,7 @@
                               <td>{{ $member->tlp }}</td>
                               <td>
                                 <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $member->id }}">
+                              <button type="button" class="btn btn-warning text-light mb-1" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $member->id }}">
                                 <i class="ti-pencil-alt"></i>
                               </button>
 

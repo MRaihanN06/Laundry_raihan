@@ -10,6 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SimulasiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GajiController;
+use App\Http\Controllers\penjemputanController;
 
 
 /*
@@ -45,9 +48,11 @@ Route::get('outlet/pdf', [OutletController::class, 'exportPDF'])->name('importpd
 Route::get('export/member', [MemberController::class, 'exportData'])->name('export-member');
 Route::post('import/member', [MemberController::class, 'importData'])->name('import-member');
 Route::get('member/pdf', [MemberController::class, 'exportPDF'])->name('importpdf-member');
+Route::get('export/penjemputan', [penjemputanController::class, 'exportData'])->name('export-penjemputan');
+Route::post('import/penjemputan', [penjemputanController::class, 'importData'])->name('import-penjemputan');
+Route::get('penjemputan/pdf', [penjemputanController::class, 'exportPDF'])->name('exportpdf-penjemputan');
 Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
-Route::post('import/user', [UserController::class, 'importData'])->name('import-user');
-Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('importpdf-user');
+Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('exportpdf-user');
 Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])->name('faktur');
 Route::get('/laporan/pdf', [TransaksiController::class, 'laporanPDF'])->name('laporanPDF');
 Route::get('export/laporan', [TransaksiController::class, 'exportData'])->name('export-laporan');
@@ -73,6 +78,9 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [TransaksiController::class, 'laporan']);
     Route::get('data_karyawan', [SimulasiController::class, 'index']);
+    Route::get('data_siswa', [SiswaController::class, 'index']);
+    Route::get('GajiKaryawan', [GajiController::class, 'index']);
+    Route::resource('/penjemputan', penjemputanController::class);
 });
 
 Route::group(['prefix' => 'k', 'middleware' => ['isKasir', 'auth']], function () {

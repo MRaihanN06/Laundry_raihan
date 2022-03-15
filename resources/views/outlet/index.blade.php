@@ -149,7 +149,7 @@
                               <td>{{ $outlet->tlp }}</td>
                               <td>
                                 <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $outlet->id }}">
+                              <button type="button" class="btn btn-warning text-light mb-1" data-bs-toggle="modal" data-bs-target="#ModalPerbaharuiData{{ $outlet->id }}">
                                 <i class="ti-pencil-alt"></i>
                               </button>
 

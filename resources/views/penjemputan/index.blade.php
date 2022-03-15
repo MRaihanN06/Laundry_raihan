@@ -27,9 +27,9 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Master Data Paket</h3>
-                            <h6 class="font-weight-normal mb-0">Membuat, Melihat, Perbaharui dan Hapus Data Paket <span
-                                    class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
+                            <h3 class="font-weight-bold">Master Data Penjemputan</h3>
+                            <h6 class="font-weight-normal mb-0">Membuat, Melihat, Perbaharui dan Hapus Data Penjemputan
+                                <span class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
                         </div>
                     </div>
                     <br>
@@ -38,46 +38,47 @@
                         <div class="col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-title">Tabel Paket</p>
+                                    <p class="card-title">Tabel Penjemputan</p>
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="table-responsive">
 
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#ModalBuatPaket">
-                                                    Buat Data Paket Baru
+                                                    data-bs-target="#ModalBuatPenjemputan">
+                                                    Buat Data Penjemputan Baru
                                                 </button>
 
-                                                <a href="{{ route('export-paket') }}" class="btn btn-success">
-                                                    Export Paket
+                                                <a href="{{ route('export-penjemputan') }}" class="btn btn-success">
+                                                    Export Excel
                                                 </a>
 
                                                 <button type="button" class="btn btn-warning text-light"
-                                                    data-bs-toggle="modal" data-bs-target="#ModalImportPaket">
-                                                    Import Paket
+                                                    data-bs-toggle="modal" data-bs-target="#ModalImportPenjemputan">
+                                                    Import Excel
                                                 </button>
 
-                                                <a href="{{ route('importpdf-paket') }}" target="_blank"
+                                                <a href="{{ route('exportpdf-penjemputan') }}" target="_blank"
                                                     class="btn btn-secondary">
                                                     Export PDF
                                                 </a>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="ModalImportPaket" data-bs-backdrop="static"
-                                                    data-bs-keyboard="false" tabindex="-1"
-                                                    aria-labelledby="ModalImportPaketLabel" aria-hidden="true">
+                                                <div class="modal fade" id="ModalImportPenjemputan"
+                                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="ModalImportPenjemputanLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header text-dark">
-                                                                <h3 class="modal-title" id="ModalImportPaketLabel">Import
+                                                                <h3 class="modal-title" id="ModalImportPenjemputanLabel">
+                                                                    Import
                                                                     Data</h3>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-dark">
-                                                                <form action="{{ route('import-paket') }}" method="POST"
-                                                                    enctype="multipart/form-data">
+                                                                <form action="{{ route('import-penjemputan') }}"
+                                                                    method="POST" enctype="multipart/form-data">
                                                                     @csrf
                                                                     <input type="file" name="file" required>
                                                             </div>
@@ -94,68 +95,53 @@
 
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="ModalBuatPaket" tabindex="-1"
-                                                    aria-labelledby="ModalBuatPaketLabel" aria-hidden="true">
+                                                <div class="modal fade" id="ModalBuatPenjemputan" tabindex="-1"
+                                                    aria-labelledby="ModalBuatPenjemputanLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header text-dark">
-                                                                <h3 class="modal-title" id="ModalBuatPaketLabel">Masukan
+                                                                <h3 class="modal-title" id="ModalBuatPenjemputanLabel">
+                                                                    Masukan
                                                                     Data Baru</h3>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body text-dark">
-                                                                <form action="/{{ request()->segment(1) }}/paket"
+                                                                <form action="/{{ request()->segment(1) }}/penjemputan"
                                                                     method="POST" class="mb-5"
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     <div class="mb-3">
                                                                         <label for="nama" class="form-label">Nama
-                                                                            Outlet</label>
-                                                                        <select name="id_outlet" id="outlet"
+                                                                            pelanggan</label>
+                                                                        <select name="id_member" id="member"
                                                                             class="form-control js-example-basic-single w-100">
-                                                                            @foreach ($outlet as $o)
-                                                                                <option value="{{ $o->id }}">
-                                                                                    {{ $o->nama }}</option>
+                                                                            @foreach ($member as $m)
+                                                                                <option value="{{ $m->id }}">
+                                                                                    {{ $m->nama }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="nama" class="form-label">Nama
+                                                                            Penjemput</label>
+                                                                        <select name="id_user" id="user"
+                                                                            class="form-control js-example-basic-single w-100">
+                                                                            @foreach ($user as $u)
+                                                                                <option value="{{ $u->id }}">
+                                                                                    {{ $u->name }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="jenis"
-                                                                            class="form-label">Jenis</label>
-                                                                        <select class="form-control" name="jenis"
-                                                                            id="jenis">
-                                                                            <option value="kiloan">Kiloan</option>
-                                                                            <option value="selimut">Selimut</option>
-                                                                            <option value="bed_cover">Bed Cover</option>
-                                                                            <option value="kaos">Kaos</option>
-                                                                            <option value="lain">Lain</option>
+                                                                            class="form-label">Status</label>
+                                                                        <select class="form-control" name="status"
+                                                                            id="status">
+                                                                            <option value="tercatat">Tercatat</option>
+                                                                            <option value="penjemputan">Penjemputan</option>
+                                                                            <option value="selesai">Selesai</option>
                                                                         </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="nama_paket" class="form-label">Nama
-                                                                            Paket</label>
-                                                                        <input type="text"
-                                                                            class="form-control @error('nama_paket') is-invalid @enderror"
-                                                                            id="nama_paket" name="nama_paket" required
-                                                                            autofocus>
-                                                                        @error('nama_paket')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="harga"
-                                                                            class="form-label">Harga</label>
-                                                                        <input type="text"
-                                                                            class="form-control @error('harga') is-invalid @enderror"
-                                                                            id="harga" name="harga" required autofocus>
-                                                                        @error('harga')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger"
@@ -170,60 +156,53 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <table class="display expandable-table" style="width:100%" id="tb-paket">
+                                                <table class="display expandable-table" style="width:100%"
+                                                    id="tb-penjemputan">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Id Outlet</th>
-                                                            <th>Jenis</th>
-                                                            <th>Nama Paket</th>
-                                                            <th>Harga</th>
+                                                            <th>Nama Pelanggan</th>
+                                                            <th>Alamat Pelanggan</th>
+                                                            <th>No Telepon</th>
+                                                            <th>Penjemput</th>
+                                                            <th>Status</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($paket as $paket)
+                                                        @foreach ($penjemputan as $p)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $paket->outlet->nama ?? '' }}</td>
-                                                                <td>
-                                                                    @switch($paket->jenis)
-                                                                        @case('kiloan')
-                                                                            Kiloan
-                                                                        @break
-
-                                                                        @case('selimut')
-                                                                            Selimut
-                                                                        @break
-
-                                                                        @case('bed_cover')
-                                                                            Bed Cover
-                                                                        @break
-
-                                                                        @case('kaos')
-                                                                            Kaos
-                                                                        @break
-
-                                                                        @case('lain')
-                                                                            Lainnya
-                                                                        @break
-
-                                                                        @default
-                                                                    @endswitch
+                                                                <td>{{ $p->member->nama ?? '' }}</td>
+                                                                <td>{{ $p->member->alamat ?? '' }}</td>
+                                                                <td>{{ $p->member->tlp ?? '' }}</td>
+                                                                <td>{{ $p->user->name ?? '' }}</td>
+                                                                    <span hidden
+                                                                        class="id">{{ $p->id }}</span>
+                                                                <td id="status">
+                                                                    <select name="status" class="status" id="status">
+                                                                        <option value="tercatat"
+                                                                            {{ $p->status == 'tercatat' ? 'selected' : '' }}>
+                                                                            Tercatat</option>
+                                                                        <option value="penjemputan"
+                                                                            {{ $p->status == 'penjemputan' ? 'selected' : '' }}>
+                                                                            Penjemputan</option>
+                                                                        <option value="selesai"
+                                                                            {{ $p->status == 'selesai' ? 'selected' : '' }}>
+                                                                            Selesai</option>
+                                                                    </select>
                                                                 </td>
-                                                                <td>{{ $paket->nama_paket }}</td>
-                                                                <td>Rp. {{ number_format($paket->harga) }}</td>
                                                                 <td>
                                                                     <!-- Button trigger modal -->
                                                                     <button type="button" class="btn btn-warning text-light"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#ModalPerbaharuiData{{ $paket->id }}">
+                                                                        data-bs-target="#ModalPerbaharuiData{{ $p->id }}">
                                                                         <i class="ti-pencil-alt"></i>
                                                                     </button>
 
                                                                     <!-- Modal -->
                                                                     <div class="modal fade"
-                                                                        id="ModalPerbaharuiData{{ $paket->id }}"
+                                                                        id="ModalPerbaharuiData{{ $p->id }}"
                                                                         data-bs-backdrop="static" data-bs-keyboard="false"
                                                                         tabindex="-1"
                                                                         aria-labelledby="ModalPerbaharuiDataLabel"
@@ -241,7 +220,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body text-dark">
                                                                                     <form
-                                                                                        action="/{{ request()->segment(1) }}/paket/{{ $paket->id }}"
+                                                                                        action="/{{ request()->segment(1) }}/penjemputan/{{ $p->id }}"
                                                                                         method="POST" class="mb-5"
                                                                                         enctype="multipart/form-data">
                                                                                         @method('PUT')
@@ -249,77 +228,63 @@
                                                                                         <div class="mb-3">
                                                                                             <label for="nama"
                                                                                                 class="form-label">Nama
-                                                                                                Outlet</label>
-                                                                                            <select name="id_outlet"
-                                                                                                id="outlet"
+                                                                                                Pelanggan</label>
+                                                                                            <select name="id_member"
+                                                                                                id="member"
                                                                                                 class="form-control js-example-basic-single w-100">
-                                                                                                @foreach ($outlet as $otl)
-                                                                                                    @if (old('id_outlet') && old('id_outlet') == $otl->id)
+                                                                                                @foreach ($member as $m)
+                                                                                                    @if (old('id_member') && old('id_member') == $m->id)
                                                                                                         <option
-                                                                                                            value="{{ $otl->id }}"
+                                                                                                            value="{{ $m->id }}"
                                                                                                             selected>
-                                                                                                            {{ $otl->nama }}
+                                                                                                            {{ $m->nama }}
                                                                                                         </option>
                                                                                                     @else
                                                                                                     @endif
                                                                                                     <option
-                                                                                                        value="{{ $otl->id }}">
-                                                                                                        {{ $otl->nama }}
+                                                                                                        value="{{ $m->id }}">
+                                                                                                        {{ $m->nama }}
                                                                                                     </option>
                                                                                                 @endforeach
                                                                                             </select>
                                                                                         </div>
                                                                                         <div class="mb-3">
-                                                                                            <label for="jenis"
-                                                                                                class="form-label">Jenis</label>
-                                                                                            <select class="form-control"
-                                                                                                name="jenis" id="jenis">
-                                                                                                <option value="kiloan"
-                                                                                                    @if ($paket->jenis == 'kiloan') selected @endif>
-                                                                                                    Kiloan</option>
-                                                                                                <option value="selimut"
-                                                                                                    @if ($paket->jenis == 'selimut') selected @endif>
-                                                                                                    Selimut</option>
-                                                                                                <option value="bed_cover"
-                                                                                                    @if ($paket->jenis == 'bed_cover') selected @endif>
-                                                                                                    Bed Cover</option>
-                                                                                                <option value="kaos"
-                                                                                                    @if ($paket->jenis == 'kaos') selected @endif>
-                                                                                                    Kaos</option>
-                                                                                                <option value="lain"
-                                                                                                    @if ($paket->jenis == 'lain') selected @endif>
-                                                                                                    Lain</option>
+                                                                                            <label for="nama"
+                                                                                                class="form-label">Nama
+                                                                                                Penjemput</label>
+                                                                                            <select name="id_user" id="user"
+                                                                                                class="form-control js-example-basic-single w-100">
+                                                                                                @foreach ($user as $u)
+                                                                                                    @if (old('id_member') && old('id_member') == $u->id)
+                                                                                                        <option
+                                                                                                            value="{{ $u->id }}"
+                                                                                                            selected>
+                                                                                                            {{ $u->nama }}
+                                                                                                        </option>
+                                                                                                    @else
+                                                                                                    @endif
+                                                                                                    <option
+                                                                                                        value="{{ $u->id }}">
+                                                                                                        {{ $u->name }}
+                                                                                                    </option>
+                                                                                                @endforeach
                                                                                             </select>
                                                                                         </div>
                                                                                         <div class="mb-3">
-                                                                                            <label for="nama_paket"
-                                                                                                class="form-label">Nama
-                                                                                                Paket</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control @error('nama_paket') is-invalid @enderror"
-                                                                                                id="nama_paket"
-                                                                                                name="nama_paket" required
-                                                                                                autofocus
-                                                                                                value="{{ old('nama', $paket->nama_paket) }}">
-                                                                                            @error('nama_paket')
-                                                                                                <div class="invalid-feedback">
-                                                                                                    {{ $message }}
-                                                                                                </div>
-                                                                                            @enderror
-                                                                                        </div>
-                                                                                        <div class="mb-3">
-                                                                                            <label for="harga"
-                                                                                                class="form-label">Harga</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control @error('harga') is-invalid @enderror"
-                                                                                                id="harga" name="harga"
-                                                                                                required autofocus
-                                                                                                value="{{ old('nama', $paket->harga) }}">
-                                                                                            @error('harga')
-                                                                                                <div class="invalid-feedback">
-                                                                                                    {{ $message }}
-                                                                                                </div>
-                                                                                            @enderror
+                                                                                            <label for="status"
+                                                                                                class="form-label">Status</label>
+                                                                                            <select class="form-control"
+                                                                                                name="status" id="status">
+                                                                                                <option value="tercatat"
+                                                                                                    @if ($p->status == 'tercatat') selected @endif>
+                                                                                                    Tercatat</option>
+                                                                                                <option value="penjemputan"
+                                                                                                    @if ($p->status == 'penjemputan') selected @endif>
+                                                                                                    Penjemputan</option>
+                                                                                                <option value="selesai"
+                                                                                                    @if ($p->status == 'selesai') selected @endif>
+                                                                                                    Selesai</option>
+                                                                                            </select>
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
@@ -334,7 +299,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <form
-                                                                        action="/{{ request()->segment(1) }}/paket/{{ $paket->id }}"
+                                                                        action="/{{ request()->segment(1) }}/penjemputan/{{ $p->id }}"
                                                                         method="post" class="d-inline">
                                                                         @csrf
                                                                         <input type="hidden" name="_method" value="DELETE">
@@ -363,7 +328,7 @@
         @push('script')
             <script>
                 $(function() {
-                    $('#tb-paket').DataTable();
+                    $('#tb-penjemputan').DataTable();
                 });
 
                 // menghapus alert

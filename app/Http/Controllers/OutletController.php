@@ -8,7 +8,7 @@ use App\Imports\OutletImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OutletController extends Controller
 {

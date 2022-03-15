@@ -33,7 +33,7 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $user->name }}</td>
               <td>{{ $user->email }}</td>
-              <td>{{ $user->id_outlet }}</td>
+              <td>{{ $user->Outlet->nama ?? '' }}</td>
               <td>{{ $user->role }}</td>
             </tr>
           @endforeach

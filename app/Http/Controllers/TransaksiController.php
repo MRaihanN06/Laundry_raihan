@@ -9,7 +9,7 @@ use App\Models\Paket;
 use App\Models\DetailTransaksi;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\LaporanExport;
 use Carbon\Carbon;
 
@@ -196,14 +196,16 @@ class TransaksiController extends Controller
         return $pdf->stream();
     }
 
-    public function laporan(){
+    public function laporan(Transaksi $transaksi){
         $data['transaksi'] = Transaksi::all(); 
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
             $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
             $data = Transaksi::whereBetween('created_at',[$start_date,$end_date])->get();
+            $data = Transaksi::where('status', $transaksi->status = 'diambil')->where('pembayaran', $transaksi->pembayaran = 'dibayar')->get();
         } else {
-            $data =Transaksi::latest()->get();
+            $data = Transaksi::latest()->get();
+            $data = Transaksi::where('status', $transaksi->status = 'diambil')->where('pembayaran', $transaksi->pembayaran = 'dibayar')->get();
         }
         
         return view('/laporan/index', compact('data'));

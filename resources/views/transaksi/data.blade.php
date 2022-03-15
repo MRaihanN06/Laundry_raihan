@@ -228,31 +228,54 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="status" class="form-label">Status</label>
-                                                    <select class="form-control" name="status" id="status">
-                                                        <option value="baru"
-                                                            @if ($t->status == 'baru') selected @endif>Baru
-                                                        </option>
-                                                        <option value="proses"
-                                                            @if ($t->status == 'proses') selected @endif>Proses
-                                                        </option>
-                                                        <option value="selesai"
-                                                            @if ($t->status == 'selesai') selected @endif>Selesai
-                                                        </option>
-                                                        <option value="diambil"
-                                                            @if ($t->status == 'diambil') selected @endif>Diambil
-                                                        </option>
-                                                    </select>
+                                                    @if ($t->status == 'diambil')
+                                                        <select class="form-control" name="status" id="status">
+                                                            <option value="diambil"
+                                                                @if ($t->status == 'diambil') selected @endif>
+                                                                Diambil
+                                                            </option>
+                                                        </select>
+                                                    @else
+                                                        <select class="form-control" name="status" id="status">
+                                                            <option value="baru"
+                                                                @if ($t->status == 'baru') selected @endif>Baru
+                                                            </option>
+                                                            <option value="proses"
+                                                                @if ($t->status == 'proses') selected @endif>Proses
+                                                            </option>
+                                                            <option value="selesai"
+                                                                @if ($t->status == 'selesai') selected @endif>
+                                                                Selesai
+                                                            </option>
+                                                            <option value="diambil"
+                                                                @if ($t->status == 'diambil') selected @endif>
+                                                                Diambil
+                                                            </option>
+                                                        </select>
+                                                    @endif
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="pembayaran" class="form-label">Pembayaran</label>
-                                                    <select class="form-control" name="pembayaran" id="pembayaran">
-                                                        <option value="dibayar"
-                                                            @if ($t->pembayaran == 'dibayar') selected @endif>Dibayar
-                                                        </option>
-                                                        <option value="belum_dibayar"
-                                                            @if ($t->pembayaran == 'belum_dibayar') selected @endif>Belum
-                                                            Dibayar</option>
-                                                    </select>
+                                                    @if ($t->pembayaran == 'dibayar')
+                                                        <select class="form-control" name="pembayaran"
+                                                            id="pembayaran">
+                                                            <option value="dibayar"
+                                                                @if ($t->pembayaran == 'dibayar') selected @endif>
+                                                                Dibayar
+                                                            </option>
+                                                        </select>
+                                                    @else
+                                                        <select class="form-control" name="pembayaran"
+                                                            id="pembayaran">
+                                                            <option value="dibayar"
+                                                                @if ($t->pembayaran == 'dibayar') selected @endif>
+                                                                Dibayar
+                                                            </option>
+                                                            <option value="belum_dibayar"
+                                                                @if ($t->pembayaran == 'belum_dibayar') selected @endif>Belum
+                                                                Dibayar</option>
+                                                        </select>
+                                                    @endif
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -361,7 +384,8 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>Pajak {{ $t->pajak }} %</td>
-                                                                <td>{{ ($t->getTotalPrice() * $t->pajak) / 100 }}</td>
+                                                                <td>{{ ($t->getTotalPrice() * $t->pajak) / 100 }}
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Biaya Tambahan</td>
@@ -379,8 +403,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Tutup</button>
-                                                <a class="btn btn-warning"
-                                                    href="{{ route('faktur', $t->id) }}" target="_blank">Cetak</a>
+                                                <a class="btn btn-warning" href="{{ route('faktur', $t->id) }}"
+                                                    target="_blank">Cetak</a>
                                             </div>
                                         </div>
                                     </div>

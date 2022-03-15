@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->belongsTo(transaksi::class);
     }
 
+    public function penjemputan()
+    {
+        return $this->belongsTo(penjemputan::class);
+    }
+
 }
