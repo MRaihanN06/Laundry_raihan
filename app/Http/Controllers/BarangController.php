@@ -13,19 +13,19 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class BarangController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * untuk menampilkan view barang dan mengirimkan data barang dengan model
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         return view('barang/index', [
-            'barang' => barang::all() 
+            'barang' => barang::all()
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * untuk menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class BarangController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store untuk menyimpan data ke database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,18 +57,7 @@ class BarangController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * menampilkan view edit dan menampilkan data barang yang akan diupdate
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -81,7 +70,7 @@ class BarangController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update untuk proses update data barang
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -101,11 +90,11 @@ class BarangController extends Controller
         barang::where('id', $barang->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/barang')->with('success', 'Post has been edited!');
+        return redirect(request()->segment(1) . '/barang')->with('success', 'Post has been edited!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * untuk menghapus data barang sesuai id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -114,39 +103,51 @@ class BarangController extends Controller
     {
         $validatedData = barang::find($id);
         $validatedData->delete();
-        return redirect(request()->segment(1).'/barang')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1) . '/barang')->with('success', 'Post has been deleted!');
     }
 
-    public function exportData() 
+
+    /**
+     * untuk melakukan export data dari view dan database menjadi file excel
+     */
+    public function exportData()
     {
         $date =  date('Y-m-d H:i:s');
-        return Excel::download(new BarangExport, $date. '_barang.xlsx');
+        return Excel::download(new BarangExport, $date . '_barang.xlsx');
     }
 
-    public function importData(Request $request) 
+    /**
+     * untuk melakukan upload data excel dan meng importnya untuk dimasukan ke dalam database
+     * dan menampilkan datanya ke view
+     */
+    public function importData(Request $request)
     {
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
-        
-        if ($request){
-            Excel::import(new BarangImport, $request->file('file'));  
+
+        if ($request) {
+            Excel::import(new BarangImport, $request->file('file'));
         } else {
             return back()->withErrors([
                 'file' => "File Bukan Excel"
             ]);
         }
-        
+
         return back()->with('success', 'All good!');
     }
 
-    public function exportPDF(Barang $Barang) {
-  
+
+    /**
+     * untuk melakukan export data dari view dan database menjadi file PDF
+     */
+    public function exportPDF(Barang $Barang)
+    {
+
         $pdf = PDF::loadView('Barang.pdf', [
             'tb_barang' => Barang::all()
         ]);
-        
+
         return $pdf->stream();
-        
-      }
+    }
 }

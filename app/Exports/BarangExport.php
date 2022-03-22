@@ -7,23 +7,22 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Maatwebsite\Excel\Sheet;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * Method collection untuk mengambil semua data dari database
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Barang::all();
     }
 
+    /**
+     * Method map untuk menentukan atau menyeleksi field yang mengisi Excel
+     */
     public function map($barang): array
     {
         return [
@@ -38,6 +37,9 @@ class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapp
         ];
     }
 
+    /**
+     * method heading untuk mengatur nama header pada file excel yang akan diexport
+     */
     public function headings(): array
     {
         return [
@@ -52,6 +54,14 @@ class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapp
         ];
     }
 
+    /**
+     * method registerEvent untuk men-style keseluruhan file excel,
+     * seperti memberi jarak pada tiap kolom secara otomatis (getColumnDimension)
+     * mergecells menyatukan coloum untuk judul excel
+     * getFont untuk menebalkan font
+     * getAligment untuk menengahkan posisi juful excel
+     * getHIghesRow + border untuk menambhakan border pada coloum tertentu samapi data akhir
+     */
     public function registerEvents(): array
     {
         return [
@@ -64,7 +74,7 @@ class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapp
                 $event->sheet->getColumnDimension('F')->setAutoSize(true);
                 $event->sheet->getColumnDimension('G')->setAutoSize(true);
                 $event->sheet->getColumnDimension('H')->setAutoSize(true);
-                
+
                 $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:H1');
                 $event->sheet->setCellValue('A1', 'DATA BARANG');

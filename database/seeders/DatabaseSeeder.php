@@ -12,7 +12,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * menjalalankan semua perintah yang ada pada factory berdasarkan model yang telah ditentukan
      *
      * @return void
      */

@@ -5,11 +5,11 @@ namespace App\Imports;
 use App\Models\Barang;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithLimit;
 
 class BarangImport implements ToModel, WithHeadingRow
 {
     /**
+     * method model untuk menentukan data mana saja yang akan mengisi database
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
@@ -25,6 +25,9 @@ class BarangImport implements ToModel, WithHeadingRow
         ]);
     }
 
+    /**
+     * headingrow untuk melewati baris sesuai keinginan
+     */
     public function headingrow(): int {
         return 3;
     }

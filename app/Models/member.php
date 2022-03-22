@@ -18,6 +18,9 @@ class member extends Model
         'tlp'
     ];
 
+    /**
+     * untuk merelasikan model member dengan model transaksi
+     */
     public function transaksi()
     {
         return $this->belongsTo(transaksi::class);

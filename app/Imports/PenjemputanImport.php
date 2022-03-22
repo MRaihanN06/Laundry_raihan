@@ -5,7 +5,6 @@ namespace App\Imports;
 use App\Models\Penjemputan;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithLimit;
 
 class PenjemputanImport implements ToModel, WithHeadingRow
 {

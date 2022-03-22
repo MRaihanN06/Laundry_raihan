@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 class MemberFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * mendefinisikan field mana yang datanya akan digenerete otomatis dengan laravel fakeer
      *
      * @return array
      */
