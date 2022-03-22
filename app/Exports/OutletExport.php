@@ -64,7 +64,7 @@ class OutletExport implements FromCollection, WithHeadings,  WithEvents, WithMap
                 $event->sheet->setCellValue('A1', 'DATA OUTLET');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('A3:E' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:F' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

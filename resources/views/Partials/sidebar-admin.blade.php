@@ -194,6 +194,7 @@
             <li class="nav-item"> <a class="nav-link" href="/a/paket">Paket</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/user">User</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/barang">Barang</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/penjemputan">Penjemputan</a></li>
           </ul>
         </div>
       </li>
@@ -207,11 +208,6 @@
         <a class="nav-link" href="/a/laporan">
           <i class="ti-money menu-icon"></i>
           <span class="menu-title">Laporan</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/a/penjemputan">
-          <span class="menu-title">Penjemputan</span>
         </a>
       </li>
       <li class="nav-item">

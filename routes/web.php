@@ -81,6 +81,7 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::get('data_siswa', [SiswaController::class, 'index']);
     Route::get('GajiKaryawan', [GajiController::class, 'index']);
     Route::resource('/penjemputan', penjemputanController::class);
+    Route::post('/status', [penjemputanController::class ,'status'])->name('status');
 });
 
 Route::group(['prefix' => 'k', 'middleware' => ['isKasir', 'auth']], function () {

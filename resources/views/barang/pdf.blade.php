@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PDF Barang</title>
-    {{-- <style>
+    <style>
         table.display td {
             text-align: center;
         }
-    </style> --}}
+    </style>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
             Data Barang
         </Center>
     </h1>
-    <table class="display expandable-table" style="width:100%" id="tb-barang">
-        <thead>
+    <table class="display expandable-table" border="1" cellspacing="0" style="width:100%" id="tb-barang">
+        <thead style="background-color: aqua">
             <tr>
                 <th>No</th>
                 <th>Nama Barang</th>

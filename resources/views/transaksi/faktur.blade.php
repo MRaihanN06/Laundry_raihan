@@ -44,8 +44,8 @@
         </tbody>
     </table>
     <br>
-    <table class="expandable-table w-100 table-sm" style="width: 100% ">
-        <thead>
+    <table class="expandable-table w-100 table-sm" border="1" cellspacing="0" style="width: 100% ">
+        <thead style="background-color: aqua">
             <tr>
                 <th>No</th>
                 <th>Nama Paket</th>

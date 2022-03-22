@@ -62,7 +62,7 @@
                                                     </div>
                                                 </form>
 
-                                                <table class="expandable-table w-100 table-sm" id="tb-transaksi">
+                                                <table class="expandable-table w-100 table-sm table-striped table-bord" id="tb-transaksi">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>

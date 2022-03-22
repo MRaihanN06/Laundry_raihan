@@ -92,8 +92,7 @@ class penjemputanController extends Controller
     {
         $validatedData = $request->validate([
             'id_member' => 'required',
-            'id_user' => 'required',
-            'status' => 'required'
+            'id_user' => 'required'
         ]);
         $p = penjemputan::find($id);
 
@@ -102,6 +101,14 @@ class penjemputanController extends Controller
             ->update($validatedData);
 
         return redirect(request()->segment(1) . '/penjemputan')->with('success', 'Post has been edited!');
+    }
+
+    public function status(request $request){
+        $data = penjemputan::where('id',$request->id)->first();
+        $data->status = $request->status;
+        $update = $data->save();
+
+        return 'Data berhasil diupdate';
     }
 
     /**

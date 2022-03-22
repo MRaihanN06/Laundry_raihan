@@ -29,7 +29,8 @@
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Master Data Penjemputan</h3>
                             <h6 class="font-weight-normal mb-0">Membuat, Melihat, Perbaharui dan Hapus Data Penjemputan
-                                <span class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
+                                <span class="text-primary">Hati-hati dengan keputusan anda!</span>
+                            </h6>
                         </div>
                     </div>
                     <br>
@@ -156,8 +157,8 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <table class="display expandable-table" style="width:100%"
-                                                    id="tb-penjemputan">
+                                                <table class="display expandable-table table-striped table-bordered"
+                                                    style="width:100%" id="tb-penjemputan">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
@@ -172,29 +173,41 @@
                                                     <tbody>
                                                         @foreach ($penjemputan as $p)
                                                             <tr>
-                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $loop->iteration }} <input type="text" hidden
+                                                                        class="id" value="{{ $p->id }}">
+                                                                </td>
                                                                 <td>{{ $p->member->nama ?? '' }}</td>
                                                                 <td>{{ $p->member->alamat ?? '' }}</td>
                                                                 <td>{{ $p->member->tlp ?? '' }}</td>
                                                                 <td>{{ $p->user->name ?? '' }}</td>
-                                                                    <span hidden
-                                                                        class="id">{{ $p->id }}</span>
-                                                                <td id="status">
-                                                                    <select name="status" class="status" id="status">
-                                                                        <option value="tercatat"
-                                                                            {{ $p->status == 'tercatat' ? 'selected' : '' }}>
-                                                                            Tercatat</option>
-                                                                        <option value="penjemputan"
-                                                                            {{ $p->status == 'penjemputan' ? 'selected' : '' }}>
-                                                                            Penjemputan</option>
-                                                                        <option value="selesai"
-                                                                            {{ $p->status == 'selesai' ? 'selected' : '' }}>
-                                                                            Selesai</option>
-                                                                    </select>
+                                                                <td>
+                                                                    @if ($p->status == 'selesai')
+                                                                        <select name="status"
+                                                                            class="status form-control mb-3" id="one">
+                                                                            <option value="selesai"
+                                                                                @if ($p->status == 'selesai') selected @endif>
+                                                                                Selesai
+                                                                            </option>
+                                                                        </select>
+                                                                    @else
+                                                                        <select name="status"
+                                                                            class="status form-control mb-3" id="one">
+                                                                            <option value="tercatat"
+                                                                                {{ $p->status == 'tercatat' ? 'selected' : '' }}>
+                                                                                Tercatat</option>
+                                                                            <option value="penjemputan"
+                                                                                {{ $p->status == 'penjemputan' ? 'selected' : '' }}>
+                                                                                Penjemputan</option>
+                                                                            <option value="selesai"
+                                                                                {{ $p->status == 'selesai' ? 'selected' : '' }}>
+                                                                                Selesai</option>
+                                                                        </select>
+                                                                    @endif
                                                                 </td>
                                                                 <td>
                                                                     <!-- Button trigger modal -->
-                                                                    <button type="button" class="btn btn-warning text-light"
+                                                                    <button type="button"
+                                                                        class="btn btn-warning text-light mb-1"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#ModalPerbaharuiData{{ $p->id }}">
                                                                         <i class="ti-pencil-alt"></i>
@@ -230,21 +243,22 @@
                                                                                                 class="form-label">Nama
                                                                                                 Pelanggan</label>
                                                                                             <select name="id_member"
-                                                                                                id="member"
-                                                                                                class="form-control js-example-basic-single w-100">
+                                                                                                id="id_member"
+                                                                                                class="form-control js-example-basic-single w-100"
+                                                                                                value={{ old('id_member') }}>
                                                                                                 @foreach ($member as $m)
-                                                                                                    @if (old('id_member') && old('id_member') == $m->id)
+                                                                                                    @if (old('id_member') == $m->id)
                                                                                                         <option
                                                                                                             value="{{ $m->id }}"
                                                                                                             selected>
                                                                                                             {{ $m->nama }}
                                                                                                         </option>
                                                                                                     @else
+                                                                                                        <option
+                                                                                                            value="{{ $m->id }}">
+                                                                                                            {{ $m->nama }}
+                                                                                                        </option>
                                                                                                     @endif
-                                                                                                    <option
-                                                                                                        value="{{ $m->id }}">
-                                                                                                        {{ $m->nama }}
-                                                                                                    </option>
                                                                                                 @endforeach
                                                                                             </select>
                                                                                         </div>
@@ -252,38 +266,23 @@
                                                                                             <label for="nama"
                                                                                                 class="form-label">Nama
                                                                                                 Penjemput</label>
-                                                                                            <select name="id_user" id="user"
+                                                                                            <select name="id_user"
+                                                                                                id="id_user"
                                                                                                 class="form-control js-example-basic-single w-100">
                                                                                                 @foreach ($user as $u)
-                                                                                                    @if (old('id_member') && old('id_member') == $u->id)
+                                                                                                    @if (old('id_user') && old('id_user') == $u->id)
                                                                                                         <option
                                                                                                             value="{{ $u->id }}"
                                                                                                             selected>
                                                                                                             {{ $u->nama }}
                                                                                                         </option>
                                                                                                     @else
+                                                                                                        <option
+                                                                                                            value="{{ $u->id }}">
+                                                                                                            {{ $u->name }}
+                                                                                                        </option>
                                                                                                     @endif
-                                                                                                    <option
-                                                                                                        value="{{ $u->id }}">
-                                                                                                        {{ $u->name }}
-                                                                                                    </option>
                                                                                                 @endforeach
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="mb-3">
-                                                                                            <label for="status"
-                                                                                                class="form-label">Status</label>
-                                                                                            <select class="form-control"
-                                                                                                name="status" id="status">
-                                                                                                <option value="tercatat"
-                                                                                                    @if ($p->status == 'tercatat') selected @endif>
-                                                                                                    Tercatat</option>
-                                                                                                <option value="penjemputan"
-                                                                                                    @if ($p->status == 'penjemputan') selected @endif>
-                                                                                                    Penjemputan</option>
-                                                                                                <option value="selesai"
-                                                                                                    @if ($p->status == 'selesai') selected @endif>
-                                                                                                    Selesai</option>
                                                                                             </select>
                                                                                         </div>
                                                                                 </div>
@@ -325,21 +324,39 @@
         </div>
         <!-- content-wrapper ends -->
 
-        @push('script')
-            <script>
-                $(function() {
-                    $('#tb-penjemputan').DataTable();
-                });
-
-                // menghapus alert
-                $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#success-alert").slideUp(500);
-                });
-
-                $("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#success-alert").slideUp(500);
-                });
-            </script>
-        @endpush
-
     @endsection
+
+    @push('script')
+        <script>
+            $(function() {
+                $('#tb-penjemputan').DataTable();
+            });
+
+            // menghapus alert
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+                $("#success-alert").slideUp(500);
+            });
+
+            $("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
+                $("#success-alert").slideUp(500);
+            });
+
+            $('#tb-penjemputan').on('change', '.status', function() {
+                let status = $(this).closest('tr').find('.status').val()
+                let id = $(this).closest('tr').find('.id').val()
+                let data = {
+                    id: id,
+                    status: status,
+                    _token: "{{ csrf_token() }}"
+                };
+                $.post('{{ route('status') }}', data, function(msg) {
+                    swal("Sukses", "Data Berhasil Diubah", "success", {
+                        buttons: false,
+                        timer: 1000,
+                    })
+                })
+                console.log(id);
+                console.log(status);
+            })
+        </script>
+    @endpush

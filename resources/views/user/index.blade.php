@@ -57,7 +57,7 @@
                 
                     <br>
                     <br>
-                      <table class="display expandable-table" style="width:100%" id="tb-user">
+                      <table class="display expandable-table table-striped table-bordered" style="width:100%" id="tb-user">
                         <thead>
                           <tr>
                             <th>No</th>

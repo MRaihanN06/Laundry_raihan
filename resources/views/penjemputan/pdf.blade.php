@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PDF PENJEMPUTAN</title>
-    {{-- <style>
+    <style>
         table.display td {
             text-align: center;
         }
-    </style> --}}
+    </style>
 </head>
 <body>
     <h1>
@@ -18,8 +18,8 @@
         </Center>
     </h1>
    
-    <table class="display expandable-table" style="width:100%" id="tb-penjemputan">
-        <thead>
+    <table class="display expandable-table" border="1" cellspacing="0" style="width:100%" id="tb-penjemputan">
+        <thead style="background-color: aqua">
             <tr>
                 <th>No</th>
                 <th>Nama Pelanggan</th>

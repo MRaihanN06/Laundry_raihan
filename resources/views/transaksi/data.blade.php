@@ -2,7 +2,7 @@
     <div class="card-body">
         <h3>Data</h3>
 
-        <table class="expandable-table w-100 table-sm" id="tb-transaksi">
+        <table class="expandable-table w-100 table-sm table-striped table-bordered" id="tb-transaksi">
             <thead>
                 <tr>
                     <th>No</th>

@@ -21,13 +21,15 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents, WithMappi
      */
     public function collection()
     {
-        return Paket::where('id_outlet', auth()->user()->id_outlet)->get();
+        // return Paket::where('id_outlet', auth()->user()->id_outlet)->get();
+        return Paket::all();
     }
 
     public function map($paket): array
     {
         return [
             $paket->id,
+            $paket->id_outlet,
             $paket->outlet->nama,
             $paket->jenis,
             $paket->nama_paket,
@@ -42,6 +44,7 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents, WithMappi
         return [
             'No',
             'Id Outlet',
+            'Outlet',
             'Jenis',
             'Nama Paket',
             'Harga',
@@ -61,13 +64,14 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents, WithMappi
                 $event->sheet->getColumnDimension('E')->setAutoSize(true);
                 $event->sheet->getColumnDimension('F')->setAutoSize(true);
                 $event->sheet->getColumnDimension('G')->setAutoSize(true);
+                $event->sheet->getColumnDimension('H')->setAutoSize(true);
 
                 $event->sheet->insertNewRowBefore(1, 2);
-                $event->sheet->mergeCells('A1:G1');
+                $event->sheet->mergeCells('A1:H1');
                 $event->sheet->setCellValue('A1', 'DATA PAKET');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('A3:E' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:H' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

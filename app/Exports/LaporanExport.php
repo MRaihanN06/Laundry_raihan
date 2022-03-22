@@ -32,9 +32,10 @@ class LaporanExport implements FromCollection, WithHeadings,  WithEvents, WithMa
             $transaksi->kode_invoice,
             $transaksi->member->nama,
             $transaksi->tgl,
-            $transaksi->user->nama,
+            $transaksi->user->name,
+            $transaksi->total,
             $transaksi->created_at,
-            $transaksi->updated_at,
+            $transaksi->updated_at
         ];
     }
 
@@ -73,7 +74,7 @@ class LaporanExport implements FromCollection, WithHeadings,  WithEvents, WithMa
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('A3:E' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:I' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

@@ -18,7 +18,8 @@ class PaketImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Paket([
-            'id_outlet'     => auth()->user()->id_outlet,
+            // 'id_outlet'     => auth()->user()->id_outlet,
+            'id_outlet'     => $row['id_outlet'],
             'jenis'         => $row['jenis'],
             'nama_paket'    => $row['nama_paket'],
             'harga'         => $row['harga']

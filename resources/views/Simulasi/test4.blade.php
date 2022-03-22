@@ -26,75 +26,80 @@
                                     <div class="row">
 
                                         <form id="formGaji">
-                                            <div class="form-grup row mb-3">
-                                                <label for="id" class="col-sm-2 col-form-label">
-                                                    <h6>ID</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="id" id="id"
-                                                        placeholder="ID" required>
+                                            <div class="row col-sm-12">
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="id" class="col-sm-3 col-form-label">
+                                                        <h6>ID</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="id" id="id"
+                                                            placeholder="ID" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="nama" class="col-sm-3 col-form-label">
+                                                        <h6>Nama</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="nama" id="nama"
+                                                            placeholder="Nama" required>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-grup row mb-3">
-                                                <label for="nama" class="col-sm-2 col-form-label">
-                                                    <h6>Nama</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="nama" id="nama"
-                                                        placeholder="Nama" required>
+
+                                            <div class="row col-sm-12">
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="jenis_kelamin" class="col-sm-3 col-form-label">
+                                                        <h6>Jenis Kelamin</h6>
+                                                    </label>
+                                                    <div class="form-check col-sm-4">
+                                                        <input type="radio" class="form-check-input" name="jenis_kelamin"
+                                                            id="jenis_kelamin" value="L" required>
+                                                        <label class="form-check-label">Laki-laki</label>
+                                                    </div>
+                                                    <div class="form-check col-sm-4">
+                                                        <input type="radio" class="form-check-input" name="jenis_kelamin"
+                                                            id="jenis_kelamin" value="P" required>
+                                                        <label class="form-check-label">Perempuan</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="status" class="col-sm-3 col-form-label">
+                                                        <h6>Status Menikah</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" name="status" id="status">
+                                                            <option value="single">Single</option>
+                                                            <option value="couple">Couple</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-grup row mb-3">
-                                                <label for="jenis_kelamin" class="col-sm-2 col-form-label">
-                                                    <h6>Jenis Kelamin</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-                                                        <option value="L">Laki-Laki</option>
-                                                        <option value="P">Perempuan</option>
-                                                    </select>
+
+                                            <div class="row col-sm-12">
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="jumlah_anak" class="col-sm-3 col-form-label">
+                                                        <h6>Jumlah Anak</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="number" class="form-control" name="jumlah_anak"
+                                                            id="jumlah_anak" min="0" placeholder="Jumlah Anak" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="mulai" class="col-sm-3 col-form-label">
+                                                        <h6>Mulai Bekerja</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" class="form-control"
+                                                            value="{{ date('Y-m-d') }}" name="mulai" id="mulai">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-grup row mb-3">
-                                                <label for="status" class="col-sm-2 col-form-label">
-                                                    <h6>Status Menikah</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" name="status" id="status">
-                                                        <option value="single">Single</option>
-                                                        <option value="couple">Couple</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-grup row mb-3">
-                                                <label for="jumlah_anak" class="col-sm-2 col-form-label">
-                                                    <h6>Jumlah Anak</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <input type="number" class="form-control" name="jumlah_anak"
-                                                        id="jumlah_anak" min="0" placeholder="Jumlah Anak" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-grup row mb-3">
-                                                <label for="mulai" class="col-sm-2 col-form-label">
-                                                    <h6>Mulai Bekerja</h6>
-                                                </label>
-                                                <div class="col-sm-10">
-                                                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}"
-                                                        name="mulai" id="mulai">
-                                                </div>
-                                            </div>
-                                            <div class="form-grup row mb-3" hidden>
-                                                <input type="number" class="form-control" name="gaji" id="gaji"
-                                                    value="2000000">
-                                            </div>
-                                            <div class="form-grup row">
-                                                <label for="nama" class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
-                                                    <button class="btn btn-primary" id="btnSimpan"
-                                                        type="submit">Simpan</button>
-                                                    <button class="btn btn-dark" id="btnReset" type="reset">Reset</button>
-                                                </div>
+
+                                            <div class="col-sm-10">
+                                                <button class="btn btn-primary" id="btnSimpan" type="submit">Simpan</button>
+                                                <button class="btn btn-dark" id="btnReset" type="reset">Reset</button>
                                             </div>
                                         </form>
 
@@ -112,33 +117,36 @@
                                     <p class="card-title">Data</p>
                                     <div class="row">
 
-                                        <div class="form-group row-3">
+                                        <div class="form-group row col-sm-12">
 
-                                            <label for="sorting">
-                                                <h6>Sorting</h6>
-                                            </label>
-                                            <select name="sorting" id="sorting" class="form-control col-sm-2">
-                                                <option value="id">Id</option>
-                                                <option value="nama">Nama</option>
-                                                <option value="jenis_kelamin">Jenis Kelamin</option>
-                                                <option value="jumlah_anak">Jumlah Anak</option>
-                                                <option value="status">Status Menikah</option>
-                                                <option value="mulai">Mulai Bekerja</option>
-                                            </select>
-
-                                            <br><label for="sorting">
-                                                <h6>Cari</h6>
-                                            </label>
-                                            <div>
-                                                <input type="search" class="form-control col-sm-2" name="teksCari"
-                                                    id="teksCari" placeholder="Search">
-                                                <br><button class="btn btn-primary" type="button"
-                                                    id="btnSearch">Cari</button>
+                                            <div class="form-group row mb-3 col-sm-6">
+                                                <label for="sorting" class="col-sm-3 col-form-label">
+                                                    <h6>Sorting</h6>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <select name="sorting" id="sorting" class="form-control col-sm-8">
+                                                        <option value="id">Id</option>
+                                                        <option value="nama">Nama</option>
+                                                        <option value="jenis_kelamin">Jenis Kelamin</option>
+                                                        <option value="jumlah_anak">Jumlah Anak</option>
+                                                        <option value="status">Status Menikah</option>
+                                                        <option value="mulai">Mulai Bekerja</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row col-sm-6">
+                                                <div class="col-sm-4">
+                                                    <input type="search" class="form-control" name="teksCari"
+                                                        id="teksCari" placeholder="Search">
+                                                </div>
+                                                <button class="btn btn-primary col-sm-2" type="button"
+                                                    id="btnSearch">Cari</button> &nbsp;
+                                                <button class="btn btn-warning col-sm-2" id="btnhapus" type="delete">Hapus</button>
                                             </div>
                                         </div>
                                         <br>
-                                        <table class="display expandable-table table-stripped" style="width:100%"
-                                            id="tblGaji">
+                                        <table class="display expandable-table table-striped table-bordered"
+                                            style="width:100%" id="tblGaji">
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -162,9 +170,9 @@
                                                     <td colspan="6" align="center"
                                                         style="background:black;color:white;font-weight:bold;font-size:1em">
                                                         Total</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td id="totalGajiAwal"></td>
+                                                    <td id="totalTunjangan"></td>
+                                                    <td id="totalGajiAkhir"></td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -205,12 +213,14 @@
                 //intialize
                 let dataGaji = JSON.parse(localStorage.getItem('dataGaji')) || []
                 $('#tblGaji tbody').html(showData(dataGaji))
+                JumlahTotal()
                 //events
                 $('#formGaji').on('submit', function(e) {
                     e.preventDefault();
                     insert()
                     dataGaji = JSON.parse(localStorage.getItem('dataGaji'))
                     $('#tblGaji tbody').html(showData(dataGaji))
+                    JumlahTotal()
 
                     console.log(dataGaji)
                 })
@@ -232,6 +242,32 @@
                         data.push(dataGaji[id])
                     $('#tblGaji tbody').html(showData(data))
                 })
+
+                $('#status').on('change', function() {
+                    let value = $('#status').val()
+                    console.log(value)
+                    if (value == 'single') {
+                        $('#jumlah_anak').val(0)
+                        $('#jumlah_anak').attr('readonly', true)
+                    } else {
+                        $('#jumlah_anak').attr('readonly', false)
+
+                    }
+                })
+
+                $('#jumlah_anak').on('change', function() {
+                    let value = $('#jumlah_anak').val()
+                    console.log(value)
+                    if (value >= 1) {
+                        $('#status').val('couple')
+                        $('#status').attr('readonly', true)
+                    } else {
+                        $('#status').attr('readonly', false)
+
+                    }
+                })
+
+                $('#btnhapus').on('click', hapusKaryawan);
                 //end of events
             })
 
@@ -256,28 +292,35 @@
                 if (dataGaji.length == null) {
                     return row = `<tr><td colspan="5">Belum ada data</td></tr>`
                 }
-                dataGaji.forEach(function(item, index, birthday) {
+                
+                dataGaji.forEach(function(item, index) {
 
-                    // birthday        = new Date(item['gaji'])
-                    // var ageDiFMs    = Date.now() - birthday.getTime();
-                    // var ageDate     = new Date(ageDiFMs);
-                    // let ageNew      = Math.abs(ageDate.GetUTCFullYear() - 1970);
+                    const awal = 2000000
+                    const bonusTahun = 150000
+                    const bonusAnak = 150000
+                    const bonusCouple = 250000
 
-                    // let TunjanganTahun   = ageNew*150000
+                    han = new Date(item['mulai'])
+                    var ageDifMs = Date.now() - han.getTime();
+                    var ageDate = new Date(ageDifMs)
+                    var newAge = Math.abs(ageDate.getUTCFullYear() - 1970)
+                    var tahun = newAge * bonusTahun
 
-                    // let child       = 0
+                    if (item['jumlah_anak'] >= 2) {
+                        var child = 2
+                    } else if (item['jumlah_anak'] != 1) {
+                        var child = 0
+                    } else {
+                        var child = 1
+                    }
 
-                    // if (item['jumlah_anak'] > 1) {
-                    //     child == 2
-                    // } else (item['jumlah_anak'] = 1){
-                    //     child == 1
-                    // }
+                    let anak = bonusAnak * child
 
-                    // let TunjanganAnak =  child*150000
+                    let status = (item['status'] === 'couple' ? bonusCouple : 0)
+                    
+                    let tunjangan = anak + status + tahun
 
-                    // let status = (item['status'] == 'menikah' ?250000:0)
-                    // let Tunjangan = TunjanganTahun + TunjanganAnak + status
-                    // let Total = Tunjangan + item['gaji']
+                    let total = tunjangan + awal
 
                     row += `<tr>`
                     row += `<td>${item['id']}</td>`
@@ -286,9 +329,9 @@
                     row += `<td>${item['jenis_kelamin']}</td>`
                     row += `<td>${item['jumlah_anak']}</td>`
                     row += `<td>${item['mulai']}</td>`
-                    row += `<td>${item['gaji']}</td>`
-                    row += `<td>${item['']}</td>`
-                    row += `<td>${item['']}</td>`
+                    row += `<td>${awal}</td>`
+                    row += `<td>${tunjangan}</td>`
+                    row += `<td>${total}</td>`
                     row += `</tr>`
                 })
                 return row
@@ -302,6 +345,32 @@
                         return i
                 }
                 return 'gagal'
+            }
+
+            function JumlahTotal() {
+                let table = document.getElementById('tblGaji').getElementsByTagName('tbody')[0]
+                let totalGajiAwal = 0
+                let totalTunjangan = 0
+                let totalGajiAkhir = 0
+
+                for (let i = 0; i < table.children.length; i++) {
+                    totalGajiAwal += Number(table.getElementsByTagName('tr')[i].getElementsByTagName('td')[6].innerText)
+                    totalTunjangan += Number(table.getElementsByTagName('tr')[i].getElementsByTagName('td')[7].innerText)
+                    totalGajiAkhir += Number(table.getElementsByTagName('tr')[i].getElementsByTagName('td')[8].innerText)
+                }
+
+                document.getElementById('totalGajiAwal').innerText = totalGajiAwal
+                document.getElementById('totalTunjangan').innerText = totalTunjangan
+                document.getElementById('totalGajiAkhir').innerText = totalGajiAkhir
+            }
+
+            const hapusKaryawan = () => {
+                if (confirm('Hapus Semua Data?')) {
+                    dataGaji = [];
+                    localStorage.removeItem('dataGaji');
+                    $('#tblGaji tbody').html(showData(dataGaji));
+                    JumlahTotal()
+                }
             }
 
             // function _calculateAge(birthday, item) {

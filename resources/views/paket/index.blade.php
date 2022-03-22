@@ -170,7 +170,7 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <table class="display expandable-table" style="width:100%" id="tb-paket">
+                                                <table class="display expandable-table table-striped table-bordered" style="width:100%" id="tb-paket">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
@@ -251,7 +251,7 @@
                                                                                                 class="form-label">Nama
                                                                                                 Outlet</label>
                                                                                             <select name="id_outlet"
-                                                                                                id="outlet"
+                                                                                                id="id_outlet"
                                                                                                 class="form-control js-example-basic-single w-100">
                                                                                                 @foreach ($outlet as $otl)
                                                                                                     @if (old('id_outlet') && old('id_outlet') == $otl->id)
@@ -261,11 +261,11 @@
                                                                                                             {{ $otl->nama }}
                                                                                                         </option>
                                                                                                     @else
-                                                                                                    @endif
                                                                                                     <option
                                                                                                         value="{{ $otl->id }}">
                                                                                                         {{ $otl->nama }}
                                                                                                     </option>
+                                                                                                    @endif
                                                                                                 @endforeach
                                                                                             </select>
                                                                                         </div>
