@@ -14,7 +14,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class PaketController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan view dan mengirimkan data dengan model
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,7 +26,7 @@ class PaketController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +36,7 @@ class PaketController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data ke database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,18 +57,7 @@ class PaketController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Paket  $paket
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Paket $paket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan view edit dan menampilkan data yang akan diupdate
      *
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
@@ -81,7 +70,7 @@ class PaketController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Proses update data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Paket  $paket
@@ -104,7 +93,7 @@ class PaketController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data sesuai id
      *
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
@@ -116,12 +105,19 @@ class PaketController extends Controller
         return redirect(request()->segment(1).'/paket')->with('success', 'Post has been deleted!');
     }
 
+    /**
+     * Melakukan export data dari view dan database menjadi file excel
+     */
     public function exportData() 
     {
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new PaketExport, $date. '_paket.xlsx');
     }
 
+    /**
+     * Melakukan upload data excel dan meng importnya untuk dimasukan ke dalam database
+     * dan menampilkan datanya ke view
+     */
     public function importData(Request $request) 
     {
         $request->validate([
@@ -139,6 +135,9 @@ class PaketController extends Controller
         return back()->with('success', 'All good!');
     }
 
+    /**
+     * Melakukan export data dari view dan database menjadi file PDF
+     */
     public function exportPDF(Paket $Paket) {
   
         $pdf = PDF::loadView('Paket.pdf', [

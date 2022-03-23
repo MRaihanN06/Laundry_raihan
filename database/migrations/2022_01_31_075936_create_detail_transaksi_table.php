@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateDetailTransaksiTable extends Migration
 {
     /**
-     * Run the migrations.
+     * untuk mendeklarasikan dan membuat table ke database
      *
      * @return void
      */
@@ -28,7 +28,7 @@ class CreateDetailTransaksiTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * untuk me rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */

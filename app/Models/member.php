@@ -26,6 +26,9 @@ class member extends Model
         return $this->belongsTo(transaksi::class);
     }
 
+    /**
+     * untuk merelasikan model member dengan model penjemputan
+     */
     public function penjemputan()
     {
         return $this->belongsTo(penjemputan::class);

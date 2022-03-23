@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreatePenggunaTable extends Migration
 {
     /**
-     * Run the migrations.
+     * untuk me rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class CreatePenggunaTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * untuk me rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */

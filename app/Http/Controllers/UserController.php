@@ -13,7 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan view user dan mengirimkan data dengan model
      *
      * @return \Illuminate\Http\Response
      */
@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data ke database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -47,7 +47,7 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
             'id_outlet' => 'required',
-            'role'=> 'required'
+            'role' => 'required'
         ]);
 
 
@@ -56,19 +56,9 @@ class UserController extends Controller
         return redirect('#')->with('success', 'New post has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan view edit dan menampilkan data yang akan diupdate
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
@@ -81,7 +71,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Proses update data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\user  $user
@@ -93,18 +83,18 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'id_outlet' => 'required',
-            'role'=> 'required'
+            'role' => 'required'
         ]);
 
 
         user::where('id', $user->id)
             ->update($validatedData);
 
-        return redirect(request()->segment(1).'/user')->with('success', 'Post has been edited!');
+        return redirect(request()->segment(1) . '/user')->with('success', 'Post has been edited!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data sesuai id
      *
      * @param  \App\Models\user  $user
      * @return \Illuminate\Http\Response
@@ -113,22 +103,28 @@ class UserController extends Controller
     {
         $validatedData = user::find($id);
         $validatedData->delete();
-        return redirect(request()->segment(1).'/user')->with('success', 'Post has been deleted!');
+        return redirect(request()->segment(1) . '/user')->with('success', 'Post has been deleted!');
     }
 
-    public function exportData() 
+    /**
+     * Melakukan export data dari view dan database menjadi file excel
+     */
+    public function exportData()
     {
         $date =  date('Y-m-d H:i:s');
-        return Excel::download(new UserExport, $date. '_user.xlsx');
+        return Excel::download(new UserExport, $date . '_user.xlsx');
     }
 
-    public function exportPDF(User $User) {
-  
+     /**
+     * Melakukan export data dari view dan database menjadi file PDF
+     */
+    public function exportPDF(User $User)
+    {
+
         $pdf = PDF::loadView('User.pdf', [
             'users' => User::all()
         ]);
-        
+
         return $pdf->stream();
-        
-      }
+    }
 }

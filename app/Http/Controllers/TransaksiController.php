@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class TransaksiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan view dan mengirimkan data dengan model
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,6 +32,9 @@ class TransaksiController extends Controller
         return view('transaksi.index')->with($data);
     }
 
+    /**
+     * Menampilkan view dan mengirimkan data dengan model
+     */
     public function Faktur()
     {
         $data['member'] = Member::get();
@@ -43,22 +46,18 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('transaksi/index');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Membuat kode Invoice secara otomatis
      */
-
     private function generateKodeInvoice()
     {
         $last = Transaksi::orderBy('id', 'desc')->first();
@@ -68,6 +67,12 @@ class TransaksiController extends Controller
         return $kode;
     }
 
+    /**
+     * Menyimpan data ke database yaitu transaksi dan detail transaksi sekaligus
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         // dd($request->all());
@@ -110,18 +115,7 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan view edit dan menampilkan data yang akan diupdate
      *
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
@@ -134,7 +128,7 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Proses update data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Transaksi  $transaksi
@@ -159,32 +153,30 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
+     * Melakukan export data dari view dan database menjadi file excel
      */
-    public function destroy(Transaksi $transaksi)
-    {
-        //
-    }
-
-    public function exportData() 
+    public function exportData()
     {
         $date =  date('Y-m-d H:i:s');
-        return Excel::download(new LaporanExport, $date. '_Laporan.xlsx');
+        return Excel::download(new LaporanExport, $date . '_Laporan.xlsx');
     }
 
-    public function laporanPDF(Transaksi $transaksi) {
-  
+    /**
+    * Melakukan export data dari view dan database menjadi file PDF
+    */
+    public function laporanPDF(Transaksi $transaksi)
+    {
+
         $pdf = PDF::loadView('laporan.pdf', [
             'tb_transaksi' => Transaksi::all()
         ]);
-        
-        return $pdf->stream();
-        
-      }
 
+        return $pdf->stream();
+    }
+
+    /**
+    * Melakukan export data dari view dan database menjadi file PDF yang dijadikan faktur
+    */
     public function fakturPDF($id)
     {
 
@@ -196,18 +188,22 @@ class TransaksiController extends Controller
         return $pdf->stream();
     }
 
-    public function laporan(Transaksi $transaksi){
-        $data['transaksi'] = Transaksi::all(); 
+    /**
+     * Menentukan data yang ditampilkan sesuai tanggal yang ditentukan
+     */
+    public function laporan(Transaksi $transaksi)
+    {
+        $data['transaksi'] = Transaksi::all();
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
             $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-            $data = Transaksi::whereBetween('created_at',[$start_date,$end_date])->get();
+            $data = Transaksi::whereBetween('created_at', [$start_date, $end_date])->get();
             $data = Transaksi::where('status', $transaksi->status = 'diambil')->where('pembayaran', $transaksi->pembayaran = 'dibayar')->get();
         } else {
             $data = Transaksi::latest()->get();
             $data = Transaksi::where('status', $transaksi->status = 'diambil')->where('pembayaran', $transaksi->pembayaran = 'dibayar')->get();
         }
-        
+
         return view('/laporan/index', compact('data'));
     }
 }

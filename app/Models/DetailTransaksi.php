@@ -22,27 +22,41 @@ class DetailTransaksi extends Model
         'keterangan'
     ];
 
-
+    /**
+     * untuk merelasikan model DetailTransaksi dengan model outlet sesuai id_outlet yang berada di DetailTransaksi
+     */
     public function outlet()
     {
         return $this->belongsTo(outlet::class, 'id_outlet');
     }
 
+/**
+     * untuk merelasikan model DetailTransaksi dengan model Paket sesuai id_paket yang berada di Detailtransaksi
+     */
     public function paket()
     {
         return $this->belongsTo(paket::class, 'id_paket');
     }
 
+    /**
+     * untuk merelasikan model DetailTransaksi dengan model Member
+     */
     public function member()
     {
         return $this->belongsTo(member::class);
     }
 
+    /**
+     * untuk merelasikan model DetailTransaksi dengan model transaksi
+     */
     public function Transaksi()
     {
         return $this->belongsTo(Transaksi::class,);
     }
-    
+
+    /**
+     * untuk merelasikan model DetailTransaksi dengan model Laporan
+     */
     public function laporan()
     {
         return $this->belongsTo(laporan::class);

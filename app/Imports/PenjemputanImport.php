@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class PenjemputanImport implements ToModel, WithHeadingRow
 {
     /**
+     * method model untuk menentukan data mana saja yang akan mengisi database
     * @param Collection $collection
     */
     public function model(array $row)
@@ -20,6 +21,9 @@ class PenjemputanImport implements ToModel, WithHeadingRow
         ]);
     }
 
+    /**
+     * headingrow untuk melewati baris sesuai keinginan
+     */
     public function headingrow(): int {
         return 3;
     }

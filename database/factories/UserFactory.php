@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * mendefinisikan field mana yang datanya akan digenerete otomatis dengan laravel fakeer
      *
      * @return array
      */
@@ -26,7 +26,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * menunjukan bahwa email harus diverifikasi
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class PaketFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * mendefinisikan field mana yang datanya akan digenerete otomatis dengan laravel fakeer
      *
      * @return array
      */

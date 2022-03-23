@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class MemberExport implements FromCollection, WithHeadings,  WithEvents, WithMapping
 {
     /**
+     * Method collection untuk mengambil semua data dari database
     * @return \Illuminate\Support\Collection
     */
     public function collection()
@@ -19,6 +20,9 @@ class MemberExport implements FromCollection, WithHeadings,  WithEvents, WithMap
         return member::all();
     }
 
+    /**
+     * Method map untuk menentukan atau menyeleksi field yang mengisi Excel
+     */
     public function map($member): array
     {
         return [
@@ -32,6 +36,9 @@ class MemberExport implements FromCollection, WithHeadings,  WithEvents, WithMap
         ];
     }
 
+    /**
+     * Method headings untuk mengatur nama header pada file excel yang akan diexport
+     */
     public function headings(): array
     {
         return [
@@ -45,6 +52,14 @@ class MemberExport implements FromCollection, WithHeadings,  WithEvents, WithMap
         ];
     }
 
+    /**
+     * method registerEvent untuk men-style keseluruhan file excel,
+     * seperti getColumnDimension memberi jarak pada tiap kolom secara otomatis
+     * mergeCells menyatukan coloum untuk judul excel
+     * getFont + setBold untuk menebalkan font
+     * getAligment untuk menengahkan posisi judul excel
+     * getHighesRow + border untuk menambhakan border pada coloum tertentu samapi data akhir
+     */
     public function registerEvents(): array
     {
         return [

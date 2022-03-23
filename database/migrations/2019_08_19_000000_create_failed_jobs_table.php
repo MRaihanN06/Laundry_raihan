@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateFailedJobsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * untuk mendeklarasikan dan membuat table ke database
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class CreateFailedJobsTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * untuk me rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */

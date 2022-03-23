@@ -1,0 +1,17 @@
+Database (selesai)
+
+pemprograman dasar
+Error (Selesai, kalau bisa tambah)
+sintak (selesai)
+hasil (Selesai)
+
+perancangan
+Mockup (selesai)
+UML (edit)
+
+pemprograman web
+oop (overloading dan handling error)
+Komentar dan Dokumentasi (selesai)
+Fitur dan Hasil (belum)
+Unit testing (belum)
+

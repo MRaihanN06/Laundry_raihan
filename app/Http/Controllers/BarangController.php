@@ -13,7 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class BarangController extends Controller
 {
     /**
-     * untuk menampilkan view barang dan mengirimkan data barang dengan model
+     * Menampilkan view dan mengirimkan data dengan model
      *
      * @return \Illuminate\Http\Response
      */
@@ -25,7 +25,7 @@ class BarangController extends Controller
     }
 
     /**
-     * untuk menampilkan view create data 
+     * Menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class BarangController extends Controller
     }
 
     /**
-     * Store untuk menyimpan data ke database
+     * Menyimpan data ke database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,7 +57,7 @@ class BarangController extends Controller
     }
 
     /**
-     * menampilkan view edit dan menampilkan data barang yang akan diupdate
+     * Menampilkan view edit dan menampilkan data yang akan diupdate
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -70,7 +70,7 @@ class BarangController extends Controller
     }
 
     /**
-     * Update untuk proses update data barang
+     * Proses update data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -94,7 +94,7 @@ class BarangController extends Controller
     }
 
     /**
-     * untuk menghapus data barang sesuai id
+     * Menghapus data sesuai id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -108,7 +108,7 @@ class BarangController extends Controller
 
 
     /**
-     * untuk melakukan export data dari view dan database menjadi file excel
+     * Melakukan export data dari view dan database menjadi file excel
      */
     public function exportData()
     {
@@ -117,7 +117,7 @@ class BarangController extends Controller
     }
 
     /**
-     * untuk melakukan upload data excel dan meng importnya untuk dimasukan ke dalam database
+     * Melakukan upload data excel dan meng importnya untuk dimasukan ke dalam database
      * dan menampilkan datanya ke view
      */
     public function importData(Request $request)
@@ -137,9 +137,8 @@ class BarangController extends Controller
         return back()->with('success', 'All good!');
     }
 
-
     /**
-     * untuk melakukan export data dari view dan database menjadi file PDF
+     * Melakukan export data dari view dan database menjadi file PDF
      */
     public function exportPDF(Barang $Barang)
     {

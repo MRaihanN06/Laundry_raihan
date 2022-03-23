@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class BarangImport implements ToModel, WithHeadingRow
 {
     /**
-     * method model untuk menentukan data mana saja yang akan mengisi database
+    * method model untuk menentukan data mana saja yang akan mengisi database
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null

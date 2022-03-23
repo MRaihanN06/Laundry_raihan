@@ -25,17 +25,17 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan view create data 
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('member/index');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data ke database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -55,18 +55,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Member $member)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan view edit dan menampilkan data yang akan diupdate
      *
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
@@ -79,7 +68,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Proses update data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Member $member
@@ -101,7 +90,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data sesuai id
      *
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
@@ -113,12 +102,19 @@ class MemberController extends Controller
         return redirect(request()->segment(1) . '/member')->with('success', 'Post has been deleted!');
     }
 
+    /**
+     * Melakukan export data dari view dan database menjadi file excel
+     */
     public function exportData()
     {
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new MemberExport, $date . '_member.xlsx');
     }
 
+    /**
+     * Melakukan upload data excel dan meng importnya untuk dimasukan ke dalam database
+     * dan menampilkan datanya ke view
+     */
     public function importData(Request $request)
     {
         $request->validate([
@@ -136,6 +132,9 @@ class MemberController extends Controller
         return back()->with('success', 'All good!');
     }
 
+     /**
+     * Melakukan export data dari view dan database menjadi file PDF
+     */
     public function exportPDF(Member $Member)
     {
 

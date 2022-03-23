@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOutletTable extends Migration
 {
     /**
-     * Run the migrations.
+     * untuk mendeklarasikan dan membuat table ke database
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class CreateOutletTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * untuk me rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */

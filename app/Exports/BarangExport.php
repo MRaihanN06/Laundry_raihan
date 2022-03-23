@@ -38,7 +38,7 @@ class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapp
     }
 
     /**
-     * method heading untuk mengatur nama header pada file excel yang akan diexport
+     * Method headings untuk mengatur nama header pada file excel yang akan diexport
      */
     public function headings(): array
     {
@@ -56,11 +56,11 @@ class BarangExport implements FromCollection, WithHeadings, WithEvents, WithMapp
 
     /**
      * method registerEvent untuk men-style keseluruhan file excel,
-     * seperti memberi jarak pada tiap kolom secara otomatis (getColumnDimension)
-     * mergecells menyatukan coloum untuk judul excel
-     * getFont untuk menebalkan font
-     * getAligment untuk menengahkan posisi juful excel
-     * getHIghesRow + border untuk menambhakan border pada coloum tertentu samapi data akhir
+     * seperti getColumnDimension memberi jarak pada tiap kolom secara otomatis
+     * mergeCells menyatukan coloum untuk judul excel
+     * getFont + setBold untuk menebalkan font
+     * getAligment untuk menengahkan posisi judul excel
+     * getHighesRow + border untuk menambhakan border pada coloum tertentu samapi data akhir
      */
     public function registerEvents(): array
     {

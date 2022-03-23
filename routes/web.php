@@ -57,14 +57,6 @@ Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])-
 Route::get('/laporan/pdf', [TransaksiController::class, 'laporanPDF'])->name('laporanPDF');
 Route::get('export/laporan', [TransaksiController::class, 'exportData'])->name('export-laporan');
 
-// Route::resource('/outlet', OutletController::class)->middleware('auth');
-// Route::resource('/member', MemberController::class)->middleware('auth');
-// Route::resource('/paket', PaketController::class)->middleware('auth');
-// Route::resource('/user', UserController::class)->middleware('auth');
-// Route::resource('/laporan', LaporanController::class)->middleware('auth');
-// Route::resource('/transaksi', TransaksiController::class)->middleware('auth');
-// Route::get('index', [HomeController::class, 'index'])->name('home')->middleware('auth');
-
 
 Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function () {
     Route::get('index', [HomeController::class, 'index'])->name('a.home');

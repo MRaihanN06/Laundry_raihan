@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class OutletImport implements ToModel, WithHeadingRow
 {
     /**
+    * method model untuk menentukan data mana saja yang akan mengisi database
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
@@ -22,6 +23,9 @@ class OutletImport implements ToModel, WithHeadingRow
         ]);
     }
 
+    /**
+     * headingrow untuk melewati baris sesuai keinginan
+     */
     public function headingrow(): int {
         return 3;
     }
