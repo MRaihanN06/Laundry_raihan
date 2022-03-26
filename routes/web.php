@@ -5,6 +5,7 @@ use App\Http\Controllers\OutletController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PBarangController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GajiController;
+use App\Http\Controllers\TransaksiBarangController;
 use App\Http\Controllers\penjemputanController;
 
 
@@ -51,6 +53,9 @@ Route::get('member/pdf', [MemberController::class, 'exportPDF'])->name('importpd
 Route::get('export/penjemputan', [penjemputanController::class, 'exportData'])->name('export-penjemputan');
 Route::post('import/penjemputan', [penjemputanController::class, 'importData'])->name('import-penjemputan');
 Route::get('penjemputan/pdf', [penjemputanController::class, 'exportPDF'])->name('exportpdf-penjemputan');
+Route::get('export/pbarang', [PBarangController::class, 'exportData'])->name('export-pbarang');
+Route::post('import/pbarang', [PBarangController::class, 'importData'])->name('import-pbarang');
+Route::get('pbarang/pdf', [PBarangController::class, 'exportPDF'])->name('exportpdf-pbarang');
 Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
 Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('exportpdf-user');
 Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])->name('faktur');
@@ -65,6 +70,8 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::resource('/outlet', OutletController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/barang', BarangController::class);
+    Route::post('/bstatus', [PBarangController::class ,'bstatus'])->name('bstatus');
+    Route::resource('/pbarang', PBarangController::class);
     Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
@@ -72,6 +79,7 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::get('data_karyawan', [SimulasiController::class, 'index']);
     Route::get('data_siswa', [SiswaController::class, 'index']);
     Route::get('GajiKaryawan', [GajiController::class, 'index']);
+    Route::get('TransaksiBarang', [TransaksiBarangController::class, 'index']);
     Route::resource('/penjemputan', penjemputanController::class);
     Route::post('/status', [penjemputanController::class ,'status'])->name('status');
 });

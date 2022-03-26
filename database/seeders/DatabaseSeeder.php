@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'id_outlet' => '1',
             'role' => 'admin'
         ]);
+
         User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'id_outlet' => '1',
             'role' => 'admin'
         ]);
+        
         User::create([
             'name' => 'Owner',
             'email' => 'owner@gmail.com',

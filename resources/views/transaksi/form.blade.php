@@ -84,7 +84,7 @@
                             <td><input type="number" value="0" min="0" id="diskon" name="diskon" style="width: 100px"></td>
                           </tr>
                           <tr>
-                            <td colspan="3" align="right">Pajak <input type="number" value="0" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width: 40px">%</td>
+                            <td colspan="3" align="right">Pajak <input type="text" readonly value="3" min="0" class="qty" name="pajak" id="pajak-persen" size="2" style="width: 40px">%</td>
                             <td><span id="pajak-harga">0</span></td>
                           </tr>
                           <tr>

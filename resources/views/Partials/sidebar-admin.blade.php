@@ -195,6 +195,7 @@
             <li class="nav-item"> <a class="nav-link" href="/a/user">User</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/barang">Barang</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/penjemputan">Penjemputan</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/pbarang">Penggunaan Barang</a></li>
           </ul>
         </div>
       </li>
@@ -221,6 +222,7 @@
             <li class="nav-item"> <a class="nav-link" href="data_karyawan">Data Karyawan</a></li>
             <li class="nav-item"> <a class="nav-link" href="data_siswa">Data Siswa</a></li>
             <li class="nav-item"> <a class="nav-link" href="GajiKaryawan">Gaji Karyawan</a></li>
+            <li class="nav-item"> <a class="nav-link" href="TransaksiBarang">Transaksi Barang</a></li>
           </ul>
         </div>
       </li>
