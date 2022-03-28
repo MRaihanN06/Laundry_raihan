@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -19,6 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view User', 'view User');
         $data['outlet'] = outlet::get();
         $data['user'] = user::get();
         return view('user/index', $data);
@@ -31,6 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah User', 'view form User');
         return view('user/index');
     }
 
@@ -42,6 +46,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah User', 'view form User');
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -65,6 +70,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        Logging::record(Auth::user(), 'Akses Form Update User', 'View Update User');
         return view('user/edit', [
             'user' => $user
         ]);
@@ -79,6 +85,7 @@ class UserController extends Controller
      */
     public function update(Request $request, user $user)
     {
+        Logging::record(Auth::user(), 'Akses Update User', 'Update User');
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -101,6 +108,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete User', 'Delete User');
         $validatedData = user::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1) . '/user')->with('success', 'Post has been deleted!');
@@ -111,6 +119,7 @@ class UserController extends Controller
      */
     public function exportData()
     {
+        Logging::record(Auth::user(), 'Akses Export Excel User', 'Export Excel User');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new UserExport, $date . '_user.xlsx');
     }
@@ -120,7 +129,7 @@ class UserController extends Controller
      */
     public function exportPDF(User $User)
     {
-
+        Logging::record(Auth::user(), 'Akses Export PDF User', 'Export PDF User');
         $pdf = PDF::loadView('User.pdf', [
             'users' => User::all()
         ]);

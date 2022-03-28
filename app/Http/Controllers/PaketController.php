@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 
 class PaketController extends Controller
 {
@@ -20,6 +22,7 @@ class PaketController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Paket', 'view Paket');
         $data['outlet'] = outlet::get();
         $data['paket'] = paket::get();
         return view('paket/index', $data);
@@ -32,6 +35,7 @@ class PaketController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Paket', 'view form Paket');
         return view('paket/index');
     }
 
@@ -43,6 +47,7 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Paket', 'view form Paket');
         $validatedData = $request->validate([
             'id_outlet' => 'required',
             'jenis' => 'required',
@@ -64,6 +69,7 @@ class PaketController extends Controller
      */
     public function edit(Paket $paket)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Paket', 'View Update Paket');
         return view('paket/edit', [
             'paket' => $paket
         ]);
@@ -78,6 +84,7 @@ class PaketController extends Controller
      */
     public function update(Request $request, Paket $paket)
     {
+        Logging::record(Auth::user(), 'Akses Update Paket', 'Update Paket');
         $validatedData = $request->validate([
             'id_outlet' => 'required',
             'jenis' => 'required',
@@ -100,6 +107,7 @@ class PaketController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete Paket', 'Delete Paket');
         $validatedData = paket::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/paket')->with('success', 'Post has been deleted!');
@@ -110,6 +118,7 @@ class PaketController extends Controller
      */
     public function exportData() 
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Paket', 'Export Excel Paket');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new PaketExport, $date. '_paket.xlsx');
     }
@@ -120,6 +129,7 @@ class PaketController extends Controller
      */
     public function importData(Request $request) 
     {
+        Logging::record(Auth::user(), 'Akses Import Excel Paket', 'Import Excel Paket');
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
@@ -140,6 +150,7 @@ class PaketController extends Controller
      */
     public function exportPDF(Paket $Paket) {
   
+        Logging::record(Auth::user(), 'Akses Export PDF Paket', 'Export PDF Paket');
         $pdf = PDF::loadView('Paket.pdf', [
             'tb_paket' => Paket::all()
         ]);

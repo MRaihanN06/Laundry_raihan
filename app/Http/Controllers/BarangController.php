@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
+
 
 class BarangController extends Controller
 {
@@ -19,6 +22,7 @@ class BarangController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Barang', 'view barang');
         return view('barang/index', [
             'barang' => barang::all()
         ]);
@@ -31,6 +35,7 @@ class BarangController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Barang', 'view form barang');
         return view('barang/index');
     }
 
@@ -42,6 +47,7 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Tambah Barang', 'Create Barang');
         $validatedData = $request->validate([
             'nama_barang' => 'required',
             'merk_barang' => 'required',
@@ -64,6 +70,7 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Barang', 'View Update Barang');
         return view('barang/edit', [
             'barang' => $barang
         ]);
@@ -78,6 +85,7 @@ class BarangController extends Controller
      */
     public function update(Request $request, barang $barang)
     {
+        Logging::record(Auth::user(), 'Akses Update Barang', 'Update Barang');
         $validatedData = $request->validate([
             'nama_barang' => 'required',
             'merk_barang' => 'required',
@@ -101,6 +109,7 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete Barang', 'Delete Barang');
         $validatedData = barang::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1) . '/barang')->with('success', 'Post has been deleted!');
@@ -112,6 +121,7 @@ class BarangController extends Controller
      */
     public function exportData()
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Barang', 'Export Excel Barang');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new BarangExport, $date . '_barang.xlsx');
     }
@@ -122,6 +132,7 @@ class BarangController extends Controller
      */
     public function importData(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Import Excel Barang', 'Import Excel Barang');
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
@@ -142,7 +153,7 @@ class BarangController extends Controller
      */
     public function exportPDF(Barang $Barang)
     {
-
+        Logging::record(Auth::user(), 'Akses Export PDF Barang', 'Export PDF Barang');
         $pdf = PDF::loadView('Barang.pdf', [
             'tb_barang' => Barang::all()
         ]);

@@ -223,6 +223,7 @@
             <li class="nav-item"> <a class="nav-link" href="data_siswa">Data Siswa</a></li>
             <li class="nav-item"> <a class="nav-link" href="GajiKaryawan">Gaji Karyawan</a></li>
             <li class="nav-item"> <a class="nav-link" href="TransaksiBarang">Transaksi Barang</a></li>
+            <li class="nav-item"> <a class="nav-link" href="SimulasiTransaksi">Transaksi Cucian</a></li>
           </ul>
         </div>
       </li>

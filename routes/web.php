@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GajiController;
+use App\Http\Controllers\SimulasiTransaksiController;
 use App\Http\Controllers\TransaksiBarangController;
 use App\Http\Controllers\penjemputanController;
 
@@ -80,6 +81,7 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::get('data_siswa', [SiswaController::class, 'index']);
     Route::get('GajiKaryawan', [GajiController::class, 'index']);
     Route::get('TransaksiBarang', [TransaksiBarangController::class, 'index']);
+    Route::get('SimulasiTransaksi', [SimulasiTransaksiController::class, 'index']);
     Route::resource('/penjemputan', penjemputanController::class);
     Route::post('/status', [penjemputanController::class ,'status'])->name('status');
 });

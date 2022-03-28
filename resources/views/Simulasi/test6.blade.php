@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">Simulasi</h3>
-                            <h6 class="font-weight-normal mb-0">Simulasi Transaksi Barang <span
+                            <h6 class="font-weight-normal mb-0">Simulasi Transaksi Cucian <span
                                     class="text-primary">Hati-hati
                                     dengan
                                     keputusan anda!</span></h6>
@@ -26,11 +26,11 @@
                                     <p class="card-title">Form</p>
                                     <div class="row">
 
-                                        <form id="formTB">
+                                        <form id="formTransaksi">
                                             <div class="row col-sm-12">
                                                 <div class="form-group row mb-3 col-sm-6">
                                                     <label for="id" class="col-sm-3 col-form-label">
-                                                        <h6>ID</h6>
+                                                        <h6>No Transaksi</h6>
                                                     </label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" name="id" id="id"
@@ -38,8 +38,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="nama" class="col-sm-3 col-form-label">
+                                                        <h6>Nama Pelanggan</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="nama" id="nama"
+                                                            placeholder="Nama" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-sm-12">
+                                                <div class="form-group row mb-3 col-sm-6">
+                                                    <label for="tlp" class="col-sm-3 col-form-label">
+                                                        <h6>No. HP/WA</h6>
+                                                    </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="tlp" name="tlp"
+                                                            required placeholder="No. HP/WA">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3 col-sm-6">
                                                     <label for="tgl" class="col-sm-3 col-form-label">
-                                                        <h6>Tanggal Beli</h6>
+                                                        <h6>Tanggal Cuci</h6>
                                                     </label>
                                                     <div class="col-sm-9">
                                                         <input type="date" class="form-control"
@@ -50,51 +71,23 @@
 
                                             <div class="row col-sm-12">
                                                 <div class="form-group row mb-3 col-sm-6">
-                                                    <label for="barang" class="col-sm-3 col-form-label">
-                                                        <h6>Nama Barang</h6>
-                                                    </label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" name="barang" id="barang">
-                                                            <option value="detergent">Detergent</option>
-                                                            <option value="pewangi">Pewangi</option>
-                                                            <option value="detergent_sepatu">Detergent Sepatu</option>
-                                                        </select>
-                                                    </div>
+                                                <label for="jenis" class="col-sm-3 col-form-label">
+                                                    <h6>Jenis Cucian</h6>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" name="jenis" id="jenis">
+                                                        <option value="standar">Standar</option>
+                                                        <option value="express">Express</option>
+                                                    </select>
                                                 </div>
-                                                <div class="form-group row mb-3 col-sm-6">
-                                                    <label for="harga" class="col-sm-3 col-form-label">
-                                                        <h6>Harga Barang</h6>
-                                                    </label>
-                                                    <div class="col-sm-8">
-                                                        <input type="number" class="form-control" name="harga" id="harga"
-                                                            required readonly placeholder="Harga Barang">
-                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="row col-sm-12">
                                                 <div class="form-group row mb-3 col-sm-6">
                                                     <label for="jumlah" class="col-sm-3 col-form-label">
-                                                        <h6>Jumlah</h6>
+                                                        <h6>Berat</h6>
                                                     </label>
                                                     <div class="col-sm-9">
-                                                        <input type="number" class="form-control" name="jumlah"
-                                                            id="jumlah" min="0" placeholder="Jumlah" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row mb-3 col-sm-6">
-                                                    <label for="jenis_pembayaran" class="col-sm-4 col-form-label">
-                                                        <h6>Jenis Pembayaran</h6>
-                                                    </label>
-                                                    <div class="form-check col-sm-3">
-                                                        <input type="radio" class="form-check-input" name="jenis_pembayaran"
-                                                            id="jenis_pembayaran" value="Cash" required>
-                                                        <label class="form-check-label">Cash</label>
-                                                    </div>
-                                                    <div class="form-check col-sm-5">
-                                                        <input type="radio" class="form-check-input" name="jenis_pembayaran"
-                                                            id="jenis_pembayaran" value="E-money" required>
-                                                        <label class="form-check-label">E-money/Transfer</label>
+                                                        <input type="real" class="form-control" name="berat"
+                                                            id="berat" min="0" placeholder="Berat" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,11 +128,11 @@
                                                 <div class="col-sm-4">
                                                     <select name="sorting" id="sorting" class="form-control col-sm-8">
                                                         <option value="id">Id</option>
-                                                        <option value="tgl">Tanggal Beli</option>
-                                                        <option value="barang">Nama Barang</option>
-                                                        <option value="harga">Harga</option>
-                                                        <option value="jumlah">QTY</option>
-                                                        <option value="jenis_pembayaran">Total Harga</option>
+                                                        <option value="nama">Nama Pelanggan</option>
+                                                        <option value="tlp">Kontak</option>
+                                                        <option value="tgl">Tanggal Cucian</option>
+                                                        <option value="jenis">Jenis Cucian</option>
+                                                        <option value="berat">Berat</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -154,32 +147,19 @@
                                                     type="delete">Hapus</button>
                                             </div>
                                         </div>
-                                        {{-- <div class="form-group row col-sm-12">
-                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                            <div class="form-check col-sm-3">
-                                                <input type="checkbox" class="form-check-input" name="jp"
-                                                    id="jp" value="Cash" required>
-                                                <label class="form-check-label">Cash</label>
-                                            </div>
-                                            <div class="form-check col-sm-3">
-                                                <input type="checkbox" class="form-check-input" name="jp" id="jp"
-                                                    value="E-money" required>
-                                                <label class="form-check-label">E-money/Transfer</label>
-                                            </div>
-                                        </div> --}}
                                         <br>
                                         <table class="display expandable-table table-striped table-bordered"
-                                            style="width:100%" id="tblTB">
+                                            style="width:100%" id="tblTransaksi">
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Tanggal Beli</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Harga</th>
-                                                    <th>Qty</th>
+                                                    <th>Nama Pelanggan</th>
+                                                    <th>Kontak</th>
+                                                    <th>Tanggal Cucian</th>
+                                                    <th>Jenis Cucian</th>
+                                                    <th>Berat</th>
                                                     <th>Diskon</th>
                                                     <th>Total Harga</th>
-                                                    <th>Jenis Bayar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -205,34 +185,34 @@
     @push('script')
         <script>
             function insert() {
-                let dataTB = JSON.parse(localStorage.getItem('dataTB')) || []
+                let dataTransaksi = JSON.parse(localStorage.getItem('dataTransaksi')) || []
 
-                const data = $('#formTB').serializeArray()
+                const data = $('#formTransaksi').serializeArray()
                 console.log(data)
                 let newData = {}
                 data.forEach(function(item, index) {
                     let name = item['name']
                     let value = (name === 'id' ||
-                        name === 'harga' ?
+                        name === 'berat' ?
                         Number(item['value']) : item['value'])
                     newData[name] = value
                 })
-                localStorage.setItem('dataTB', JSON.stringify([...dataTB, newData]))
+                localStorage.setItem('dataTransaksi', JSON.stringify([...dataTransaksi, newData]))
                 return newData
             }
 
             $(function() {
                 //intialize
-                let dataTB = JSON.parse(localStorage.getItem('dataTB')) || []
-                $('#tblTB tbody').html(showData(dataTB))
+                let dataTransaksi = JSON.parse(localStorage.getItem('dataTransaksi')) || []
+                $('#tblTransaksi tbody').html(showData(dataTransaksi))
                 //events
-                $('#formTB').on('submit', function(e) {
+                $('#formTransaksi').on('submit', function(e) {
                     e.preventDefault();
                     insert()
-                    dataTB = JSON.parse(localStorage.getItem('dataTB'))
-                    $('#tblTB tbody').html(showData(dataTB))
+                    dataTransaksi = JSON.parse(localStorage.getItem('dataTransaksi'))
+                    $('#tblTransaksi tbody').html(showData(dataTransaksi))
 
-                    console.log(dataTB)
+                    console.log(dataTransaksi)
                 })
 
                 $('#sort').on('change', function() {
@@ -241,98 +221,63 @@
                     if (value == 'asc') {
                         $('#sorting').on('change', function() {
                             let nama = document.getElementById("sorting").value;
-                            dataTB = insertionSortAsc(dataTB, nama)
+                            dataTransaksi = insertionSortAsc(dataTransaksi, nama)
                             // console.log(dataTB)
-                            $('#tblTB tbody').html(showData(dataTB))
+                            $('#tblTransaksi tbody').html(showData(dataTransaksi))
                         })
                     } else {
                         $('#sorting').on('change', function() {
                             let nama = document.getElementById("sorting").value;
-                            dataTB = insertionSortDes(dataTB, nama)
+                            dataTransaksi = insertionSortDes(dataTransaksi, nama)
                             // console.log(dataTB)
-                            $('#tblTB tbody').html(showData(dataTB))
+                            $('#tblTransaksi tbody').html(showData(dataTransaksi))
                         })
-                    }
-                })
-
-                // $('#jp').on('click', function() {
-                //     let value = $('#jp').val()
-                //     // console.log(value)
-                //     if (value == 'Cash') {
-                //         let id = SequentialSearchingCash(dataTB, 'jenis_pembayaran')
-                //         let data = []
-                //         // if (id >= 0)
-                //         for (x = 0; x < id.length; x++) {
-                //             data.push(dataTB[id[x]])
-                //         }
-                //         $('#tblTB tbody').html(showData(data))
-                //     } else {
-                //         let id = SequentialSearchingEmoney(dataTB, 'jenis_pembayaran')
-                //         let data = []
-                //         // if (id >= 0)
-                //         for (x = 0; x < id.length; x++) {
-                //             data.push(dataTB[id[x]])
-                //         }
-                //         $('#tblTB tbody').html(showData(data))
-                //     }
-                // })
-
-
-
-                const HDe = 15000;
-                const HPe = 10000;
-                const HDs = 25000;
-
-                $('#barang').on('change', function() {
-                    let value = $('#barang').val()
-                    // console.log(value)
-                    if (value == 'detergent') {
-                        $('#harga').val(HDe)
-                        $('#harga').attr('readonly', true)
-                    } else if (value == 'pewangi') {
-                        $('#harga').val(HPe)
-                        $('#harga').attr('readonly', true)
-                    } else {
-                        $('#harga').val(HDs)
-                        $('#harga').attr('readonly', true)
                     }
                 })
 
                 $('#btnSearch').on('click', function(e) {
                     let teksSearch = $('#teksCari').val()
                     console.log(teksSearch)
-                    let id = SequentialSearching(dataTB, 'id', teksSearch)
+                    let id = SequentialSearching(dataTransaksi, 'id', teksSearch)
                     let data = []
                     // if (id >= 0)
                     for (x = 0; x < id.length; x++) {
-                        data.push(dataTB[id[x]])
+                        data.push(dataTransaksi[id[x]])
                     }
-                    $('#tblTB tbody').html(showData(data))
+                    $('#tblTransaksi tbody').html(showData(data))
                 })
-
+                
                 $('#btnhapus').on('click', hapusData);
                 //end of events
+
             })
 
-            function showData(dataTB) {
+            function showData(dataTransaksi) {
                 let row = ''
 
-                const dis = 15 / 100
+                const standar = 7500
+                const express = 15000
+                const dis = 10 / 100
                 var TAkhir = 0
                 var TDiskon = 0
-                var TQty = 0
-                var THarga = 0
+                var TBerat = 0
                 var diskon = 0
                 var jumlah = 0
 
-                if (dataTB.length == 0) {
+                if (dataTransaksi.length == 0) {
                     return row = `<tr><td colspan="8" align="center">Belum ada data</td></tr>`
                 }
+                dataTransaksi.forEach(function(item, index) {
 
-                dataTB.forEach(function(item, index) {
+                    let jenis = item['jenis']
+                    let berat = item['berat']
 
-                    let jumlah = item['jumlah'] * item['harga']
-
+                    if ( jenis == 'standar') {
+                        jumlah = berat * standar
+                    } else {
+                        jumlah = berat * express
+                    }
+                    
                     if (jumlah >= 50000) {
                         diskon = jumlah * dis
                         jumlah = jumlah - diskon
@@ -340,30 +285,28 @@
                         diskon = 0
                     }
 
-                    THarga += Number(item['harga'])
-                    TQty += Number(item['jumlah'])
+                    TBerat += Number(item['berat'])
                     TDiskon += diskon
                     TAkhir += jumlah
 
                     row += `<tr>`
                     row += `<td>${item['id']}</td>`
+                    row += `<td>${item['nama']}</td>`
+                    row += `<td>${item['tlp']}</td>`
                     row += `<td>${item['tgl']}</td>`
-                    row += `<td>${item['barang']}</td>`
-                    row += `<td>${item['harga']}</td>`
-                    row += `<td>${item['jumlah']}</td>`
+                    row += `<td>${item['jenis']}</td>`
+                    row += `<td>${item['berat']}</td>`
                     row += `<td>${diskon}</td>`
                     row += `<td>${jumlah}</td>`
-                    row += `<td>${item['jenis_pembayaran']}</td>`
                     row += `</tr>`
                 })
 
                 row += `<tr>`
                 row +=
-                    `<td colspan="3" align="center" style="background:black;color:white;font-weight:bold;font-size:1em">Total</td>`
-                row += `<td>${THarga}</td>`
-                row += `<td>${TQty}</td>`
+                    `<td colspan="5" align="center" style="background:black;color:white;font-weight:bold;font-size:1em">Total</td>`
+                row += `<td>${TBerat}</td>`
                 row += `<td>${TDiskon}</td>`
-                row += `<td colspan="3">${TAkhir}</td>`
+                row += `<td>${TAkhir}</td>`
                 row += `</tr>`
 
                 return row
@@ -407,31 +350,14 @@
                 }
                 return buffer
             }
-
-            // function SequentialSearchingCash(arr, key, teks) {
-            //     let buffer = []
-            //     for (let i = 0; i < arr.length; i++) {
-            //         if (arr[i][key] == 'Cash')
-            //             buffer.push(i)
-            //     }
-            //     return buffer
-            // }
-
-            // function SequentialSearchingEmoney(arr, key) {
-            //     let buffer = []
-            //     for (let i = 0; i < arr.length; i++) {
-            //         if (arr[i][key] == 'E-money')
-            //             buffer.push(i)
-            //     }
-            //     return buffer
-            // }
-
+            
             const hapusData = () => {
                 if (confirm('Hapus Semua Data?')) {
-                    dataTB = [];
-                    localStorage.removeItem('dataTB');
-                    $('#tblTB tbody').html(showData(dataTB));
+                    dataTransaksi = [];
+                    localStorage.removeItem('dataTransaksi');
+                    $('#tblTransaksi tbody').html(showData(dataTransaksi));
                 }
             }
+
         </script>
     @endpush

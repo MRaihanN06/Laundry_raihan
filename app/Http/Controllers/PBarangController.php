@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Psr7\Message;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 
 class PBarangController extends Controller
 {
@@ -20,6 +22,7 @@ class PBarangController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Penggunaan Barang', 'view Penggunaan Barang');
         return view('pbarang/index', [
             'pbarang' => pbarang::all()
         ]);
@@ -32,6 +35,7 @@ class PBarangController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Penggunaan Barang', 'view form Penggunaan Barang');
         return view('pbarang/index');
     }
 
@@ -43,6 +47,7 @@ class PBarangController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Penggunaan Barang', 'view form Penggunaan Barang');
         $validatedData = $request->validate([
             'nama_barang' => 'required',
             'qty' => 'required',
@@ -66,6 +71,7 @@ class PBarangController extends Controller
      */
     public function edit(PBarang $pbarang)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Penggunaan Barang', 'View Update Penggunaan Barang');
         return view('pbarang/edit', [
             'pbarang' => $pbarang
         ]);
@@ -80,6 +86,7 @@ class PBarangController extends Controller
      */
     public function update(Request $request, PBarang $pbarang)
     {
+        Logging::record(Auth::user(), 'Akses Update Penggunaan Barang', 'Update Penggunaan Barang');
         $validatedData = $request->validate([
             'nama_barang' => 'required',
             'qty' => 'required',
@@ -87,8 +94,6 @@ class PBarangController extends Controller
             'waktu_beli' => 'required',
             'supplier' => 'required'
         ]);
-
-        $validatedData['waktu_beli'] = now('d-m-Y h:i:s');
 
         PBarang::where('id', $pbarang->id)
             ->update($validatedData);
@@ -100,6 +105,7 @@ class PBarangController extends Controller
      * proses update Status dan tgl status
      */
     public function bstatus(request $request){
+        Logging::record(Auth::user(), 'Akses Update Status Penggunaan Barang', 'Update Status Penggunaan Barang');
         $data = PBarang::where('id',$request->id)->first();
         $data->bstatus = $request->bstatus;
         $data->tgl_status = now();
@@ -120,6 +126,7 @@ class PBarangController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete Penggunaan Barang', 'Delete Penggunaan Barang');
         $validatedData = PBarang::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1) . '/pbarang')->with('success', 'Post has been deleted!');
@@ -130,6 +137,7 @@ class PBarangController extends Controller
      */
     public function exportData()
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Penggunaan Barang', 'Export Excel Penggunaan Barang');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new PbarangExport, $date . '_PBarang.xlsx');
     }
@@ -140,6 +148,7 @@ class PBarangController extends Controller
      */
     public function importData(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Import Excel Penggunaan Barang', 'Import Excel Penggunaan Barang');
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
@@ -161,6 +170,7 @@ class PBarangController extends Controller
     public function exportPDF(PBarang $pbarang)
     {
 
+        Logging::record(Auth::user(), 'Akses Export PDF Penggunaan Barang', 'Export PDF Penggunaan Barang');
         $pdf = PDF::loadView('PBarang.pdf', [
             'pbarang' => PBarang::all()
         ]);

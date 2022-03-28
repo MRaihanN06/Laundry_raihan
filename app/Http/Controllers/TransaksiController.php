@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\LaporanExport;
 use Carbon\Carbon;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -24,6 +26,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Transaksi', 'view Transaksi');
         $data['member'] = Member::get();
         $data['DetailTransaksi'] = DetailTransaksi::get();
         $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
@@ -37,6 +40,7 @@ class TransaksiController extends Controller
      */
     public function Faktur()
     {
+        Logging::record(Auth::user(), 'Akses view Faktur Transaksi', 'view Faktur Transaksi');
         $data['member'] = Member::get();
         $data['DetailTransaksi'] = DetailTransaksi::get();
         $data['paket'] = Paket::where('id_outlet', auth()->user()->id_outlet)->get();
@@ -52,6 +56,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Transaksi', 'view form Transaksi');
         return view('transaksi/index');
     }
 
@@ -60,6 +65,7 @@ class TransaksiController extends Controller
      */
     private function generateKodeInvoice()
     {
+        Logging::record(Auth::user(), 'Akses Kode Invoice Transaksi', 'Kode Invoice Transaksi');
         $last = Transaksi::orderBy('id', 'desc')->first();
         $last = ($last == null ? 1 : $last->id + 1);
         $kode = sprintf('TKI' . date('ymd') . '%06d', $last);
@@ -76,7 +82,7 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-
+        Logging::record(Auth::user(), 'Akses Form Tambah Transaksi', 'view form Transaksi');
         $request->validate([
             'id_member' => 'required',
             'tgl' => 'required',
@@ -122,6 +128,7 @@ class TransaksiController extends Controller
      */
     public function edit(Transaksi $transaksi)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Transaksi', 'View Update Transaksi');
         return view('transaksi/edit', [
             'transaksi' => $transaksi
         ]);
@@ -137,6 +144,7 @@ class TransaksiController extends Controller
     public function update(Request $request, Transaksi $transaksi)
     {
         // dd($request);
+        Logging::record(Auth::user(), 'Akses Update Transaksi', 'Update Transaksi');
         $validatedData = $request->validate([
             'status' => 'required',
             'pembayaran' => 'required'
@@ -157,6 +165,7 @@ class TransaksiController extends Controller
      */
     public function exportData()
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Transaksi', 'Export Excel Transaksi');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new LaporanExport, $date . '_Laporan.xlsx');
     }
@@ -167,6 +176,7 @@ class TransaksiController extends Controller
     public function laporanPDF(Transaksi $transaksi)
     {
 
+        Logging::record(Auth::user(), 'Akses Export PDF Transaksi', 'Export PDF Transaksi');
         $pdf = PDF::loadView('laporan.pdf', [
             'tb_transaksi' => Transaksi::all()
         ]);
@@ -180,6 +190,7 @@ class TransaksiController extends Controller
     public function fakturPDF($id)
     {
 
+        Logging::record(Auth::user(), 'Akses Export PDF Transaksi', 'Export PDF Transaksi');
         $transaksi = Transaksi::findOrFail($id);
         $pdf = PDF::loadView('transaksi.faktur', [
             'transaksi' => $transaksi
@@ -193,6 +204,7 @@ class TransaksiController extends Controller
      */
     public function laporan(Transaksi $transaksi)
     {
+        Logging::record(Auth::user(), 'Akses view Laporan', 'view Laporan');
         $data['transaksi'] = Transaksi::all();
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();

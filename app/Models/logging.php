@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class logging extends Model
 {
     use HasFactory;
+
+    protected $table = 'logging';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $primaryKey = 'id';
+
+    public static function record($user_id = null, $event, $extra = null)
+    {
+        return static::create([
+            'user_id' => is_null($user_id) ? null : $user_id->id,
+            'ip' => request()->ip(),
+            'event' => $event,
+            'extra' => $extra
+        ]);
+    }
 }

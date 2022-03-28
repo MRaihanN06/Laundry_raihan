@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 
 class OutletController extends Controller
 {
@@ -19,6 +21,7 @@ class OutletController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Outlet', 'view Outlet');
         return view('outlet/index', [
             'outlet' => outlet::all() 
         ]);
@@ -31,6 +34,7 @@ class OutletController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Outlet', 'view form Outlet');
         return view('outlet/index');
     }
 
@@ -42,6 +46,7 @@ class OutletController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Outlet', 'view form Outlet');
         $validatedData = $request->validate([
             'nama'  => 'required',
             'alamat'  => 'required',
@@ -61,6 +66,7 @@ class OutletController extends Controller
      */
     public function edit(Outlet $outlet)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Outlet', 'View Update Outlet');
         return view('outlet/edit', [
             'outlet' => $outlet
         ]);
@@ -75,6 +81,7 @@ class OutletController extends Controller
      */
     public function update(Request $request, Outlet $outlet)
     {
+        Logging::record(Auth::user(), 'Akses Update Outlet', 'Update Outlet');
         $validatedData = $request->validate([
             'nama'  => 'required',
             'alamat'  => 'required',
@@ -95,6 +102,7 @@ class OutletController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete Outlet', 'Delete Outlet');
         $validatedData = outlet::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1).'/outlet')->with('success', 'Post has been deleted!');
@@ -105,6 +113,7 @@ class OutletController extends Controller
      */
     public function exportData() 
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Outlet', 'Export Excel Outlet');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new OutletExport, $date. '_outlet.xlsx');
     }
@@ -115,6 +124,7 @@ class OutletController extends Controller
      */
     public function importData(Request $request) 
     {
+        Logging::record(Auth::user(), 'Akses Import Excel Outlet', 'Import Excel Outlet');
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
@@ -135,6 +145,7 @@ class OutletController extends Controller
      */
     public function exportPDF(Outlet $Outlet) {
   
+        Logging::record(Auth::user(), 'Akses Export PDF Outlet', 'Export PDF Outlet');
         $pdf = PDF::loadView('Outlet.pdf', [
             'tb_outlet' => Outlet::all()
         ]);

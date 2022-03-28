@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Models\penjemputan;
+use App\Models\logging;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class penjemputanController extends Controller
@@ -21,6 +23,7 @@ class penjemputanController extends Controller
      */
     public function index()
     {
+        Logging::record(Auth::user(), 'Akses view Penjemputan', 'view Penjemputan');
         $data['member'] = member::get();
         $data['user'] = user::get();
         $data['penjemputan'] = penjemputan::get();
@@ -34,6 +37,7 @@ class penjemputanController extends Controller
      */
     public function create()
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Penjemputan', 'view form Penjemputan');
         return view('penjemputan/index');
     }
 
@@ -45,6 +49,7 @@ class penjemputanController extends Controller
      */
     public function store(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Form Tambah Penjemputan', 'view form Penjemputan');
         $validatedData = $request->validate([
             'id_member' => 'required',
             'id_user' => 'required',
@@ -65,6 +70,7 @@ class penjemputanController extends Controller
      */
     public function edit(penjemputan $penjemputan)
     {
+        Logging::record(Auth::user(), 'Akses Form Update Penjemputan', 'View Update Penjemputan');
         return view('penjemputan/edit', [
             'penjemputan' => $penjemputan
         ]);
@@ -79,6 +85,7 @@ class penjemputanController extends Controller
      */
     public function update(Request $request, penjemputan $p, $id)
     {
+        Logging::record(Auth::user(), 'Akses Update Penjemputan', 'Update Penjemputan');
         $validatedData = $request->validate([
             'id_member' => 'required',
             'id_user' => 'required'
@@ -96,6 +103,7 @@ class penjemputanController extends Controller
      * Proses update data status
      */
     public function status(request $request){
+        Logging::record(Auth::user(), 'Akses Update Status Penjemputan', 'Update Status Penjemputan');
         $data = penjemputan::where('id',$request->id)->first();
         $data->status = $request->status;
         $update = $data->save();
@@ -111,6 +119,7 @@ class penjemputanController extends Controller
      */
     public function destroy($id)
     {
+        Logging::record(Auth::user(), 'Akses Delete Penjemputan', 'Delete Penjemputan');
         $validatedData = penjemputan::find($id);
         $validatedData->delete();
         return redirect(request()->segment(1) . '/penjemputan')->with('success', 'Post has been deleted!');
@@ -121,6 +130,7 @@ class penjemputanController extends Controller
      */
     public function exportData()
     {
+        Logging::record(Auth::user(), 'Akses Export Excel Penjemputan', 'Export Excel Penjemputan');
         $date =  date('Y-m-d H:i:s');
         return Excel::download(new PenjemputanExport, $date . '_penjemputan.xlsx');
     }
@@ -131,6 +141,7 @@ class penjemputanController extends Controller
      */
     public function importData(Request $request)
     {
+        Logging::record(Auth::user(), 'Akses Import Excel Penjemputan', 'Import Excel Penjemputan');
         $request->validate([
             'file' => 'file|mimes:xlsx, xls, xlsm, xlsb'
         ]);
@@ -152,6 +163,7 @@ class penjemputanController extends Controller
     public function exportPDF(penjemputan $penjemputan)
     {
 
+        Logging::record(Auth::user(), 'Akses Export PDF Penjemputan', 'Export PDF Penjemputan');
         $pdf = PDF::loadView('Penjemputan.pdf', [
             'tb_penjemputan' => penjemputan::all()
         ]);

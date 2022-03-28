@@ -15,7 +15,13 @@ class CreateLoggingTable extends Migration
     {
         Schema::create('logging', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('ip', 20);
+            $table->string('event', 100)->nullable();
+            $table->text('extra')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -322,7 +322,7 @@
                                                                                         <div class="mb-3">
                                                                                             <label for="waktu_beli"
                                                                                                 class="form-label">Waktu Beli</label>
-                                                                                            <input type="date"
+                                                                                            <input type="datetime-local"
                                                                                                 class="form-control"
                                                                                                 id="waktu_beli"
                                                                                                 name="waktu_beli"
