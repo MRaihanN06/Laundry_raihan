@@ -59,4 +59,9 @@ class User extends Authenticatable
         return $this->belongsTo(penjemputan::class);
     }
 
+    public function logging()
+    {
+        return $this->belongsTo(logging::class);
+    }
+
 }

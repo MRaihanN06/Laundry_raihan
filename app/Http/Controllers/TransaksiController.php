@@ -163,6 +163,27 @@ class TransaksiController extends Controller
     /**
      * Melakukan export data dari view dan database menjadi file excel
      */
+    public function exportbelumData()
+    {
+        Logging::record(Auth::user(), 'Akses Export Excel Transaksi', 'Export Excel Transaksi');
+        $date =  date('Y-m-d H:i:s');
+        return Excel::download(new LaporanExport, $date . '_Laporan.xlsx');
+    }
+
+    /**
+    * Melakukan export data dari view dan database menjadi file PDF
+    */
+    public function laporanbelumPDF(Transaksi $transaksi)
+    {
+
+        Logging::record(Auth::user(), 'Akses Export PDF Transaksi', 'Export PDF Transaksi');
+        $pdf = PDF::loadView('laporan.pdf', [
+            'tb_transaksi' => Transaksi::all()
+        ]);
+
+        return $pdf->stream();
+    }
+
     public function exportData()
     {
         Logging::record(Auth::user(), 'Akses Export Excel Transaksi', 'Export Excel Transaksi');
@@ -204,7 +225,7 @@ class TransaksiController extends Controller
      */
     public function laporan(Transaksi $transaksi)
     {
-        Logging::record(Auth::user(), 'Akses view Laporan', 'view Laporan');
+        Logging::record(Auth::user(), 'Akses Laporan', 'view Laporan');
         $data['transaksi'] = Transaksi::all();
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
@@ -217,5 +238,20 @@ class TransaksiController extends Controller
         }
 
         return view('/laporan/index', compact('data'));
+    }
+
+    public function laporanbelum(Transaksi $transaksi)
+    {
+        Logging::record(Auth::user(), 'Akses Laporan Lengkap', 'view Laporan Lengkap');
+        $data['transaksi'] = Transaksi::all();
+        if (request()->start_date || request()->end_date) {
+            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+            $data = Transaksi::whereBetween('created_at', [$start_date, $end_date])->get();
+        } else {
+            $data = Transaksi::latest()->get();
+        }
+
+        return view('/laporanbelum/index', compact('data'));
     }
 }

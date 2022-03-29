@@ -22,4 +22,9 @@ class logging extends Model
             'extra' => $extra
         ]);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'user_id');
+    }
 }

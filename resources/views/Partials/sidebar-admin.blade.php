@@ -195,7 +195,8 @@
             <li class="nav-item"> <a class="nav-link" href="/a/user">User</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/barang">Barang</a></li>
             <li class="nav-item"> <a class="nav-link" href="/a/penjemputan">Penjemputan</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/a/pbarang">Penggunaan Barang</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/pbarang">PBarang</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/pebarang">Penggunaan Barang</a></li>
           </ul>
         </div>
       </li>
@@ -206,10 +207,17 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/a/laporan">
-          <i class="ti-money menu-icon"></i>
+        <a class="nav-link" data-toggle="collapse" href="#tables3" aria-expanded="false" aria-controls="tables">
+          <i class="ti-id-badge menu-icon"></i>
           <span class="menu-title">Laporan</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="tables3">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="/a/laporanbelum">Laporan</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/a/laporan">Sudah Dibayar - Diambil</a></li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#tables2" aria-expanded="false" aria-controls="tables">
@@ -226,6 +234,12 @@
             <li class="nav-item"> <a class="nav-link" href="SimulasiTransaksi">Transaksi Cucian</a></li>
           </ul>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/a/logging">
+          <i class="ti-user menu-icon"></i>
+          <span class="menu-title">Logging</span>
+        </a>
       </li>
     </ul>
   </nav>

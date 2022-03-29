@@ -6,6 +6,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PBarangController;
+use App\Http\Controllers\PeBarangController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\GajiController;
 use App\Http\Controllers\SimulasiTransaksiController;
 use App\Http\Controllers\TransaksiBarangController;
 use App\Http\Controllers\penjemputanController;
+use App\Http\Controllers\LoggingController;
 
 
 /*
@@ -57,11 +59,16 @@ Route::get('penjemputan/pdf', [penjemputanController::class, 'exportPDF'])->name
 Route::get('export/pbarang', [PBarangController::class, 'exportData'])->name('export-pbarang');
 Route::post('import/pbarang', [PBarangController::class, 'importData'])->name('import-pbarang');
 Route::get('pbarang/pdf', [PBarangController::class, 'exportPDF'])->name('exportpdf-pbarang');
+Route::get('export/pebarang', [PeBarangController::class, 'exportData'])->name('export-pebarang');
+Route::post('import/pebarang', [PeBarangController::class, 'importData'])->name('import-pebarang');
+Route::get('pebarang/pdf', [PeBarangController::class, 'exportPDF'])->name('exportpdf-pebarang');
 Route::get('export/user', [UserController::class, 'exportData'])->name('export-user');
 Route::get('user/pdf', [UserController::class, 'exportPDF'])->name('exportpdf-user');
 Route::get('/transaksi/faktur/{id}', [TransaksiController::class, 'fakturPDF'])->name('faktur');
 Route::get('/laporan/pdf', [TransaksiController::class, 'laporanPDF'])->name('laporanPDF');
 Route::get('export/laporan', [TransaksiController::class, 'exportData'])->name('export-laporan');
+Route::get('/laporanbelum/pdf', [TransaksiController::class, 'laporanbelumPDF'])->name('laporanbelumPDF');
+Route::get('export/laporanbelum', [TransaksiController::class, 'exportbelumData'])->name('export-laporanbelum');
 
 
 Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function () {
@@ -73,15 +80,19 @@ Route::group(['prefix' => 'a', 'middleware' => ['isAdmin', 'auth']], function ()
     Route::resource('/barang', BarangController::class);
     Route::post('/bstatus', [PBarangController::class ,'bstatus'])->name('bstatus');
     Route::resource('/pbarang', PBarangController::class);
+    Route::post('/pestatus', [PeBarangController::class ,'pestatus'])->name('pestatus');
+    Route::resource('/pebarang', PeBarangController::class);
     Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
     Route::post('register', [AuthController::class, 'register']);
     Route::resource('/transaksi', TransaksiController::class);
     Route::get('/laporan', [TransaksiController::class, 'laporan']);
+    Route::get('/laporanbelum', [TransaksiController::class, 'laporanbelum']);
     Route::get('data_karyawan', [SimulasiController::class, 'index']);
     Route::get('data_siswa', [SiswaController::class, 'index']);
     Route::get('GajiKaryawan', [GajiController::class, 'index']);
     Route::get('TransaksiBarang', [TransaksiBarangController::class, 'index']);
     Route::get('SimulasiTransaksi', [SimulasiTransaksiController::class, 'index']);
+    Route::get('logging', [LoggingController::class, 'index']);
     Route::resource('/penjemputan', penjemputanController::class);
     Route::post('/status', [penjemputanController::class ,'status'])->name('status');
 });

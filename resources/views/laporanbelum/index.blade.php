@@ -28,7 +28,7 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Master Data Laporan Sudah Dibayar dan Diambil</h3>
+                            <h3 class="font-weight-bold">Master Data Laporan Semua Transaksi</h3>
                             <h6 class="font-weight-normal mb-0">Melihat dan Export Data Laporan <span
                                     class="text-primary">Hati-hati dengan keputusan anda!</span></h6>
                         </div>
@@ -45,16 +45,16 @@
                                         <div class="col-12">
                                             <div class="table-responsive">
 
-                                                <a href="{{ route('export-laporan') }}" class="btn btn-success me-3 mb-3">
+                                                <a href="{{ route('export-laporanbelum') }}" class="btn btn-success me-3 mb-3">
                                                     Export Excel
                                                 </a>
 
-                                                <a href="{{ route('laporanPDF') }}" target="_blank"
+                                                <a href="{{ route('laporanbelumPDF') }}" target="_blank"
                                                     class="btn btn-secondary mb-3">
                                                     Export PDF
                                                 </a>
 
-                                                <form action="laporan" method="GET">
+                                                <form action="laporanbelum" method="GET">
                                                     <div class="input-group mb-3">
                                                         <input type="date" class="form-control" name="start_date">
                                                         <input type="date" class="form-control" name="end_date">
